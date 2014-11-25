@@ -54,7 +54,8 @@ oButton.prototype.getHtml = function() {
   div.style = this.getStyle();
   div.title = this.title;
   if (supportsSVG() && this.svgExist()) {
-    div.appendChild(this.createSvg());
+    //div.appendChild(this.createSvg());
+    div.innerHTML = this.createSvg();
   }
   else {
       div.style.backgroundImage = this.getIconBackgroundImage();
@@ -83,6 +84,7 @@ oButton.prototype.createSvg = function(type) {
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">' + innerSVG + '</svg>';
+    /*
     var svgDocElement = dXML.parseFromString(sXML, "text/xml");
 
     var childNode = svgDocElement.documentElement;
@@ -94,6 +96,8 @@ oButton.prototype.createSvg = function(type) {
 
     svg.appendChild(this.svgBackground());
     return svg;
+    */
+    return sXML;
 };
 
 oButton.prototype.svgBackground = function() {

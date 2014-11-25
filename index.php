@@ -28,7 +28,10 @@ else {
   $icons = file_list('bin/images/icons/button/svg', '.svg');
   foreach ($icons as $icon) {
     $val = explode('.', $icon);
-    $GLOBALS['jsvars']['icons']['svg'][array_shift($val)] = file_get_contents('bin/images/icons/button/svg/'.$icon);
+    $content = file_get_contents('bin/images/icons/button/svg/'.$icon);
+    $content = str_replace("\r\n",'', $content);
+    $content = str_replace("\t",'', $content);
+    $GLOBALS['jsvars']['icons']['svg'][array_shift($val)] = $content;
   }
 }
 

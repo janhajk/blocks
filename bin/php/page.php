@@ -46,13 +46,13 @@ function JS() {
       $files = array_diff(scandir('./usr/js'), array('.', '..', 'packer.php'));
       foreach ($files as $file) {
         $out .= '<script type="text/javascript" src="usr/js/'.$file.'"></script>';
-      }      
+      }
       return $out;
   }
 }
 
 function JS_vars() {
-  return 
+  return
     '<script type="text/javascript">'.
     'window.janframe = ( '.json_encode($GLOBALS['jsvars']).');'.
     '</script>';

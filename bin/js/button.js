@@ -72,13 +72,38 @@ oButton.prototype.svgExist = function() {
   return (window.janframe.icons.svg[this.type] !== undefined);
 };
 
+
+// Parse the markup into valid nodes.
+var dXML = new DOMParser();
+dXML.async = false;
+// Wrap the markup into a SVG node to ensure parsing works.
+sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + markupText + '</svg>';
+var svgDocElement = dXML.parseFromString(sXML, 'text/xml').documentElement;
+// Now take each node, import it and append to this element.
+var childNode = svgDocElement.firstChild;
+while(childNode) {
+    this.appendChild(this.ownerDocument.importNode(childNode, true));
+    childNode = childNode.nextSibling;
+}
+
+
+
+
 oButton.prototype.createSvg = function(type) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttributeNS(null, 'version', '1.1');
     svg.appendChild(this.svgBackground());
-    var content = new DOMParser()
-    content.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
-    svg.appendChild(svg.ownerDocument.importNode(content.documentElement, true));
+
+    var innerSVG = window.janframe.icons.svg[this.type];
+    var dXML = new DOMParser();
+    dXML.async = false;
+    sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + innerSVG + '</svg>';
+    var svgDocElement = dXML.parseFromString(sXML, 'text/xml').documentElement;
+    var childNode = svgDocElement.firstChild;
+    while(childNode) {
+        svg.appendChild(svg.ownerDocument.importNode(childNode, true));
+        childNode = childNode.nextSibling;
+    }
     return svg;
 };
 

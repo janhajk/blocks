@@ -74,7 +74,7 @@ oButton.prototype.svgExist = function() {
 
 oButton.prototype.createSvg = function(content) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.version = '1.1';
+    svg.setAttributeNS(null, 'version', '1.1');
     svg.innerHTML = this.svgBackground().outerHTML + content;
     return svg;
 };
@@ -83,12 +83,12 @@ oButton.prototype.svgBackground = function() {
   var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   rect.style.fill = '#000';
   rect.id = 'b' + this.name;
-  rect.x = '0';
-  rect.y = '0';
+  rect.setAttribute(null, 'x', '0');
+  rect.setAttribute(null, 'y', '0');
+  rect.setAttribute(null, 'ry', '3.5');
+  rect.setAttribute(null, 'rx', '3.5');
   rect.width = '20';
   rect.height = '20';
-  rect.ry = '3.5';
-  rect.rx = '3.5';
   return rect;
   //return '<rect style="fill:#000" id="b'+this.name+'" x="0" y="0" width="20" height="20" ry="3.5" rx="3.5" />';
 };

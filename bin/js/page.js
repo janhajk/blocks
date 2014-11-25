@@ -6,7 +6,7 @@ var htmlConstruct = function() {
     //this.browser = 'mobile';  // for testing mobile
     this.css();
     this.setHTMLHeader();
-    this.msg();
+    this.msgDOM();
     $('body').append('<div id="overlay" class="ui-widget-overlay" style="display:none"></div>');
     $('body').append('<div id="wrapper"><div id="header"></div><div id="middle"></div></div>');
     pacman = new loader();

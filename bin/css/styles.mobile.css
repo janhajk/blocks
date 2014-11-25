@@ -1,0 +1,122 @@
+html, body {
+  margin          : 0;
+  padding         : 0;
+  background      : gray;
+  font-family     : arial,sans-serif;
+  font-size       : 10pt;
+  overflow-x      : hidden;
+}
+a {
+  color           : #2D2D2D;
+  font-weight     : bold;
+}
+a:visited {
+  color           : #2D2D2D;
+  font-weight     : bold;
+}
+
+#wrapper {
+  min-height      : 460px;
+  font-size       : 1.0em;
+}
+
+div {
+  display         : block;
+}
+ul {
+  margin          : 0;
+  padding         : 0;
+}
+ul li {
+  margin          : 0;
+  padding         : 0;
+  margin-left     : 30px;
+}
+
+p {
+  margin          : 0;
+}
+#header {
+  height          : 30px;
+  position        : relative;
+  background-color: #EEE;
+}
+#middle {
+  left            : 0px;
+  top             : 30px;
+  bottom          : 0px;
+  right           : 0px;
+  padding         : 0px;
+  position        : absolute;
+}
+.chapterCol {
+  background-color: #EEE;
+  display         : block;
+  position        : relative;
+}
+#content {
+  background-color: #EEE;
+}
+.sfield {
+  width           : 100%;
+  border-bottom   : 1px solid #BBB;
+  padding         : 5px 0;
+  cursor          : pointer;
+  background      : white;
+}
+
+/* Markierung des Pfades */
+.selectedlineli {
+  background      : #8DF25A;
+}
+.selectedli {
+  background      : #6BD030;
+}
+.levelcol {
+  background      : black;
+  color           : white;
+}
+.list1 li {
+  margin          : 0px;
+  padding         : 0px;
+}
+.snavi {
+  float           : left;
+  padding-left    : 5px;
+}
+
+
+.scontent {
+  margin-left     : 8px;
+  margin-right    : 5px;
+}
+.scontent ul li {
+  list-style-type : disc;
+  left            : 40px;
+  position        : relative;
+  margin-right    : 50px;
+}
+.newline {
+  clear           : both;
+}
+
+#header .btn {
+  position        : relative;
+  cursor          : pointer;
+  width           : 20px;
+  height          : 20px;
+  margin          : 0;
+  padding         : 0;
+  margin-left     : 5px;
+  top             : 5px;
+  float           : left;
+  color           : white;
+}
+
+#header .btnNoImage {
+  background-image: none !important;
+}
+
+span.erledigt {
+  text-decoration: line-through;
+}

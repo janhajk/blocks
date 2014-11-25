@@ -1,0 +1,27 @@
+<?php
+
+$GLOBALS['packer']           = 'none';  // 'none, 'jspacker', 'combined'
+$GLOBALS['jscache']          = true;  // true/false
+$GLOBALS['mysql_user']       = 'wiki';
+$GLOBALS['mysql_password']   = '';
+$GLOBALS['default_table']    = '';
+$GLOBALS['user_table']       = '';
+$GLOBALS['user_user']        = 'user';
+$GLOBALS['user_password']    = 'D9r$cQ';
+$GLOBALS['janrainkey']       = '';
+$GLOBALS['pathmysqldump']    = '/usr/bin/mysqldump';
+$GLOBALS['janrain_tokenurl'] = '';
+$GLOBALS['useGoogleJs']      = true;
+
+$GLOBALS['jsvars']         = array(
+                                'ajax_target'      => '?ajax',
+                                'page_title'       => '',
+                                'page_icon'        => '',
+                                'jqueriuitheme'    => 'smoothness'
+                             );
+
+// Ende der Programm Variablen
+
+
+
+?>

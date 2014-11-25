@@ -76,7 +76,8 @@ oButton.prototype.createSvg = function(type) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttributeNS(null, 'version', '1.1');
     svg.appendChild(this.svgBackground());
-    var content = new DOMParser().parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
+    var content = new DOMParser()
+    content.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
     svg.appendChild(svg.ownerDocument.importNode(content.documentElement, true));
     return svg;
 };

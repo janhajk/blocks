@@ -1,9 +1,9 @@
-var buttonSpacer = function(type,title,target) {  
+var buttonSpacer = function(type,title,target) {
   buttonSpacer.parent.init.call(this,type,title,target);
 };
 buttonSpacer.prototype             = new oButton();
 buttonSpacer.prototype.constructor = oButton;
-buttonSpacer.parent                = oButton.prototype; 
+buttonSpacer.parent                = oButton.prototype;
 
 
 /**

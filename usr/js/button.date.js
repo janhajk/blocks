@@ -1,9 +1,9 @@
-var buttonDate = function(type,title,target) {  
+var buttonDate = function(type,title,target) {
   buttonDate.parent.init.call(this,type,title,target,'d');
 };
 buttonDate.prototype             = new oButton();
 buttonDate.prototype.constructor = oButton;
-buttonDate.parent                = oButton.prototype; 
+buttonDate.parent                = oButton.prototype;
 
 
 /**
@@ -28,7 +28,7 @@ buttonDate.prototype.click = function() {
 buttonDate.prototype.dialog = function(title, date) {
   var me = this;
   janframeDialog(me.name, '<p>Datum: <input type="text" id="datepicker'+me.name+'" class="noShortcuts"></p>');
-  $('#datepicker'+me.name).datepicker({ 
+  $('#datepicker'+me.name).datepicker({
     dateFormat : 'dd.mm.yy',
     firstDay   : 1,
     defaultDate: date
@@ -64,8 +64,8 @@ data.prototype.updateDate = function(id, date) {
     id     : id,
     date  : date
   };
-  $.post(this.target, options, function() { 
+  $.post(this.target, options, function() {
     me.get();
-  }, 
+  },
   'json');
 };

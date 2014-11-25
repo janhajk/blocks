@@ -25,6 +25,11 @@ loader.prototype.off = function() {
   $('#'+this.name).hide();
 };
 
+loader.prototype.dom = function() {
+    var div = document.createElement('div');
+    
+};
+
 
 
 loader.prototype.getStyle = function() {

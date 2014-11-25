@@ -1,9 +1,9 @@
-var buttonBackup = function(type,title,target) {  
+var buttonBackup = function(type,title,target) {
   buttonBackup.parent.init.call(this,type,title,target);
 };
 buttonBackup.prototype             = new oButton();
 buttonBackup.prototype.constructor = oButton;
-buttonBackup.parent                = oButton.prototype; 
+buttonBackup.parent                = oButton.prototype;
 
 
 /**

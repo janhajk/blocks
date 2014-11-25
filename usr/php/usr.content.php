@@ -1,16 +1,16 @@
 <?php
 
-function content_usr() {  
-  global $db; 
+function content_usr() {
+  global $db;
   $db = new DB_MySQL();
-  
-  $action  = preg_replace('|[^a-z]|','',$_POST['action']);  // Actions müssen aus kleinen Buchstaben bestehen    
+
+  $action  = preg_replace('|[^a-z]|','',$_POST['action']);  // Actions müssen aus kleinen Buchstaben bestehen
   $typ     = $_POST['type']==1?1:0; // content oder chapter
   $id      = (int) preg_replace('|[^0-9]|','',$_POST['id']);
   $id2     = isset($_POST['id2']) ? (int) preg_replace('|[^0-9]|','',$_POST['id2']) : false;
   $content = $_POST['content'];
   $date    = isset($_POST['date']) && validDate($_POST['date']) ? $_POST['date'] : false;
-  
+
   if ($action === 'load') {
     print json_encode(array(
         'content'  => getFlat()
@@ -18,7 +18,7 @@ function content_usr() {
   }
   elseif ($action === 'add') {
     print json_encode(blockAdd($id, 0, $typ, $content, ''));  // returns $bid
-  } 
+  }
   elseif ($action === 'update') {
     print json_encode(blockUpdate($id,$content));
   }
@@ -70,7 +70,7 @@ function getFlat() {
     $out[$key]['cid']      = (int) $bid;
     $out[$key]['name']     = $r['name'];
     $out[$key]['date']     = $r['date'] != NULL ? (int) $r['date'] : $r['date'];
-    
+
     $properties            = getBlockProperties($bid);    
     $out[$key]['type']     = (int) $properties['valtype'];
     $out[$key]['active']   = (int) $properties['active'];
@@ -109,7 +109,7 @@ function blockAdd($pid, $doc, $valtype, $value, $name='') {
   // Do plugin actions...
   //
   //
-  
+
   return $bid;
 }
 

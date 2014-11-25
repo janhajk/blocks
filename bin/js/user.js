@@ -1,11 +1,11 @@
 var user = function() {
-  this.renderLoginLink(); 
+  this.renderLoginLink();
 };
 
 
 user.prototype.renderLoginLink = function() {
   $.post('?public', {action:'islogged'}, function(data) {
-    
+
     if (data===1) { // Ist eingeloggt, dann Logout zeigen
       $('#signin').hide();
       $('#header').append('<div style="float:right;margin-right:10px;margin-top:5px"><a id="logout" href="#">Abmelden</a></div>');

@@ -75,7 +75,8 @@ oButton.prototype.svgExist = function() {
 oButton.prototype.createSvg = function(content) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttributeNS(null, 'version', '1.1');
-    svg.innerHTML = this.svgBackground().outerHTML + content;
+    svg.appendChild(this.svgBackground());
+    svg.appendChild(content);
     return svg;
 };
 

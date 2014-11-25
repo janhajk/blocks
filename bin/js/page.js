@@ -23,7 +23,6 @@ var htmlConstruct = function() {
 htmlConstruct.prototype.loadCSS = function(url) {
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.name = 'test';
     link.type = 'text/css';
     link.href = url;
     (document.head || document.getElementsByTagName('head')[0]).appendChild(link);
@@ -67,10 +66,14 @@ htmlConstruct.prototype.setHTMLHeader = function() {
     for(var i = 0; i < icons.length; i++) {
         icon = document.createElement('link');
         icon.rel = icons[i][0];
-        icon.href = icons[i][1];
+        icon.href = icons[i][1] + '?v=1';
+        icon.type = 'image/x-icon';
         head.appendChild(icon);
     }
 };
+
+
+
 /**
  * Lädt CSS Dateien
  */
@@ -82,8 +85,10 @@ htmlConstruct.prototype.css = function() {
     }
     this.loadCSS('lib/jquery/css/' + window.janframe.jqueriuitheme + '/jquery-ui.css');
 };
+
+
 /**
- * gets the Browser-Type
+ * returns the Browser-Type
  */
 htmlConstruct.prototype.getBrowser = function() {
     var ua = navigator.userAgent.toLowerCase();
@@ -95,13 +100,43 @@ htmlConstruct.prototype.getBrowser = function() {
     //  }
     return 'generic';
 };
+
+
+
 /**
  * erstellt das Message DIV für Informationsanzeigen
  */
 htmlConstruct.prototype.msg = function() {
-    var style = ['position:absolute', 'width:200px', 'min-height:20px', 'margin:0', 'margin-left:-100px', 'padding:5px 10px', 'left:50%', 'top:0px', 'background:#F9EDBE', 'color:white', 'border-radius:4px', 'border:1px solid gray', 'color:black', 'font-weight:bold', 'display:none', 'text-align:center', 'vertical-align: middle', 'z-index:9999'].join(';');
-    $('body').append('<div id="msg" style="' + style + ';"><span id="msgtxt"></span></div>');
+    var msg = document.createElement('div');
+    msg.style.position = 'absolute';
+    msg.style.width = '200px';
+    msg.style.minHeight = '20px';
+    msg.style.margin = '0';
+    msg.style.marginLeft = '-100px';
+    msg.style.padding = '5px 10px';
+    msg.style.left = '50%';
+    msg.style.top = '0px';
+    msg.style.background = '#F9EDBE';
+    msg.style.borderRadius = '4px';
+    msg.style.border = '1px solid gray';
+    msg.style.color = 'black';
+    msg.style.fontWeight = 'bold';
+    msg.style.display = 'none';
+    msg.style.textAlign = 'center';
+    msg.style.verticalAlign = 'middle';
+    msg.style.zIndex = '9999';
+    msg.id = 'msg';
+
+    var span = document.createElement('span');
+    span.id = 'msgtxt';
+
+    msg.appendChild(span);
+
+    document.body.appendChild(msg);
 };
+
+
+
 /**
  * Message-DIV Text aktualisieren
  */

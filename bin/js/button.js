@@ -77,8 +77,8 @@ oButton.prototype.createSvg = function(type) {
     svg.setAttributeNS(null, 'version', '1.1');
     svg.appendChild(this.svgBackground());
     var parser = new DOMParser();
-    parser.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
-    svg.appendChild(parser);
+    //parser.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
+    //svg.appendChild(parser);
     return svg;
 };
 

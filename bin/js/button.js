@@ -77,7 +77,6 @@ oButton.prototype.svgExist = function() {
 oButton.prototype.createSvg = function(type) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttributeNS(null, 'version', '1.1');
-    svg.appendChild(this.svgBackground());
 
     var innerSVG = window.janframe.icons.svg[this.type];
     innerSVG.replace(/(\r\n|\n|\r)/gm, '');
@@ -90,6 +89,8 @@ oButton.prototype.createSvg = function(type) {
         svg.appendChild(svg.ownerDocument.importNode(childNode, true));
         childNode = childNode.nextSibling;
     }
+
+    svg.appendChild(this.svgBackground());
     return svg;
 };
 

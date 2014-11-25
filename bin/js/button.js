@@ -83,8 +83,9 @@ oButton.prototype.createSvg = function(type) {
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + innerSVG + '</svg>';
-    var svgDocElement = dXML.parseFromString(sXML, 'text/xml').documentElement;
-    var childNode = svgDocElement.firstChild;
+    var svgDocElement = dXML.parseFromString(sXML, 'text/xml');
+    var childNode = svgDocElement.documentElement;
+    var childNode = childNode.firstChild;
     while(childNode) {
         svg.appendChild(svg.ownerDocument.importNode(childNode, true));
         childNode = childNode.nextSibling;

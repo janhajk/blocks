@@ -73,21 +73,6 @@ oButton.prototype.svgExist = function() {
 };
 
 
-// Parse the markup into valid nodes.
-var dXML = new DOMParser();
-dXML.async = false;
-// Wrap the markup into a SVG node to ensure parsing works.
-sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + markupText + '</svg>';
-var svgDocElement = dXML.parseFromString(sXML, 'text/xml').documentElement;
-// Now take each node, import it and append to this element.
-var childNode = svgDocElement.firstChild;
-while(childNode) {
-    this.appendChild(this.ownerDocument.importNode(childNode, true));
-    childNode = childNode.nextSibling;
-}
-
-
-
 
 oButton.prototype.createSvg = function(type) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');

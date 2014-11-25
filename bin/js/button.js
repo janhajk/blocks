@@ -80,10 +80,10 @@ oButton.prototype.createSvg = function(type) {
     svg.appendChild(this.svgBackground());
 
     var innerSVG = window.janframe.icons.svg[this.type];
+    innerSVG.replace('\r\n','');
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + innerSVG + '</svg>';
-    innerSVG.replace('\r\n','');
     var svgDocElement = dXML.parseFromString(sXML, 'text/xml').documentElement;
     var childNode = svgDocElement.firstChild;
     while(childNode) {

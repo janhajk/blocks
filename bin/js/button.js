@@ -49,18 +49,27 @@ oButton.prototype.click = function() {
 };
 
 oButton.prototype.getHtml = function() {
-  var div = document.createElement('div');
-  div.name = this.name;
-  div.style = this.getStyle();
-  div.title = this.title;
-  if (supportsSVG() && this.svgExist()) {
-    //div.appendChild(this.createSvg());
-    div.innerHTML = this.createSvg();
-  }
-  else {
-      div.style.backgroundImage = this.getIconBackgroundImage();
-  }
-  return div;
+    var div = document.createElement('div');
+    div.name = this.name;
+    div.style.position = 'relative';
+    div.style.cursor = 'pointer';
+    div.style.width = '20px';
+    div.style.height = '20px';
+    div.style.margin = '0';
+    div.style.padding = '0';
+    div.style.marginLeft = '5px';
+    div.style.top = '5px';
+    div.style.float = 'left';
+    div.style.backgroundRepeat = 'none';
+    div.style.color = 'white';
+    div.title = this.title;
+    if(supportsSVG() && this.svgExist()) {
+        //div.appendChild(this.createSvg());
+        div.innerHTML = this.createSvg();
+    } else {
+        div.style.backgroundImage = this.getIconBackgroundImage();
+    }
+    return div;
 };
 
 
@@ -113,25 +122,6 @@ oButton.prototype.svgBackground = function() {
   return rect;
   //return '<rect style="fill:#000" id="b'+this.name+'" x="0" y="0" width="20" height="20" ry="3.5" rx="3.5" />';
 };
-
-
-oButton.prototype.getStyle = function() {
-    return {
-        position: 'relative',
-        cursor: 'pointer',
-        width: '20px',
-        height: '20px',
-        margin: '0',
-        padding: '0',
-        marginLeft: '5px',
-        top: '5px',
-        float: 'left',
-        backgroundRepeat: 'none',
-        color: 'white'
-    };
-};
-
-
 
 
 /**

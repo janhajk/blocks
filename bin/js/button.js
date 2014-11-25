@@ -79,7 +79,7 @@ oButton.prototype.createSvg = function(type) {
     svg.setAttributeNS(null, 'version', '1.1');
 
     var innerSVG = window.janframe.icons.svg[this.type];
-    innerSVG = innerSVG.replace(/(\\\n|\\\r|\\\")/g, "");
+    innerSVG = innerSVG.replace(/\\"/g, "");
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns=\'http://www.w3.org/2000/svg\'>' + innerSVG + '</svg>';

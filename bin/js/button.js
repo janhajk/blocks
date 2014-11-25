@@ -83,7 +83,8 @@ oButton.prototype.createSvg = function(type) {
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns="http://www.w3.org/2000/svg">' + innerSVG + '</svg>';
-    var svgDocElement = dXML.parseFromString(sXML, 'text/xml');
+    var svgDocElement = dXML.parseFromString(stringContainingXMLSource, "image/svg+xml");
+
     var childNode = svgDocElement.documentElement;
     var childNode = childNode.firstChild;
     while(childNode) {

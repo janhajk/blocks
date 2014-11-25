@@ -77,8 +77,9 @@ oButton.prototype.createSvg = function(type) {
     svg.setAttributeNS(null, 'version', '1.1');
     svg.appendChild(this.svgBackground());
     var parser = new DOMParser();
-    //parser.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
-    //svg.appendChild(parser);
+    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.innerHTML = window.janframe.icons.svg[this.type];
+    svg.appendChild(g);
     return svg;
 };
 
@@ -86,10 +87,10 @@ oButton.prototype.svgBackground = function() {
   var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   rect.style.fill = '#000';
   rect.id = 'b' + this.name;
-  rect.setAttribute(null, 'x', '0');
-  rect.setAttribute(null, 'y', '0');
-  rect.setAttribute(null, 'ry', '3.5');
-  rect.setAttribute(null, 'rx', '3.5');
+  rect.setAttributeNS(null, 'x', '0');
+  rect.setAttributeNS(null, 'y', '0');
+  rect.setAttributeNS(null, 'ry', '3.5');
+  rect.setAttributeNS(null, 'rx', '3.5');
   rect.width = '20';
   rect.height = '20';
   return rect;

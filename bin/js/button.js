@@ -82,8 +82,8 @@ oButton.prototype.createSvg = function(type) {
     innerSVG = innerSVG.replace(/\\"/g, "");
     var dXML = new DOMParser();
     dXML.async = false;
-    sXML = '<svg>' + innerSVG + '</svg>';
-    var svgDocElement = dXML.parseFromString(sXML, "image/svg+xml");
+    sXML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">' + innerSVG + '</svg>';
+    var svgDocElement = dXML.parseFromString(sXML, "text/xml");
 
     var childNode = svgDocElement.documentElement;
     var childNode = childNode.firstChild;

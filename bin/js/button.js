@@ -26,10 +26,10 @@ oButton.prototype.init = function(type, title, target, arg) {
   }
 
   if (arg === 'prepend') {
-    $('#'+target).prepend(this.getHtml());
+    $('#'+target).prepend(this.getDOM());
   }
   else {
-    $('#'+target).append(this.getHtml());
+    $('#'+target).append(this.getDOM());
   }
   this.setClickEvent();
   this.keypress();
@@ -38,9 +38,9 @@ oButton.prototype.init = function(type, title, target, arg) {
 
 
 oButton.prototype.setClickEvent = function() {
-   var me = this;
+   var self = this;
    $('#' + this.name).live('click', function(){
-     me.click();
+     self.click();
    });
 };
 
@@ -48,10 +48,10 @@ oButton.prototype.click = function() {
   alert('Missing click-event for button with the type of "' + this.type + '"; Please create one');
 };
 
-oButton.prototype.getHtml = function() {
+oButton.prototype.getDOM = function() {
     var div = document.createElement('div');
     div.name = this.name;
-    div.className ='menubutton';
+    div.className = 'menubutton';
     div.title = this.title;
     if(supportsSVG() && this.svgExist()) {
         //div.appendChild(this.createSvg());
@@ -79,7 +79,6 @@ oButton.prototype.createSvg = function(type) {
     svg.setAttributeNS(null, 'version', '1.1');
 
     var innerSVG = window.janframe.icons.svg[this.type];
-    innerSVG = innerSVG.replace(/\\"/g, "");
     var dXML = new DOMParser();
     dXML.async = false;
     sXML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">' + innerSVG + '</svg>';

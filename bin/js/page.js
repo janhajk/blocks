@@ -75,7 +75,7 @@ htmlConstruct.prototype.setHTMLHeader = function() {
 
 
 /**
- * Lädt CSS Dateien
+ * loads CSS Files
  */
 htmlConstruct.prototype.css = function() {
     if(this.browser === 'mobile') {
@@ -102,11 +102,10 @@ htmlConstruct.prototype.getBrowser = function() {
 };
 
 
-
 /*
  * The Message Area to send Messages to Client
  */
-htmlConstruct.prototype.msg = function() {
+htmlConstruct.prototype.msgDOM = function() {
     var msg = document.createElement('div');
     msg.style.position = 'absolute';
     msg.style.width = '200px';
@@ -133,15 +132,13 @@ htmlConstruct.prototype.msg = function() {
     msg.appendChild(span);
 
     document.body.appendChild(msg);
-};
 
-
-
-/**
- * Update Message-Area
- */
-htmlConstruct.prototype.msgUpdate = function(text) {
-    $('#msg').slideDown(100);
-    document.getElementById('msgtxt').innerHTML = text;
-    $('#msg').delay(8000).fadeOut(1000);
+    /**
+     * Update Message-Area
+     */
+    htmlConstruct.prototype.msg = function(text) {
+        $(msg).slideDown(100);
+        msg.innerHTML = text;
+        $(msg).delay(8000).fadeOut(1000);
+    };
 };

@@ -40,7 +40,7 @@ element.prototype.updateContent = function(content) {
   $.post(data.target, options, function() { 
     owner.content = content;
     l.display();
-    html.msgUpdate('Eintrag angepasst');
+    html.msg('Eintrag angepasst');
   }, 
   'json');
 };
@@ -59,7 +59,7 @@ element.prototype.createNew = function() {
     owner.bid = data;
     l.data.data[owner.bid] = owner;
     l.display();
-    html.msgUpdate('Neuer Eintrag hinzugef&uuml;gt');
+    html.msg('Neuer Eintrag hinzugef&uuml;gt');
   }, 
   'json');
 };
@@ -86,7 +86,7 @@ element.prototype.toTrash = function() {
     trashTree(id);
     l.data.selected = pid; // After deleting, select parent as active item
     l.display();
-    html.msgUpdate('der Eintrag wurde in den Papierkorb verschoben!');
+    html.msg('der Eintrag wurde in den Papierkorb verschoben!');
   }, 
   'json');
 };
@@ -100,7 +100,7 @@ element.prototype.recycle = function() {
   $.post(l.data.target, options, function() { 
     l.data.selected = id; // After recycling, select id as active item
     l.data.get();
-    html.msgUpdate('der Eintrag wurde wiederhergestellt!');
+    html.msg('der Eintrag wurde wiederhergestellt!');
   }, 
   'json');
 };
@@ -126,7 +126,7 @@ element.prototype.toggleActive = function() {
   $.post(l.data.target, options, function() { 
     toggleAll(id);
     l.display();
-    html.msgUpdate('Die Aktivit&auml;t des Eintrages wurde umgekehrt');
+    html.msg('Die Aktivit&auml;t des Eintrages wurde umgekehrt');
   }, 
   'json');
 };

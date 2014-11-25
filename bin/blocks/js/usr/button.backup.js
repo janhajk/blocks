@@ -11,6 +11,6 @@ buttonBackup.parent                = oButton.prototype;
  */
 buttonBackup.prototype.click = function() {
   $.post('?backup', function(data){
-    html.msgUpdate( data === 0 ? 'Es gab ein Fehler!' : 'Backup wurde erstellt!');
+    html.msg( data === 0 ? 'Es gab ein Fehler!' : 'Backup wurde erstellt!');
   },'json');
 };

@@ -98,7 +98,7 @@ htmlConstruct.prototype.msg = function() {
 /**
  * Message-DIV Text aktualisieren
  */
-htmlConstruct.prototype.msgUpdate = function(text) {
+htmlConstruct.prototype.msg = function(text) {
   $('#msg').slideDown(100);
   document.getElementById('msgtxt').innerHTML = text;
   $('#msg').delay(8000).fadeOut(1000);

@@ -6,10 +6,6 @@
 
 var hasher = function() {
   this.cId = 0;
-  
-
-  
-
 };
 
 hasher.prototype.setActive = function(id) {

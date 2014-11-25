@@ -51,7 +51,7 @@ liste.prototype.display = function() {
     eval('this.load'+(view[0].toUpperCase() + view.substring(1, view.length))+'()');
   }
   else {
-    html.msgUpdate('Es wurde versucht, die unbekannte View "' + view + '" zu laden.');
+    html.msg('Es wurde versucht, die unbekannte View "' + view + '" zu laden.');
     this.loadParent();            // Default View > hierarchical
   }
 };

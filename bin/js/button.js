@@ -116,19 +116,19 @@ oButton.prototype.svgBackground = function() {
 
 
 oButton.prototype.getStyle = function() {
-  return {
-    'position': 'relative',
-    'cursor': 'pointer',
-    'width': '20px',
-    'height': '20px',
-    'margin': '0',
-    'padding': '0',
-    'marginLeft': '5px',
-    'top': '5px',
-    'float': 'left',
-    'backgroundRepeat': 'none',
-    'color': 'white'
-  };
+    return {
+        position: 'relative',
+        cursor: 'pointer',
+        width: '20px',
+        height: '20px',
+        margin: '0',
+        padding: '0',
+        marginLeft: '5px',
+        top: '5px',
+        float: 'left',
+        backgroundRepeat: 'none',
+        color: 'white'
+    };
 };
 
 

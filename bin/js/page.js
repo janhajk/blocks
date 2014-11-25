@@ -14,11 +14,19 @@ var htmlConstruct = function() {
         this.createMenu();
     }
 };
+
+
+
 /**
  * Lädt eine CSS Datei dynamisch in die HTML-Seite
  */
-htmlConstruct.prototype.loadCSS = function(link) {
-    $('head').append('<link rel="stylesheet" type="text/css" href="' + link + '" />');
+htmlConstruct.prototype.loadCSS = function(url) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.name = 'test';
+    link.type = 'text/css';
+    link.href = url;
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(link);
 };
 
 

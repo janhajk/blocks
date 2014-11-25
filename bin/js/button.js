@@ -54,7 +54,7 @@ oButton.prototype.getHtml = function() {
   div.style = this.getStyle();
   div.title = this.title;
   if (supportsSVG() && this.svgExist()) {
-    div.appendChild(this.createSvg(window.janframe.icons.svg[this.type]));
+    div.appendChild(this.createSvg());
   }
   else {
       div.style.backgroundImage = this.getIconBackgroundImage();
@@ -72,11 +72,13 @@ oButton.prototype.svgExist = function() {
   return (window.janframe.icons.svg[this.type] !== undefined);
 };
 
-oButton.prototype.createSvg = function(content) {
+oButton.prototype.createSvg = function(type) {
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttributeNS(null, 'version', '1.1');
     svg.appendChild(this.svgBackground());
-    svg.appendChild(content);
+    var parser = new DOMParser();
+    parser.parseFromString(window.janframe.icons.svg[this.type], 'text/xml');
+    svg.appendChild(parser);
     return svg;
 };
 

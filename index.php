@@ -31,6 +31,7 @@ else {
     $content = file_get_contents('bin/images/icons/button/svg/'.$icon);
     $content = str_replace("\r\n",'', $content);
     $content = str_replace("\t",'', $content);
+      $content = str_replace("  "," ", $content);
     $GLOBALS['jsvars']['icons']['svg'][array_shift($val)] = $content;
   }
 }

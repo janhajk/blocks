@@ -23,11 +23,11 @@ htmlConstruct.prototype.createMenu = function() {
     new button('add'    , 'Inhalt hinzuf&uuml;gen'              , 'header');
     new button('edit'   , 'Inhalt bearbeiten'                   , 'header');
     new button('completed', 'Erledigt / Durchstreichen'         , 'header');
-    new button('trash'  , 'Inhalt in den Papierkorb verschieben', 'header');  
-    new button('recycle', 'Inhalt aus dem Papierkorb holen'     , 'header');  
+    new button('trash'  , 'Inhalt in den Papierkorb verschieben', 'header');
+    new button('recycle', 'Inhalt aus dem Papierkorb holen'     , 'header');
     new button('spacer' , ''                                    , 'header');
     new button('date'   , 'Datum hinzuf&uuml;gen'               , 'header');
-    new button('tags'   , 'Tags anpassen'                       , 'header');  
+    new button('tags'   , 'Tags anpassen'                       , 'header');
     new button('parent' , 'Besitzer &auml;ndern'                , 'header');
     new button('spacer' , ''                                    , 'header');
     new button('print'  , 'ausgew&auml;hltes Kapitel Drucken'   , 'header');

@@ -23,7 +23,7 @@ buttonAdd.prototype.click = function() {
 
 /**
  * Erstellt den Wysiwyg Editor zum Erstellen von Content
- * - #wysiwyg 
+ * - #wysiwyg
  * ---- #wysiwyg-textarea
  */
 buttonAdd.prototype.dialog = function() {

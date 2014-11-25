@@ -11,20 +11,20 @@ var button = function(type, title, target, position) {
  * Das eigentliche Button Objekt
  */
 var oButton = function() {
- 
+
 };
 
 oButton.prototype.init = function(type, title, target, arg) {
   this.type  = type;
   this.title = title;
   this.name  = 'button' + uniqueId();
-  
+
   this.shortkeys = [];
   if (arg !== undefined && arg.length===1) {
     this.shortkeys = [arg.charCodeAt(0), arg.toUpperCase().charCodeAt(0)];
     this.title = this.title + ' [' + arg + ']';
-  } 
-  
+  }
+
   if (arg === 'prepend') {
     $('#'+target).prepend(this.getHtml());
   }
@@ -33,7 +33,7 @@ oButton.prototype.init = function(type, title, target, arg) {
   }
   this.setClickEvent();
   this.keypress();
- 
+
 };
 
 
@@ -49,15 +49,23 @@ oButton.prototype.click = function() {
 };
 
 oButton.prototype.getHtml = function() {
+  var div = document.createElement('div');
+  div.name = this.name;
+  div.style = this.getStyle();
+  div.title = this.title;
   if (supportsSVG() && this.svgExist()) {
-    return '<div id="'+this.name+'" style="'+this.getStyle()+';" title="'+this.title+'">'+this.createSvg(window.janframe.icons.svg[this.type])+'</div>';
+    div.appendChild(this.createSvg(window.janframe.icons.svg[this.type]));
   }
-  return '<div id="'+this.name+'" style="'+this.getStyle()+';'+this.getIconBackgroundImage()+'" title="'+this.title+'"></div>';
+  else {
+      div.style.backgroundImage = this.getIconBackgroundImage();
+  }
+  return div;
 };
+
 
 oButton.prototype.getIconBackgroundImage = function() {
   var icon = this.iconImage(this.type);
-  return 'background-image:url(data:image/'+icon.type+';'+icon.encoding+','+icon.data+')';
+  return 'url(data:image/'+icon.type+';'+icon.encoding+','+icon.data+')';
 };
 
 oButton.prototype.svgExist = function() {
@@ -65,28 +73,41 @@ oButton.prototype.svgExist = function() {
 };
 
 oButton.prototype.createSvg = function(content) {
-  return '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">'+this.svgBackground()+content+'</svg>';
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.version = '1.1';
+    svg.innerHTML = this.svgBackground().outerHTML + content;
+    return svg;
 };
 
 oButton.prototype.svgBackground = function() {
-  return '<rect style="fill:#000" id="b'+this.name+'" x="0" y="0" width="20" height="20" ry="3.5" rx="3.5" />';
+  var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.style.fill = '#000';
+  rect.id = 'b' + this.name;
+  rect.x = '0';
+  rect.y = '0';
+  rect.width = '20';
+  rect.height = '20';
+  rect.ry = '3.5';
+  rect.rx = '3.5';
+  return rect;
+  //return '<rect style="fill:#000" id="b'+this.name+'" x="0" y="0" width="20" height="20" ry="3.5" rx="3.5" />';
 };
 
 
 oButton.prototype.getStyle = function() {
-  return [
-    'position:relative',
-    'cursor:pointer',
-    'width:20px',
-    'height:20px',
-    'margin:0',
-    'padding:0',
-    'margin-left:5px',
-    'top:5px',
-    'float:left',
-    'background-repeat:none',
-    'color:white'
-  ].join(';');
+  return {
+    'position': 'relative',
+    'cursor': 'pointer',
+    'width': '20px',
+    'height': '20px',
+    'margin': '0',
+    'padding': '0',
+    'marginLeft': '5px',
+    'top': '5px',
+    'float': 'left',
+    'backgroundRepeat': 'none',
+    'color': 'white'
+  };
 };
 
 
@@ -118,7 +139,7 @@ oButton.prototype.keypress = function() {
         if (e.which === owner.shortkeys[i]) {
           e.preventDefault();
           owner.click();
-        } 
+        }
       }
     }
   });

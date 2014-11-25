@@ -103,8 +103,8 @@ htmlConstruct.prototype.getBrowser = function() {
 
 
 
-/**
- * erstellt das Message DIV für Informationsanzeigen
+/*
+ * The Message Area to send Messages to Client
  */
 htmlConstruct.prototype.msg = function() {
     var msg = document.createElement('div');
@@ -138,7 +138,7 @@ htmlConstruct.prototype.msg = function() {
 
 
 /**
- * Message-DIV Text aktualisieren
+ * Update Message-Area
  */
 htmlConstruct.prototype.msgUpdate = function(text) {
     $('#msg').slideDown(100);

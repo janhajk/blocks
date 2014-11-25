@@ -17,7 +17,7 @@ buttonSpacer.prototype.click = function() {
 /**
  * Style Überschriebung
  */
-buttonSpacer.prototype.getHtml = function() {
+buttonSpacer.prototype.getDOM = function() {
   return '<div id="'+this.name+'" class="menubutton" title="'+this.title+'"></div>';
 };
 

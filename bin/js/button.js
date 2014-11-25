@@ -51,17 +51,7 @@ oButton.prototype.click = function() {
 oButton.prototype.getHtml = function() {
     var div = document.createElement('div');
     div.name = this.name;
-    div.style.position = 'relative';
-    div.style.cursor = 'pointer';
-    div.style.width = '20px';
-    div.style.height = '20px';
-    div.style.margin = '0';
-    div.style.padding = '0';
-    div.style.marginLeft = '5px';
-    div.style.top = '5px';
-    div.style.float = 'left';
-    div.style.backgroundRepeat = 'none';
-    div.style.color = 'white';
+    div.className ='menubutton';
     div.title = this.title;
     if(supportsSVG() && this.svgExist()) {
         //div.appendChild(this.createSvg());

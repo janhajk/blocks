@@ -27,7 +27,7 @@ user.prototype.renderLoginLink = function() {
                 });
             };
             div.appendChild(a);
-            getElementById('header').appendChild(div);
+            document.getElementById('header').appendChild(div);
         }
     }, 'json');
 };

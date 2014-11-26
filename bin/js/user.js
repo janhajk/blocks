@@ -19,7 +19,7 @@ user.prototype.renderLoginLink = function() {
             a.href = 'javascript:';
             a.id = 'logout';
             a.textContent = 'Logout';
-            a.onClick = function() {
+            a.onclick = function() {
                 $.post(janframe.ajax_target, {
                     action: 'logout'
                 }, function() {

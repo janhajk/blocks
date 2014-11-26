@@ -4,12 +4,43 @@
 var htmlConstruct = function() {
     this.browser = this.getBrowser();
     //this.browser = 'mobile';  // for testing mobile
-    this.css();
-    this.setHTMLHeader();
+
+    // configure HTML-<head>
+    this.setHTMLHead();
+
+    // Add some additional CSS Files
+    if(this.browser === 'mobile') {
+        addCssFile('bin/css/styles.mobile.css');
+    } else {
+        addCssFile('bin/css/styles.css');
+    }
+    addCssFile('lib/jquery/css/' + window.janframe.jqueriuitheme + '/jquery-ui.css');
+
     this.msgDOM();
-    $('body').append('<div id="overlay" class="ui-widget-overlay" style="display:none"></div>');
-    $('body').append('<div id="wrapper"><div id="header"></div><div id="middle"></div></div>');
+
+    var div1, div2, div3;
+    // Overlay for editing mode
+    div1 = document.createElement('div');
+    div1.id = 'overlay';
+    div1.class = 'ui-widget-overlay';
+    div1.style.display = 'none';
+    document.body.appendChild(div1);
+
+    // Content Wrapper
+    div1 = document.createElement('div');
+    div1.id = 'wrapper';
+    div2 = document.createElement('div');
+    div2.id = 'header';
+    div3 = document.createElement('div');
+    div3.id = 'middle';
+    div1.appendChild(div2);
+    div1.appendChild(div3);
+    document.body.appendChild(div1);
+
+    // Pacman-Loader
     pacman = new loader();
+
+    // If menu is defined in usr scripts, then execute
     if(typeof this.createMenu === 'function') {
         this.createMenu();
     }
@@ -18,23 +49,9 @@ var htmlConstruct = function() {
 
 
 /**
- * Lädt eine CSS Datei dynamisch in die HTML-Seite
- */
-htmlConstruct.prototype.loadCSS = function(url) {
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = url;
-    (document.head || document.getElementsByTagName('head')[0]).appendChild(link);
-};
-
-
-
-
-/**
  * setzt die HTML-Header Eigenschaften
  */
-htmlConstruct.prototype.setHTMLHeader = function() {
+htmlConstruct.prototype.setHTMLHead = function() {
     document.title = window.janframe.page_title;
 
     document.documentElement.lang = 'de';
@@ -73,18 +90,6 @@ htmlConstruct.prototype.setHTMLHeader = function() {
 };
 
 
-
-/**
- * loads CSS Files
- */
-htmlConstruct.prototype.css = function() {
-    if(this.browser === 'mobile') {
-        this.loadCSS('bin/css/styles.mobile.css');
-    } else {
-        this.loadCSS('bin/css/styles.css');
-    }
-    this.loadCSS('lib/jquery/css/' + window.janframe.jqueriuitheme + '/jquery-ui.css');
-};
 
 
 /**

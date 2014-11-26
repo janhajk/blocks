@@ -1,1 +1,0 @@
-/*jslint passfail: false, continue: true, es5: true, evil: true, forin: true, newcap: true, plusplus: true, undef: true, sloppy: true, vars: true, white: true, indent: 2, maxerr: 500 */

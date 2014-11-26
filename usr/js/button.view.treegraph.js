@@ -11,7 +11,7 @@ buttonTreegraph.parent                = oButton.prototype;
  */
 buttonTreegraph.prototype.click = function() {
   $('#middle').empty().append('<div id="tree-container" style="background-color:white"></div>');
-  addCss('g.node{font-family: Verdana, Helvetica;font-size: 12px;font-weight: bold;}circle.node-dot {fill: lightsalmon;stroke: red;stroke-width: 1px;}path.link {fill: none;stroke: gray;}');
+  addCssPlain('g.node{font-family: Verdana, Helvetica;font-size: 12px;font-weight: bold;}circle.node-dot {fill: lightsalmon;stroke: red;stroke-width: 1px;}path.link {fill: none;stroke: gray;}');
   var visit = function(parent, visitFn, childrenFn) {
       if (!parent) {return;}
       visitFn(parent);

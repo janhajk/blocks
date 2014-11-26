@@ -31,17 +31,28 @@ var supportsSVG = function() {
 
 
 /**
- * Add CSS
+ * Add Raw CSS to page header
  */
-var addCss = function(cssCode) {
-  var styleElement = document.createElement('style');
-  styleElement.type = 'text/css';
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = cssCode;
-  } else {
-    styleElement.appendChild(document.createTextNode(cssCode));
-  }
-  document.getElementsByTagName('head')[0].appendChild(styleElement);
+var addCssPlain = function(cssCode) {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    if(style.styleSheet) {
+        style.styleSheet.cssText = cssCode;
+    } else {
+        style.appendChild(document.createTextNode(cssCode));
+    }
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(style);
+};
+
+/*
+ * Add CSS files to page header
+ */
+var addCssFile = function(url) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = url;
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(link);
 };
 
 var janframeDialog = function(name, content) {

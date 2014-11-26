@@ -2,58 +2,9 @@
  * Baut die HTML-Seite auf
  */
 var htmlConstruct = function() {
-    this.browser = this.getBrowser();
-    //this.browser = 'mobile';  // for testing mobile
 
     // configure HTML-<head>
-    this.setHTMLHead();
-
-    // Add some additional CSS Files
-    if(this.browser === 'mobile') {
-        addCssFile('bin/css/styles.mobile.css');
-    } else {
-        addCssFile('bin/css/styles.css');
-    }
-    addCssFile('lib/jquery/css/' + window.janframe.jqueriuitheme + '/jquery-ui.css');
-
-    this.msgDOM();
-
-    var div1, div2, div3;
-    // Overlay for editing mode
-    div1 = document.createElement('div');
-    div1.id = 'overlay';
-    div1.class = 'ui-widget-overlay';
-    div1.style.display = 'none';
-    document.body.appendChild(div1);
-
-    // Content Wrapper
-    div1 = document.createElement('div');
-    div1.id = 'wrapper';
-    div2 = document.createElement('div');
-    div2.id = 'header';
-    div3 = document.createElement('div');
-    div3.id = 'middle';
-    div1.appendChild(div2);
-    div1.appendChild(div3);
-    document.body.appendChild(div1);
-
-    // Pacman-Loader
-    pacman = new loader();
-
-    // If menu is defined in usr scripts, then execute
-    if(typeof this.createMenu === 'function') {
-        this.createMenu();
-    }
-};
-
-
-
-/**
- * setzt die HTML-Header Eigenschaften
- */
-htmlConstruct.prototype.setHTMLHead = function() {
     document.title = window.janframe.page_title;
-
     document.documentElement.lang = 'de';
 
     var head = document.head || document.getElementsByTagName('head')[0];
@@ -87,24 +38,48 @@ htmlConstruct.prototype.setHTMLHead = function() {
         icon.type = 'image/x-icon';
         head.appendChild(icon);
     }
-};
 
-
-
-
-/**
- * returns the Browser-Type
- */
-htmlConstruct.prototype.getBrowser = function() {
-    var ua = navigator.userAgent.toLowerCase();
-    if(ua.indexOf("android") !== -1) {
-        return 'mobile';
+     this.browser = getBrowser();
+    //this.browser = 'mobile';  // for testing mobile
+    // Add some additional CSS Files
+    if(this.browser === 'mobile') {
+        addCssFile('bin/css/styles.mobile.css');
+    } else {
+        addCssFile('bin/css/styles.css');
     }
-    //  else if (ua.indexOf("chrome") !== -1){
-    //    return 'chrome';
-    //  }
-    return 'generic';
+    addCssFile('lib/jquery/css/' + window.janframe.jqueriuitheme + '/jquery-ui.css');
+
+    var div1, div2, div3;
+    // Overlay for editing mode
+    div1 = document.createElement('div');
+    div1.id = 'overlay';
+    div1.class = 'ui-widget-overlay';
+    div1.style.display = 'none';
+    document.body.appendChild(div1);
+
+    // Content Wrapper
+    div1 = document.createElement('div');
+    div1.id = 'wrapper';
+    div2 = document.createElement('div');
+    div2.id = 'header';
+    div3 = document.createElement('div');
+    div3.id = 'middle';
+    div1.appendChild(div2);
+    div1.appendChild(div3);
+    document.body.appendChild(div1);
+
+    // Pacman-Loader
+    pacman = new loader();
+
+    // Message Box
+    this.msgDOM();
+
+    // If menu is defined in usr scripts, then execute
+    if(typeof this.createMenu === 'function') {
+        this.createMenu();
+    }
 };
+
 
 
 /*

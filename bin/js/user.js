@@ -4,16 +4,30 @@ var user = function() {
 
 
 user.prototype.renderLoginLink = function() {
-  $.post('?public', {action:'islogged'}, function(data) {
-
-    if (data===1) { // Ist eingeloggt, dann Logout zeigen
-      $('#signin').hide();
-      $('#header').append('<div style="float:right;margin-right:10px;margin-top:5px"><a id="logout" href="#">Abmelden</a></div>');
-      $('#logout').on('click', function() {
-        $.post(janframe.ajax_target,{action:'logout'}, function(){
-          window.location.reload();
-        });
-      });
-    }
-  },'json');
+    $.post('?public', {
+        action: 'islogged'
+    }, function(data) {
+        if(data === 1) { // Ist eingeloggt, dann Logout zeigen
+            $('#signin').hide();
+            var div;
+            div = document.createElement('div');
+            div.style.float = 'right';
+            div.style.marginRight = '10px';
+            div.style.marginTop = '5px';
+            var a;
+            a = document.createElement('a');
+            a.href = 'javascript:';
+            a.id = 'logout';
+            a.textContent = 'Logout';
+            a.onClick = function() {
+                $.post(janframe.ajax_target, {
+                    action: 'logout'
+                }, function() {
+                    window.location.reload();
+                });
+            };
+            div.appendChild(a);
+            getElementsById('header').appendChild(div);
+        }
+    }, 'json');
 };

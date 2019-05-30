@@ -6,7 +6,7 @@ const Block = new Schema({
       creator: { type: Schema.Types.ObjectId, ref: 'User' },
       owner: { type: Schema.Types.ObjectId, ref: 'User' },
       timestamp:  { type: Date, default: Date.now },
-      type: { type: String, default: 'document' },
+      type: { type: String, default: 'original' },
       parent: { type: Schema.Types.ObjectId, ref: 'Block' },
       children: [{type: Schema.Types.ObjectId, ref: 'Block'}],
       ancestor: { type: Schema.Types.ObjectId, ref: 'Block' },

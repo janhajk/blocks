@@ -119,8 +119,8 @@
                               self.data[i] = block[i];
                         }
                         async.eachOf(block.children, function(childId, key, callback) {
-                                    block.data.children[key] = new _Block(childId);
-                                    block.data.children[key].load(function() {
+                                    self.data.children[key] = new _Block(childId);
+                                    self.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
                               },

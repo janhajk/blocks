@@ -21,8 +21,8 @@
             this.data.language = 0;
 
             this.dom;
-
-
+            
+            var self = this;
 
 
 
@@ -31,7 +31,6 @@
              *
              */
             var create = function(properties, cb) {
-                  var self = this;
                   var params = [];
                   for (let i in properties) {
                         params.push(i + '=' + properties[i]);
@@ -81,7 +80,6 @@
              *
              */
             var loadById = function(id, cb) {
-                  var self = this;
                   var request = new XMLHttpRequest();
                   request.open('GET', '/block/' + id, true);
                   request.onload = function() {
@@ -113,7 +111,6 @@
 
             // block-data is loaded; this is recursive as it loads all the children with it
             var load = function(cb) {
-                  let self = this;
                   loadById(self._id, function(e, block) {
                         for (let i in block) {
                               self.data[i] = block[i];

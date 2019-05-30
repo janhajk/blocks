@@ -19,7 +19,7 @@ var basic = function(app, connection) {
         });
     });
 
-    app.get('/block/add', /*auth.ensureAuthenticated,*/ function(req, res) {
+    app.post('/block/add', /*auth.ensureAuthenticated,*/ function(req, res) {
         let properties = req.body;
         utils.log(properties);
         block.add(properties, function(e, block) {

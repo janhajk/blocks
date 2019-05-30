@@ -37,6 +37,7 @@
                   }
 
                   var request = new XMLHttpRequest();
+                  request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                   request.open('POST', '/block/add', true);
                   request.onload = function() {
                         if (request.status >= 200 && request.status < 405) {

@@ -38,7 +38,7 @@
 
                   var request = new XMLHttpRequest();
                   request.open('POST', '/block/add', true);
-                  request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                  request.setRequestHeader('Content-type', 'application/json');
                   request.onload = function() {
                         if (request.status >= 200 && request.status < 405) {
                               try {
@@ -63,7 +63,7 @@
                         console.log('There was an error in xmlHttpRequest!');
                         return cb(true);
                   };
-                  request.send(params.join('&'));
+                  request.send(properties);
             };
             this.create = create;
 

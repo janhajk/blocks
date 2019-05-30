@@ -20,7 +20,7 @@ var basic = function(app, connection) {
     });
 
     app.post('/block/add', /*auth.ensureAuthenticated,*/ function(req, res) {
-        let properties = req.body;
+        let properties = res.json(req.body);
         utils.log(properties);
         block.add(properties, function(e, block) {
             res.send(e ? e : block);

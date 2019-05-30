@@ -5,19 +5,20 @@
 
       var Block = function _Block(_id) {
             this.id = (typeof _id === 'string') ? _id : '';
-            this.creator = {};
-            this.owner = {};
-            this.timestamp = 0;
-            this.type = '';
-            this.parent = {};
-            this.children = [];
-            this.ancestor = {};
-            this.content = '';
-            this.content_type = '';
-            this.properties = [];
-            this.weight = 0;
-            this.tags = [];
-            this.language = 0;
+            this.data = {};
+            this.data.creator = {};
+            this.data.owner = {};
+            this.data.timestamp = 0;
+            this.data.type = '';
+            this.data.parent = {};
+            this.data.children = [];
+            this.data.ancestor = {};
+            this.data.content = '';
+            this.data.content_type = '';
+            this.data.properties = [];
+            this.data.weight = 0;
+            this.data.tags = [];
+            this.data.language = 0;
 
             this.dom;
 
@@ -45,7 +46,7 @@
                                     var newBlock = JSON.parse(request.responseText);
                                     console.log(newBlock);
                                     for (let i in newBlock) {
-                                          self[i] = newBlock[i];
+                                          self.data[i] = newBlock[i];
                                           return cb(null);
                                     }
                               }
@@ -115,11 +116,11 @@
                   let self = this;
                   loadById(self._id, function(e, block) {
                         for (let i in block) {
-                              self[i] = block[i];
+                              self.data[i] = block[i];
                         }
                         async.eachOf(block.children, function(childId, key, callback) {
-                                    block.children[key] = new _Block(childId);
-                                    block.children[key].load(function() {
+                                    block.data.children[key] = new _Block(childId);
+                                    block.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
                               },

@@ -19,12 +19,14 @@ var basic = function(app, connection) {
         });
     });
 
-    app.get('/documents/add', /*auth.ensureAuthenticated,*/ function(req, res) {
-        block.add({type:'document'}, function(e, block) {
+    app.get('/block/add', /*auth.ensureAuthenticated,*/ function(req, res) {
+        let properties = req.body;
+        utils.log(properties);
+        block.add(properties, function(e, block) {
             res.send(e ? e : block);
         });
     });
-    app.get('/documents/:id/load', /*auth.ensureAuthenticated,*/ function(req, res) {
+    app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
         const id = req.params.id;
         block.getById(id, function(e, block) {
             res.send(e ? e : block);

@@ -7,17 +7,18 @@
     + parents and children
     - change in block alters whole line up the tree
 - setup API for 
-    - insert new
+    + insert new
+    + read block
     - edit block
-- transfer old content to new database
-- basic document viewing with v01 content
-- render document tree with colors for diffrent kinds of content (original, cloned etc)
+- js-calls to add new block
 - create editor to add new content
    - block type document
    - block type simple html
    - block type heading
+- transfer old content to new database
+- basic document viewing with v01 content
+- render document tree with colors for diffrent kinds of content (original, cloned etc)
 - Implement users: https://github.com/saintedlama/passport-local-mongoose/blob/master/index.js OR selfmade: https://github.com/NishiGaba/User-Login-System
-
 
 
 

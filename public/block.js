@@ -4,7 +4,7 @@
 
 
       var Block = function _Block(_id) {
-            this.id = (typeof _id === 'string') ? _id : '';
+            this._id = (typeof _id === 'string') ? _id : '';
             this.data = {};
             this.data.creator = {};
             this.data.owner = {};

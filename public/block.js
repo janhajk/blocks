@@ -3,7 +3,7 @@
 (function() {
 
 
-      var Block = function _Block(_id) {
+      var Block = function _Block(_id, domParent) {
             this._id = (typeof _id === 'string') ? _id : '';
             this.data = {};
             this.data.creator = {};
@@ -20,8 +20,10 @@
             this.data.tags = [];
             this.data.language = 0;
 
+            // the whole dom element, rendered
             this.dom;
-            
+            this.domParent = domParent;
+
             var self = this;
 
 
@@ -75,7 +77,7 @@
             }
 
             /*
-             * Loads a block 'id'
+             * Loads a block by 'id'
              *
              *
              */
@@ -109,14 +111,25 @@
             };
             this.loadById = loadById;
 
-            // block-data is loaded; this is recursive as it loads all the children with it
+
+            /*
+             * Load block data
+             
+             * this is recursive as it loads all the children within
+             *
+             * TODO: load 
+             */
             var load = function(cb) {
                   loadById(self._id, function(e, block) {
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        self.render();
+                        this.domParent.appendChild(self.dom.panel);
+                        this.dom.body.innerHTML = self.data.content;
+                        // Go trough all children and load them
                         async.eachOf(block.children, function(childId, key, callback) {
-                                    self.data.children[key] = new _Block(childId);
+                                    self.data.children[key] = new _Block(childId, self.domParent);
                                     self.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
@@ -130,12 +143,13 @@
             };
             this.load = load;
 
-            var loadChildren = function(children) {
 
-            };
-
-            var render = function(parent) {
-
+            var render = function() {
+                  let panel = new Panel();
+                  let dom = panel.row;
+                  let body = panel.body;
+                  self.dom.body = body;
+                  self.dom.panel = dom;
             };
             this.render = render;
 
@@ -145,10 +159,6 @@
             };
             this.renderBlock = renderBlock;
 
-            document.addEventListener('DOMContentLoaded', function() {
-                  doc = new Panel('Werkvertrag Kanton Basel-Landschaft');
-
-            });
 
             var row = function() {
                   let div = document.createElement('div');
@@ -160,13 +170,16 @@
             };
 
 
-
-            var Panel = function(title) {
+            /**
+             * Creates a block panel
+             * 
+             * Type: Object
+             * 
+             * @param string title the title of the panel
+             * 
+             */
+            var Panel = function() {
                   var self = this;
-                  this.title = {
-                        value: title,
-                        html: null
-                  };
                   this.row = row();
                   let content = document.getElementById('content');
                   content.appendChild(this.row.div);
@@ -174,22 +187,32 @@
                   var head = function(title) {
                         let head = document.createElement('div');
                         head.className = 'ibox-head';
-
-                        let divTitle = document.createElement('div');
-                        divTitle.className = 'ibox-title';
-                        divTitle.innerHTML = title;
-                        self.title.html = divTitle;
+                        head.style.float = 'right';
+                        head.style.minHeight = '0';
 
                         let tools = document.createElement('div');
                         tools.className = 'ibox-tools';
-                        head.appendChild(divTitle);
+                        tools.style.position = 'absolute';
+                        tools.style.marginRight = '10px';
+                        tools.style.right = '0px';
+                        tools.style.top = '0px';
+                        tools.style.marginTop = '10px';
+
+                        <<
+                        << << << < saved version
+                              // head.appendChild(divTitle);
+                              ===
+                              === ===
+
+                              >>>
+                              >>> >>> local version
                         head.appendChild(tools);
                         let c = collapse();
                         let m = menu([
                               { title: 'Bearbeiten', icon: 'pencil' },
                               { title: 'Löschen', icon: 'trash' }
                         ]);
-                        tools.appendChild(c[0]);
+                        // tools.appendChild(c[0]);
                         tools.appendChild(m[0]);
                         tools.appendChild(m[1]);
                         return head;
@@ -233,10 +256,11 @@
                   var html = function() {
                         let div = document.createElement('div');
                         div.className = 'ibox ibox-fullheight';
-                        let h = head(title);
+                        let h = head();
 
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
+                        this.body = divBody;
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';
                         divSlimScroll.style.position = 'relative';

@@ -1,31 +1,34 @@
 + Setup basic interface
 + Setup basic nodejs structure
 + import database from V01 app
++ js-calls to add new block
 
-
+- render block function
 - setup Mongoose Schemas
     + parents and children
     - change in block alters whole line up the tree
 - setup API for 
     + insert new
     + read block
-    - edit block
-- js-calls to add new block
-- create editor to add new content
-   - block type document
-   - block type simple html
-   - block type heading
+    - edit/update block
+
+- create editor to add basic content
+   - content_type document
+   - content_type html_simple (https://summernote.org)
+   - content_type heading
+   
+   
 - transfer old content to new database
 - basic document viewing with v01 content
 - render document tree with colors for diffrent kinds of content (original, cloned etc)
-- Implement users: https://github.com/saintedlama/passport-local-mongoose/blob/master/index.js OR selfmade: https://github.com/NishiGaba/User-Login-System
 
 
 
+Ressources:
 
-
-
-
-
-
-Themefy Icon: https://themify.me/themify-icons
+- For revision copy document: https://stackoverflow.com/questions/18324843/easiest-way-to-copy-clone-a-mongoose-document-instance
+- User implementation: https://github.com/saintedlama/passport-local-mongoose/blob/master/index.js OR selfmade: https://github.com/NishiGaba/User-Login-System
+- FileUpload: https://www.dropzonejs.com/
+- Tree: jsTree jQuery Plugin https://www.jstree.com/
+- Panels: http://admincast.com/adminca/preview/admin_1/html/panels.html
+- Icons Themefy: https://themify.me/themify-icons

@@ -252,7 +252,7 @@
 
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
-                        this.body = divBody;
+                        self.body = divBody;
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';
                         divSlimScroll.style.position = 'relative';

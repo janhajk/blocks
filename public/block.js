@@ -21,7 +21,7 @@
             this.data.language = 0;
 
             // the whole dom element, rendered
-            this.dom;
+            this.dom = {};
             this.domParent = domParent;
 
             var self = this;

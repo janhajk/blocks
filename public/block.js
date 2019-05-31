@@ -190,11 +190,11 @@
 
                         let tools = document.createElement('div');
                         tools.className = 'ibox-tools';
-                        tools.style.position = 'absolute';
                         tools.style.marginRight = '10px';
                         tools.style.right = '0px';
                         tools.style.top = '0px';
                         tools.style.marginTop = '10px';
+                        tools.style.borderBottom = 'none';
 
                         head.appendChild(tools);
                         let c = collapse();
@@ -250,6 +250,7 @@
 
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
+                        divBody.style.marginBottom = '5px';
                         self.body = divBody;
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';

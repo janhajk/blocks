@@ -125,8 +125,8 @@
                               self.data[i] = block[i];
                         }
                         self.render();
-                        this.domParent.appendChild(self.dom.panel);
-                        this.dom.body.innerHTML = self.data.content;
+                        self.domParent.appendChild(self.dom.panel);
+                        self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         async.eachOf(block.children, function(childId, key, callback) {
                                     self.data.children[key] = new _Block(childId, self.domParent);

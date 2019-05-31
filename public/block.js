@@ -146,7 +146,7 @@
 
             var render = function() {
                   let panel = new Panel();
-                  let dom = panel.row;
+                  let dom = panel.row.div;
                   let body = panel.body;
                   self.dom.body = body;
                   self.dom.panel = dom;
@@ -181,8 +181,6 @@
             var Panel = function() {
                   var self = this;
                   this.row = row();
-                  let content = document.getElementById('content');
-                  content.appendChild(this.row.div);
 
                   var head = function(title) {
                         let head = document.createElement('div');

@@ -246,11 +246,13 @@
                   var html = function() {
                         let div = document.createElement('div');
                         div.className = 'ibox ibox-fullheight';
+                        div.style.height = 'calc(100% - 5px)';
+                        div.style.marginBottom = '5px';
                         let h = head();
 
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
-                        divBody.style.marginBottom = '5px';
+                        divBody.style.padding = '5px 30px 5px';
                         self.body = divBody;
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';

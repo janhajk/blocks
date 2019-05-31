@@ -164,7 +164,7 @@
                   let div = document.createElement('div');
                   div.className = 'row';
                   let col = document.createElement('div');
-                  col.className = 'col';
+                  col.className = 'col-md-8';
                   div.appendChild(col);
                   return { div: div, col: col };
             };

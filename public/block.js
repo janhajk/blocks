@@ -198,14 +198,6 @@
                         tools.style.top = '0px';
                         tools.style.marginTop = '10px';
 
-                        <<
-                        << << << < saved version
-                              // head.appendChild(divTitle);
-                              ===
-                              === ===
-
-                              >>>
-                              >>> >>> local version
                         head.appendChild(tools);
                         let c = collapse();
                         let m = menu([

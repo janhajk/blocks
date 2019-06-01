@@ -268,11 +268,11 @@
                         div.appendChild(divBody);
 
                         let row = document.createElement('div');
-                        div.className = 'row';
+                        row.className = 'row';
                         let col = document.createElement('div');
                         col.className = 'col-md-8';
                         row.appendChild(col);
-                        row.appendChild(div);
+                        col.appendChild(div);
                         return { body: divBody, dom: row };
 
                   }();

@@ -174,7 +174,7 @@
                               title: 'Bearbeiten',
                               icon: 'pencil',
                               action: function() {
-                                    block;
+                                    console.log(block);
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

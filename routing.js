@@ -35,7 +35,7 @@ var basic = function(app, connection) {
     app.post('/block/save', /*auth.ensureAuthenticated,*/ function(req, res) {
         let properties = req.body;
         utils.log(properties);
-        block.add(properties, function(e) {
+        block.save(properties, function(e) {
             res.send(e ? {success:false, error: e} : {success:true});
         });
     });

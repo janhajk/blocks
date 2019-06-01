@@ -295,7 +295,7 @@
                         col.className = 'col-md-8';
                         row.appendChild(col);
                         col.appendChild(div);
-                        return { body: divBody, row: row, dom: div };
+                        return { body: divBody, row: row, panel: div };
 
                   }();
 

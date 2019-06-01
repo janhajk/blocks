@@ -2,20 +2,25 @@
 + Setup basic nodejs structure
 + import database from V01 app
 + js-calls to add new block
-
-- render block function
-- setup Mongoose Schemas
++ render block function
++ setup Mongoose Schemas
     + parents and children
-    - change in block alters whole line up the tree
-- setup API for 
++ setup API for 
     + insert new
     + read block
-    - edit/update block
+
 
 - create editor to add basic content
    - content_type document
    - content_type html_simple (https://summernote.org)
    - content_type heading
+
+
+
+- edit/update block
+- change in block alters whole line up the tree
+
+
    
    
 - transfer old content to new database

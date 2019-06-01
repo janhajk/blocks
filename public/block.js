@@ -132,7 +132,7 @@
                         }
                         else {
                               // Blocks are inserted from bottom to top; that's why they are stored in reverse order
-                              self.domParent.insertAdjacentElement('afterend',self.dom.row);
+                              self.domParent.insertAdjacentElement('afterend', self.dom.row);
                         }
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
@@ -274,6 +274,7 @@
                                     buttonSave.innerHTML = 'Speichern';
                                     buttonSave.onclick = function() {
                                           block.dom.panel.removeChild(buttonSave);
+                                          block.dom.panel.removeChild(buttonCancel);
                                           $(block.dom.body).summernote('destroy');
                                           block.content = block.dom.body.innerHTML;
                                           block.saveContent(function() {
@@ -286,6 +287,8 @@
                                     buttonCancel.setAttribute('type', 'button');
                                     buttonCancel.innerHTML = 'Abbrechen';
                                     buttonCancel.onclick = function() {
+                                          block.dom.panel.removeChild(buttonSave);
+                                          block.dom.panel.removeChild(buttonCancel);
                                           $(block.dom.body).summernote('destroy');
                                     };
                                     block.dom.panel.appendChild(buttonCancel);

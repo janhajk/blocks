@@ -177,7 +177,7 @@
                         ['insert', ['link', 'picture']]
                   ];
                   let block = self;
-                  let self = this;
+                  let mPanel = this;
                   let menuPoints = [{
                               title: 'Bearbeiten',
                               icon: 'pencil',

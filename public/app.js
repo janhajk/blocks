@@ -11,5 +11,6 @@
         console.log('success, fallowing your block:');
         console.log(b);
     });
+    window.b = b;
 
 })();

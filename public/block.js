@@ -130,7 +130,7 @@
                               self.contentDom.appendChild(self.dom.row);
                         }
                         else {
-                              self.domparent.insertAdjacentElement('afterend',self.dom.row);
+                              self.domParent.insertAdjacentElement('afterend',self.dom.row);
                         }
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them

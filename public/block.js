@@ -272,7 +272,7 @@
                         let col = document.createElement('div');
                         col.className = 'col-md-8';
                         row.appendChild(col);
-                        row.col.appendChild(div);
+                        row.appendChild(div);
                         return { body: divBody, dom: row };
 
                   }();

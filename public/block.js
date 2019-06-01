@@ -169,12 +169,22 @@
              * 
              */
             var Panel = function() {
+                  let toolbar = [
+                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture']]
+                  ];
                   let block = self;
+                  let self = this;
                   let menuPoints = [{
                               title: 'Bearbeiten',
                               icon: 'pencil',
                               action: function() {
-                                    $(block.dom.body).summernote();
+                                    $(block.dom.body).summernote(toolbar);
+                                    // ToDo Save Button: https://github.com/DiemenDesign/summernote-save-button/blob/master/summernote-save-button.js
+                                    document.getElementsByClassName('note-toolbar').style.background = 'none';
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

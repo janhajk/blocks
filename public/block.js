@@ -136,6 +136,7 @@
                         }
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
+                        // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
                         async.eachOfLimit(block.children, 1, function(childId, key, callback) {
                                     self.data.children[key] = new _Block(childId, self.dom.row);
                                     self.data.children[key].load(function() {
@@ -280,6 +281,14 @@
                                           });
                                     };
                                     block.dom.panel.appendChild(buttonSave);
+                                    let buttonCancel = document.createElement('button');
+                                    buttonCancel.className = 'btn btn-primary';
+                                    buttonCancel.setAttribute('type', 'button');
+                                    buttonCancel.innerHTML = 'Abbrechen';
+                                    buttonCancel.onclick = function() {
+                                          $(block.dom.body).summernote('destroy');
+                                    };
+                                    block.dom.panel.appendChild(buttonCancel);
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

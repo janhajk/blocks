@@ -128,6 +128,9 @@
                         self.render();
                         // TOp Block get's appended to content of page
                         if (self._id === window.currentBlockId) {
+                              while (self.contentDom.firstChild) {
+                                    self.contentDom.removeChild(self.contentDom.firstChild);
+                              }
                               self.contentDom.appendChild(self.dom.row);
                         }
                         else {
@@ -292,6 +295,16 @@
                                           $(block.dom.body).summernote('destroy');
                                     };
                                     block.dom.panel.appendChild(buttonCancel);
+                              }
+                        },
+                        {
+                              title: 'Block öffnen',
+                              icon: 'fullscreen',
+                              action: function() {
+                                    window.b = new Block(block._id, block.contentDom);
+                                    window.b.load(function() {
+                                          console.log('success, fallowing your block:');
+                                    });
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

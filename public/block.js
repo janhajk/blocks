@@ -174,7 +174,7 @@
                               title: 'Bearbeiten',
                               icon: 'pencil',
                               action: function() {
-                                    console.log(block);
+                                    $(block.dom.body).summernote();
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

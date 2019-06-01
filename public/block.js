@@ -123,6 +123,7 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        self.data.children = self.data.children.reverse();
                         // Render DOM of block
                         self.render();
                         // TOp Block get's appended to content of page
@@ -130,6 +131,7 @@
                               self.contentDom.appendChild(self.dom.row);
                         }
                         else {
+                              // Blocks are inserted from bottom to top; that's why they are stored in reverse order
                               self.domParent.insertAdjacentElement('afterend',self.dom.row);
                         }
                         self.dom.body.innerHTML = self.data.content;

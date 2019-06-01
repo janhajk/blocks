@@ -184,7 +184,7 @@
                               action: function() {
                                     $(block.dom.body).summernote(toolbar);
                                     // ToDo Save Button: https://github.com/DiemenDesign/summernote-save-button/blob/master/summernote-save-button.js
-                                    document.getElementsByClassName('note-toolbar').style.background = 'none';
+                                    $('.note-toolbar').style('background', 'none', 'important');
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },

@@ -31,6 +31,7 @@
 
 Ressources:
 
+- GUTENBERG: https://wordpress.org/gutenberg/
 - For revision copy document: https://stackoverflow.com/questions/18324843/easiest-way-to-copy-clone-a-mongoose-document-instance
 - User implementation: https://github.com/saintedlama/passport-local-mongoose/blob/master/index.js OR selfmade: https://github.com/NishiGaba/User-Login-System
 - FileUpload: https://www.dropzonejs.com/

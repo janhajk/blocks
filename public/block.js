@@ -144,6 +144,40 @@
             this.load = load;
 
 
+            var saveContent = function(next) {
+                  var params = {
+                        content: self.content,
+                        _id: self._id
+                  };
+                  var request = new XMLHttpRequest();
+                  request.open('POST', '/block/save', true);
+                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+                  request.onload = function() {
+                        if (request.status >= 200 && request.status < 405) {
+                              try {
+                                    var response = JSON.parse(request.responseText);
+                                    console.log(response);
+                                    return next(null, response);
+                              }
+                              catch (e) {
+                                    console.log(e);
+                                    return next(e);
+                              }
+                        }
+                        else {
+                              console.log('Error in request; status was: ' + request.status);
+                              return next(true);
+                        }
+                  };
+                  request.onerror = function() {
+                        console.log('There was an error in xmlHttpRequest!');
+                        return next(true);
+                  };
+                  request.send(JSON.stringify(params));
+            };
+            this.saveContent = saveContent;
+
+
             var render = function() {
                   let panel = new Panel();
                   let row = panel.content.row;
@@ -195,6 +229,10 @@
                                     buttonSave.onclick = function() {
                                           block.dom.panel.removeChild(buttonSave);
                                           $(block.dom.body).summernote('destroy');
+                                          block.content = block.dom.body.innerHTML;
+                                          block.saveContent(function(){
+                                                
+                                          });
                                     };
                                     block.dom.panel.appendChild(buttonSave);
                               }

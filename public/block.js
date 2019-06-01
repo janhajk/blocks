@@ -133,7 +133,7 @@
                                     self.domParent.insertBefore(self.dom.row, self.domParent.nextElementSibling);
                               }
                               else {
-                                    self.domParent.append(self.dom.row);
+                                    self.domParent.parentNode.append(self.dom.row);
                               }
                         };
                         self.dom.body.innerHTML = self.data.content;

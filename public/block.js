@@ -202,7 +202,7 @@
                               { title: 'Bearbeiten', icon: 'pencil' },
                               { title: 'neuen Block darüber', icon: 'angle-double-up' },
                               { title: 'neuen Block darunter', icon: 'angle-double-down' },
-                              { title: 'Block unterordnen', icon: 'double-right' },
+                              { title: 'Block unterordnen', icon: 'angle-double-right' },
                               { title: 'Block nach oben', icon: 'arrow-up' },
                               { title: 'Block nach unten', icon: 'arrow-down' },
                               { title: 'Block löschen', icon: 'trash' }

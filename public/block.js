@@ -33,11 +33,6 @@
              *
              */
             var create = function(properties, cb) {
-                  var params = [];
-                  for (let i in properties) {
-                        params.push(i + '=' + properties[i]);
-                  }
-
                   var request = new XMLHttpRequest();
                   request.open('POST', '/block/add', true);
                   request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
@@ -46,10 +41,7 @@
                               try {
                                     var newBlock = JSON.parse(request.responseText);
                                     console.log(newBlock);
-                                    for (let i in newBlock) {
-                                          self.data[i] = newBlock[i];
-                                          return cb(null);
-                                    }
+                                    return cb(null, newBlock);
                               }
                               catch (e) {
                                     console.log(e);
@@ -71,8 +63,10 @@
 
             // new Block
             if (typeof _id === 'object') {
-                  create(_id, function(e) {
-
+                  create(_id, function(e, newBlock) {
+                        for (let i in newBlock) {
+                              self.data[i] = newBlock[i];
+                        }
                   });
             }
 
@@ -121,6 +115,10 @@
              */
             var load = function(cb) {
                   loadById(self._id, function(e, block) {
+                        // remove old data
+                        if (self.dom.row !== undefined) self.domParent.removeChild(self.dom.row);
+                        self.children = [];
+                        // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
@@ -177,6 +175,38 @@
             };
             this.saveContent = saveContent;
 
+            var appendBlock = function(next) {
+                  var params = {
+                        parent: self._id
+                  };
+                  var request = new XMLHttpRequest();
+                  request.open('POST', '/block/add', true);
+                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+                  request.onload = function() {
+                        if (request.status >= 200 && request.status < 405) {
+                              try {
+                                    var response = JSON.parse(request.responseText);
+                                    console.log(response);
+                                    return next(null, response);
+                              }
+                              catch (e) {
+                                    console.log(e);
+                                    return next(e);
+                              }
+                        }
+                        else {
+                              console.log('Error in request; status was: ' + request.status);
+                              return next(true);
+                        }
+                  };
+                  request.onerror = function() {
+                        console.log('There was an error in xmlHttpRequest!');
+                        return next(true);
+                  };
+                  request.send(JSON.stringify(params));
+            };
+            this.appendBlock = appendBlock;
+
 
             var render = function() {
                   let panel = new Panel();
@@ -216,7 +246,12 @@
                   };
                   let block = self;
                   let mPanel = this;
-                  let menuPoints = [{
+                  let menuPoints = [
+                        /**
+                         * 
+                         * Block edit content
+                         */
+                        {
                               title: 'Bearbeiten',
                               icon: 'pencil',
                               action: function() {
@@ -230,15 +265,25 @@
                                           block.dom.panel.removeChild(buttonSave);
                                           $(block.dom.body).summernote('destroy');
                                           block.content = block.dom.body.innerHTML;
-                                          block.saveContent(function(){
-                                                
+                                          block.saveContent(function() {
+
                                           });
                                     };
                                     block.dom.panel.appendChild(buttonSave);
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },
-                        { title: 'neuen Block darunter', icon: 'angle-double-down' },
+                        {
+                              title: 'neuen Block darunter',
+                              icon: 'angle-double-down',
+                              action: function() {
+                                    block.create({ parent: block._id }, function(e, newBlock) {
+                                          block.load(function(){
+                                                
+                                          });
+                                    });
+                              }
+                        },
                         { title: 'Block unterordnen', icon: 'angle-double-right' },
                         { title: 'Block nach oben', icon: 'arrow-up' },
                         { title: 'Block nach unten', icon: 'arrow-down' },

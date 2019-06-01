@@ -146,8 +146,8 @@
 
             var render = function() {
                   let panel = new Panel();
-                  let dom = panel.row.div;
-                  let body = panel.body;
+                  let dom = panel.content.dom;
+                  let body = panel.content.body;
                   self.dom.body = body;
                   self.dom.panel = dom;
             };
@@ -160,16 +160,6 @@
             this.renderBlock = renderBlock;
 
 
-            var row = function() {
-                  let div = document.createElement('div');
-                  div.className = 'row';
-                  let col = document.createElement('div');
-                  col.className = 'col-md-8';
-                  div.appendChild(col);
-                  return { div: div, col: col };
-            };
-
-
             /**
              * Creates a block panel
              * 
@@ -179,20 +169,21 @@
              * 
              */
             var Panel = function() {
-
-                  let m = menu([
-                        { title: 'Bearbeiten', icon: 'pencil' },
+                  let block = self;
+                  let menuPoints = [{
+                              title: 'Bearbeiten',
+                              icon: 'pencil',
+                              action: function() {
+                                    block;
+                              }
+                        },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },
                         { title: 'neuen Block darunter', icon: 'angle-double-down' },
                         { title: 'Block unterordnen', icon: 'angle-double-right' },
                         { title: 'Block nach oben', icon: 'arrow-up' },
                         { title: 'Block nach unten', icon: 'arrow-down' },
                         { title: 'Block löschen', icon: 'trash' }
-                  ]);
-                  
-                  var self = this;
-                  this.row = row();
-
+                  ];
 
 
                   var head = function(title) {
@@ -211,6 +202,7 @@
 
                         head.appendChild(tools);
                         let c = collapse();
+                        let m = menu(menuPoints);
                         // tools.appendChild(c[0]);
                         tools.appendChild(m[0]);
                         tools.appendChild(m[1]);
@@ -242,6 +234,7 @@
                               icon.className = 'ti-' + items[i].icon;
                               a.appendChild(icon);
                               a.innerHTML += items[i].title;
+                              a.onclick = items[i].action;
                               menu.appendChild(a);
                         }
                         menuButton.setAttribute('data-toggle', 'dropdown');
@@ -252,7 +245,7 @@
 
 
 
-                  var html = function() {
+                  this.content = function() {
                         let div = document.createElement('div');
                         div.className = 'ibox ibox-fullheight';
                         div.style.height = 'calc(100% - 5px)';
@@ -262,7 +255,7 @@
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
                         divBody.style.padding = '5px 30px 5px';
-                        self.body = divBody;
+
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';
                         divSlimScroll.style.position = 'relative';
@@ -270,14 +263,20 @@
                         divSlimScroll.style.width = 'auto';
                         divSlimScroll.style.height = '470px';
                         divBody.appendChild(divSlimScroll);
+
                         div.appendChild(h);
                         div.appendChild(divBody);
-                        self.row.col.appendChild(div);
 
+                        let row = document.createElement('div');
+                        div.className = 'row';
+                        let col = document.createElement('div');
+                        col.className = 'col-md-8';
+                        row.appendChild(col);
+                        row.col.appendChild(div);
+                        return { body: divBody, dom: row };
 
-                  };
+                  }();
 
-                  html();
             };
       };
 

@@ -125,7 +125,7 @@
                               self.data[i] = block[i];
                         }
                         self.render();
-                        self.domParent.appendChild(self.dom.panel);
+                        self.domParent.appendChild(self.dom.row);
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         async.eachOf(block.children, function(childId, key, callback) {
@@ -146,10 +146,12 @@
 
             var render = function() {
                   let panel = new Panel();
-                  let dom = panel.content.dom;
+                  let row = panel.content.row;
                   let body = panel.content.body;
+                  let panelDom = panel.content.panel;
                   self.dom.body = body;
-                  self.dom.panel = dom;
+                  self.dom.row = row;
+                  self.dom.panel = panelDom;
             };
             this.render = render;
 
@@ -169,22 +171,32 @@
              * 
              */
             var Panel = function() {
-                  let toolbar = [
-                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture']]
-                  ];
+                  let summernoteProps = {
+                        toolbar: [
+                              ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                              ['color', ['color']],
+                              ['para', ['ul', 'ol', 'paragraph']],
+                              ['table', ['table']],
+                              ['insert', ['link', 'picture']]
+                        ]
+                  };
                   let block = self;
                   let mPanel = this;
                   let menuPoints = [{
                               title: 'Bearbeiten',
                               icon: 'pencil',
                               action: function() {
-                                    $(block.dom.body).summernote(toolbar);
-                                    // ToDo Save Button: https://github.com/DiemenDesign/summernote-save-button/blob/master/summernote-save-button.js
-                                    $('.note-toolbar').css('background', 'none');
+                                    $(block.dom.body).summernote(summernoteProps);
+                                    // ToDo: Save Button: https://github.com/DiemenDesign/summernote-save-button/blob/master/summernote-save-button.js
+                                    let buttonSave = document.createElement('button');
+                                    buttonSave.className = 'btn btn-primary';
+                                    buttonSave.setAttribute('type', 'button');
+                                    buttonSave.innerHTML = 'Speichern';
+                                    buttonSave.onclick = function() {
+                                          block.dom.panel.removeChild(buttonSave);
+                                          $(block.dom.body).summernote('destroy');
+                                    };
+                                    block.dom.panel.appendChild(buttonSave);
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },
@@ -283,7 +295,7 @@
                         col.className = 'col-md-8';
                         row.appendChild(col);
                         col.appendChild(div);
-                        return { body: divBody, dom: row };
+                        return { body: divBody, row: row, dom: div };
 
                   }();
 

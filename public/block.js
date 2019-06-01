@@ -302,6 +302,7 @@
                               icon: 'fullscreen',
                               action: function() {
                                     window.b = new Block(block._id, block.contentDom);
+                                    window.currentBlockId = block._id;
                                     window.b.load(function() {
                                           console.log('success, fallowing your block:');
                                     });

@@ -23,7 +23,7 @@
             // the whole dom element, rendered
             this.dom = {};
             this.domParent = domParent;
-
+            this.contentDom = document.getElementById('content');
             var self = this;
 
 
@@ -117,18 +117,29 @@
             var load = function(next) {
                   loadById(self._id, function(e, block) {
                         // remove old data
-                        if (self.dom.row !== undefined) self.domParent.removeChild(self.dom.row);
+                        if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
                         self.children = [];
                         // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
                         self.render();
-                        self.domParent.appendChild(self.dom.row);
+                        if (self._id === window.currentBlockId) {
+                              self.contentDom.appendChild(self.dom.row);
+                        }
+                        else {
+                              let sibling = self.domParent.nextElementSibling;
+                              if (sibling !== null) {
+                                    self.domParent.insertBefore(self.dom.row, self.domParent.nextElementSibling);
+                              }
+                              else {
+                                    self.domParent.append(self.dom.row);
+                              }
+                        };
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         async.eachOf(block.children, function(childId, key, callback) {
-                                    self.data.children[key] = new _Block(childId, self.domParent);
+                                    self.data.children[key] = new _Block(childId, self.dom.row);
                                     self.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
@@ -279,8 +290,8 @@
                               icon: 'angle-double-down',
                               action: function() {
                                     block.create({ parent: block._id }, function(e, newBlock) {
-                                          block.load(function(){
-                                                
+                                          block.load(function() {
+
                                           });
                                     });
                               }

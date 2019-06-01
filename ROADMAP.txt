@@ -8,16 +8,16 @@
 + setup API for 
     + insert new
     + read block
+    + edit/update block
 
 
 - create editor to add basic content
    - content_type document
-   - content_type html_simple (https://summernote.org)
+   + content_type html_simple (https://summernote.org)
    - content_type heading
 
 
 
-- edit/update block
 - change in block alters whole line up the tree
 
 

@@ -16,8 +16,11 @@
    + content_type html_simple (https://summernote.org)
    - content_type heading
 
-
-
+- bug when adding block, wrong reloading
+- list blocks without parent in sidebar under documents
+- load selected documents
+- 
+- revisions
 - change in block alters whole line up the tree
 
 

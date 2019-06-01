@@ -127,6 +127,10 @@ pre:hover .clipboard-copy {
       opacity: 1
 }
 
+p {
+      margin: 0px;
+}
+
 .collapse.in {
       display: block
 }

@@ -200,11 +200,11 @@
                         let c = collapse();
                         let m = menu([
                               { title: 'Bearbeiten', icon: 'pencil' },
-                              { title: 'neuen Block darunter', icon: 'angle-double-down' },
                               { title: 'neuen Block darüber', icon: 'angle-double-up' },
-                              { title: 'Block darüberliegenden unterordnen', icon: 'double-right' },
-                              { title: 'Block nach oben', icon: 'arrow-down' },
-                              { title: 'Block nach unten', icon: 'arrow-up' },
+                              { title: 'neuen Block darunter', icon: 'angle-double-down' },
+                              { title: 'Block unterordnen', icon: 'double-right' },
+                              { title: 'Block nach oben', icon: 'arrow-up' },
+                              { title: 'Block nach unten', icon: 'arrow-down' },
                               { title: 'Block löschen', icon: 'trash' }
                         ]);
                         // tools.appendChild(c[0]);

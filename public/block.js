@@ -61,7 +61,8 @@
             };
             this.create = create;
 
-            // new Block
+            // new Block (alternatively string is given which is a _id)
+            // object contains properties for new block
             if (typeof _id === 'object') {
                   create(_id, function(e, newBlock) {
                         for (let i in newBlock) {
@@ -113,7 +114,7 @@
              *
              * TODO: load 
              */
-            var load = function(cb) {
+            var load = function(next) {
                   loadById(self._id, function(e, block) {
                         // remove old data
                         if (self.dom.row !== undefined) self.domParent.removeChild(self.dom.row);
@@ -134,7 +135,7 @@
                               },
                               // when async finishes
                               function(e) {
-                                    return cb(); // report block and children loaded
+                                    return next(); // report block and children loaded
                               });
                   });
 

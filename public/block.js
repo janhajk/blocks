@@ -123,19 +123,15 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        // Render DOM of block
                         self.render();
+                        // TOp Block get's appended to content of page
                         if (self._id === window.currentBlockId) {
                               self.contentDom.appendChild(self.dom.row);
                         }
                         else {
-                              let sibling = self.domParent.nextElementSibling;
-                              if (sibling !== null) {
-                                    self.domParent.insertBefore(self.dom.row, self.domParent.nextElementSibling);
-                              }
-                              else {
-                                    self.domParent.parentNode.append(self.dom.row);
-                              }
-                        };
+                              self.domparent.insertAdjacentElement('afterend',self.dom.row);
+                        }
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         async.eachOf(block.children, function(childId, key, callback) {

@@ -179,8 +179,21 @@
              * 
              */
             var Panel = function() {
+
+                  let m = menu([
+                        { title: 'Bearbeiten', icon: 'pencil' },
+                        { title: 'neuen Block darüber', icon: 'angle-double-up' },
+                        { title: 'neuen Block darunter', icon: 'angle-double-down' },
+                        { title: 'Block unterordnen', icon: 'angle-double-right' },
+                        { title: 'Block nach oben', icon: 'arrow-up' },
+                        { title: 'Block nach unten', icon: 'arrow-down' },
+                        { title: 'Block löschen', icon: 'trash' }
+                  ]);
+                  
                   var self = this;
                   this.row = row();
+
+
 
                   var head = function(title) {
                         let head = document.createElement('div');
@@ -198,15 +211,6 @@
 
                         head.appendChild(tools);
                         let c = collapse();
-                        let m = menu([
-                              { title: 'Bearbeiten', icon: 'pencil' },
-                              { title: 'neuen Block darüber', icon: 'angle-double-up' },
-                              { title: 'neuen Block darunter', icon: 'angle-double-down' },
-                              { title: 'Block unterordnen', icon: 'angle-double-right' },
-                              { title: 'Block nach oben', icon: 'arrow-up' },
-                              { title: 'Block nach unten', icon: 'arrow-down' },
-                              { title: 'Block löschen', icon: 'trash' }
-                        ]);
                         // tools.appendChild(c[0]);
                         tools.appendChild(m[0]);
                         tools.appendChild(m[1]);

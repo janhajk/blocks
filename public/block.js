@@ -39,7 +39,7 @@
                   request.onload = function() {
                         if (request.status >= 200 && request.status < 405) {
                               try {
-                                    var newBlock = JSON.parse(request.responseText);
+                                    let newBlock = JSON.parse(request.responseText);
                                     console.log(newBlock);
                                     return cb(null, newBlock);
                               }
@@ -187,6 +187,7 @@
                   blockToAppend.render();
                   let whereToAppend = findLastNChild(self);
                   whereToAppend.dom.row.insertAdjacentHTML('afterend', blockToAppend.dom.row);
+                  self.data.children.push(blockToAppend);
                   return next();
             };
             this.append = append;
@@ -293,7 +294,7 @@
                               icon: 'angle-double-down',
                               action: function() {
                                     new _Block({ parent: block._id }, block.dom.row, function(newBlock) {
-                                          block.data.children.push(newBlock);
+                                          // block.data.children.push(newBlock);
                                           block.append(newBlock, function() {
 
                                           });

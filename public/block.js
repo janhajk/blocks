@@ -114,8 +114,12 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        let childrenReverse = [];
                         // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
-                        let childrenReverse = self.data.children.reverse();
+                        for (let i in self.data.children) {
+                              childrenReverse.unshift(self.data.children[i]);
+                        }
+                        
                         // Render DOM of block
                         self.render();
                         // Top Block get's appended to content of page
@@ -294,7 +298,6 @@
                               icon: 'angle-double-down',
                               action: function() {
                                     new _Block({ parent: block._id }, block.dom.row, function(newBlock) {
-                                          // block.data.children.push(newBlock);
                                           block.append(newBlock, function() {
 
                                           });

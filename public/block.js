@@ -61,16 +61,6 @@
             };
             this.create = create;
 
-            // new Block (alternatively string is given which is a _id)
-            // object contains properties for new block
-            if (typeof _id === 'object') {
-                  create(_id, function(e, newBlock) {
-                        for (let i in newBlock) {
-                              self.data[i] = newBlock[i];
-                        }
-                        next(self);
-                  });
-            }
 
             /*
              * Loads a block by 'id'
@@ -198,7 +188,7 @@
                   let childrenCount = self.data.children.length;
                   // If there is already a child, append after the last child
                   if (childrenCount > 1) {
-                        let lastChild = self.data.children[self.data.children.length-1];
+                        let lastChild = self.data.children[self.data.children.length - 1];
                         lastChild.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   }
                   // If this is the first child, append to it's parent
@@ -300,7 +290,7 @@
                                     });
                               }
                         },
-                        { title: 'neuen Block darüber', icon: 'angle-double-up' },
+                        // { title: 'neuen Block darüber', icon: 'angle-double-up' },
                         /**
                          * 
                          * Append new Block
@@ -310,16 +300,15 @@
                               title: 'neuen Sub-Block anhängen',
                               icon: 'angle-double-down',
                               action: function() {
-                                    new _Block({parent: block._id}, block.dom.row, function(newBlock){
+                                    new _Block({ parent: block._id }, block.dom.row, function(newBlock) {
                                           block.data.children.push(newBlock);
-                                          newBlock.render();
-                                          block.append(newBlock, function(){
-                                                
+                                          block.append(newBlock, function() {
+
                                           });
                                     });
                               }
                         },
-                        { title: 'Block unterordnen', icon: 'angle-double-right' },
+                        // { title: 'Block unterordnen', icon: 'angle-double-right' },
                         { title: 'Block nach oben', icon: 'arrow-up' },
                         { title: 'Block nach unten', icon: 'arrow-down' },
                         { title: 'Block löschen', icon: 'trash' }
@@ -418,6 +407,21 @@
                   }();
 
             };
+
+
+            // new Block (alternatively string is given which is a _id)
+            // object contains properties for new block
+            if (typeof _id === 'object') {
+                  let properties = _id;
+                  create(properties, function(e, newBlockData) {
+                        for (let i in newBlockData) {
+                              self.data[i] = newBlockData[i];
+                        }
+                        next(self);
+                  });
+            }
+
+
       };
 
       Block.fn = Block.prototype = {

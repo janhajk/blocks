@@ -23,7 +23,7 @@
             };
 
 
-            this.menuPoints = [
+            let menuPoints = [
                   /**
                    * 
                    * Block edit content
@@ -123,7 +123,7 @@
              * Head with dropdown menu
              * 
              */
-            this.panelHead = function() {
+            var panelHead = function() {
                   // Head div container
                   let head = document.createElement('div');
                   head.className = 'ibox-head';
@@ -153,14 +153,14 @@
                   let menu = document.createElement('div');
                   menu.className = 'dropdown-menu dropdown-menu-right';
                   // read items
-                  for (let i in this.items) {
+                  for (let i in menuPoints) {
                         let a = document.createElement('a');
                         a.className = 'dropdown-item';
                         let icon = document.createElement('i');
-                        icon.className = 'ti-' + this.items[i].icon;
+                        icon.className = 'ti-' + menuPoints[i].icon;
                         a.appendChild(icon);
-                        a.innerHTML += this.items[i].title;
-                        a.onclick = this.items[i].action;
+                        a.innerHTML += menuPoints[i].title;
+                        a.onclick = menuPoints[i].action;
                         menu.appendChild(a);
                   }
                   tools.appendChild(menu);
@@ -196,7 +196,7 @@
                   // divSlimScroll.style.height = '470px';
                   // divBody.appendChild(divSlimScroll);
 
-                  div.appendChild(this.panelHead);
+                  div.appendChild(panelHead);
                   div.appendChild(divBody);
 
                   // Panel container as bootstrap grid row

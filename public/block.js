@@ -123,10 +123,11 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
                         self.data.children = self.data.children.reverse();
                         // Render DOM of block
                         self.render();
-                        // TOp Block get's appended to content of page
+                        // Top Block get's appended to content of page
                         if (self._id === window.currentBlockId) {
                               while (self.contentDom.firstChild) {
                                     self.contentDom.removeChild(self.contentDom.firstChild);
@@ -134,9 +135,11 @@
                               self.contentDom.appendChild(self.dom.row);
                         }
                         else {
-                              // Blocks are inserted from bottom to top; that's why they are stored in reverse order
+                              // Blocks are inserted from bottom to top; that's why they are processed in reverse order
+                              // ToDo: This ends up to be very slow; must implement way to order
                               self.domParent.insertAdjacentElement('afterend', self.dom.row);
                         }
+                        // Add content to Block-DOM-Element
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
@@ -189,37 +192,21 @@
             };
             this.saveContent = saveContent;
 
-            var appendBlock = function(next) {
-                  var params = {
-                        parent: self._id
-                  };
-                  var request = new XMLHttpRequest();
-                  request.open('POST', '/block/add', true);
-                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                  request.onload = function() {
-                        if (request.status >= 200 && request.status < 405) {
-                              try {
-                                    var response = JSON.parse(request.responseText);
-                                    console.log(response);
-                                    return next(null, response);
-                              }
-                              catch (e) {
-                                    console.log(e);
-                                    return next(e);
-                              }
-                        }
-                        else {
-                              console.log('Error in request; status was: ' + request.status);
-                              return next(true);
-                        }
-                  };
-                  request.onerror = function() {
-                        console.log('There was an error in xmlHttpRequest!');
-                        return next(true);
-                  };
-                  request.send(JSON.stringify(params));
+            var append = function(blockToAppend, next) {
+                  blockToAppend.render();
+                  let childrenCount = self.children.length;
+                  // If there is already a child, append after the last child
+                  if (childrenCount > 1) {
+                        let lastChild = self.children[self.children.length-1];
+                        lastChild.insertAdjacentElement('afterend', blockToAppend.dom.row);
+                  }
+                  // If this is the first child, append to it's parent
+                  else {
+                        blockToAppend.domParent.insertAdjacentElement('afterend', blockToAppend.dom.row);
+                  }
+                  return next();
             };
-            this.appendBlock = appendBlock;
+            this.append = append;
 
 
             var render = function() {
@@ -297,6 +284,10 @@
                                     block.dom.panel.appendChild(buttonCancel);
                               }
                         },
+                        /**
+                         * Open Block
+                         * 
+                         */
                         {
                               title: 'Block öffnen',
                               icon: 'fullscreen',
@@ -309,12 +300,19 @@
                               }
                         },
                         { title: 'neuen Block darüber', icon: 'angle-double-up' },
+                        /**
+                         * 
+                         * Append new Block
+                         * 
+                         */
                         {
-                              title: 'neuen Block darunter',
+                              title: 'neuen Sub-Block anhängen',
                               icon: 'angle-double-down',
                               action: function() {
                                     block.create({ parent: block._id }, function(e, newBlock) {
-                                          block.load(function() {
+                                          let oNewBlock = new _Block(newBlock._id, block.dom.row);
+                                          block.data.children.push(oNewBlock);
+                                          block.append(oNewBlock, function() {
 
                                           });
                                     });

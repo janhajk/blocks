@@ -22,8 +22,6 @@
 - 
 - revisions
 - change in block alters whole line up the tree
-
-
    
    
 - transfer old content to new database

@@ -114,12 +114,13 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
-                        let childrenReverse = [];
                         // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
+                        // can't use reverse() because it changes input array, so make a copy
+                        let childrenReverse = [];
                         for (let i in self.data.children) {
                               childrenReverse.unshift(self.data.children[i]);
                         }
-                        
+
                         // Render DOM of block
                         self.render();
                         // Top Block get's appended to content of page
@@ -196,6 +197,38 @@
             };
             this.append = append;
 
+            var remove = function(next) {
+                  var params = {
+                        _id: self._id
+                  };
+                  var request = new XMLHttpRequest();
+                  request.open('POST', '/block/remove', true);
+                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+                  request.onload = function() {
+                        if (request.status >= 200 && request.status < 405) {
+                              try {
+                                    var response = JSON.parse(request.responseText);
+                                    console.log(response);
+                                    return next(null, response);
+                              }
+                              catch (e) {
+                                    console.log(e);
+                                    return next(e);
+                              }
+                        }
+                        else {
+                              console.log('Error in request; status was: ' + request.status);
+                              return next(true);
+                        }
+                  };
+                  request.onerror = function() {
+                        console.log('There was an error in xmlHttpRequest!');
+                        return next(true);
+                  };
+                  request.send(JSON.stringify(params));
+            };
+            this.remove = remove;
+
 
             var render = function() {
                   let panel = new Panel();
@@ -245,7 +278,6 @@
                               icon: 'pencil',
                               action: function() {
                                     $(block.dom.body).summernote(summernoteProps);
-                                    // ToDo: Save Button: https://github.com/DiemenDesign/summernote-save-button/blob/master/summernote-save-button.js
                                     let buttonSave = document.createElement('button');
                                     buttonSave.className = 'btn btn-primary';
                                     buttonSave.setAttribute('type', 'button');
@@ -307,7 +339,28 @@
                         // { title: 'Block unterordnen', icon: 'angle-double-right' },
                         { title: 'Block nach oben', icon: 'arrow-up' },
                         { title: 'Block nach unten', icon: 'arrow-down' },
-                        { title: 'Block löschen', icon: 'trash' }
+                        /**
+                         * 
+                         * Delete/Remove block completely
+                         * 
+                         * 
+                         */
+                        {
+                              title: 'Block löschen',
+                              icon: 'trash',
+                              action: function() {
+                                    block.remove(function() {
+                                          let parentBlock = findBlockById(block.parent._id, window.b);
+                                          for (let i in parentBlock.children) {
+                                                if (parentBlock.children[i].data._id === block.data._id) {
+                                                      parentBlock.data.children.splice(i, 1);
+                                                      break;
+                                                }
+                                          }
+                                          block.contentDom.removeChild(block.dom.row);
+                                    });
+                              }
+                        }
                   ];
 
 
@@ -413,6 +466,20 @@
                   return _findLastNChild(lastChild);
             };
             this.findLastNChild = findLastNChild;
+
+
+            var findBlockById = function _findBlockById(id, block) {
+                  if (block.data._id === id) {
+                        return block;
+                  }
+                  for (let i in block.data.children) {
+                        let curBlock = _findBlockById(id, block.data.children[i]);
+                        if (curBlock) {
+                              return curBlock;
+                        }
+                  }
+                  return false;
+            };
 
 
             // new Block (alternatively string is given which is a _id)

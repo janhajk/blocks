@@ -39,6 +39,13 @@ var basic = function(app, connection) {
             res.send(e ? {success:false, error: e} : {success:true});
         });
     });
+    app.post('/block/remove', /*auth.ensureAuthenticated,*/ function(req, res) {
+        let properties = req.body;
+        utils.log(properties);
+        block.remove(properties, function(e, block) {
+            res.send(e ? {success:false, error: e} : {success:true});
+        });
+    });
 
 };
 

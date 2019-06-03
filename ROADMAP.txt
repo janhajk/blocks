@@ -16,7 +16,8 @@
    + content_type html_simple (https://summernote.org)
    - content_type heading
 
-- bug when adding block, wrong reloading
++ bug when adding block, wrong reloading
+- remove block (for testing only)
 - list blocks without parent in sidebar under documents
 - load selected documents
 - 

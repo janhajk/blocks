@@ -350,7 +350,7 @@
                               icon: 'trash',
                               action: function() {
                                     block.remove(function() {
-                                          let parentBlock = findBlockById(block.data.parent._id, window.b);
+                                          let parentBlock = findBlockById(block.data.parent, window.b);
                                           for (let i in parentBlock.data.children) {
                                                 if (parentBlock.data.children[i].data._id === block.data._id) {
                                                       parentBlock.data.children.splice(i, 1);

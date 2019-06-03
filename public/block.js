@@ -67,8 +67,8 @@
                   create(_id, function(e, newBlock) {
                         for (let i in newBlock) {
                               self.data[i] = newBlock[i];
-                              next(self);
                         }
+                        next(self);
                   });
             }
 

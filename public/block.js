@@ -1,7 +1,7 @@
 /*global $ */
 /*global async */
 (function() {
-      
+
 
       var Block = function _Block(_id, domParent, next) {
             this._id = (typeof _id === 'string') ? _id : '';
@@ -334,7 +334,7 @@
                               action: function() {
                                     new _Block({ parent: block._id }, block.dom.row, function(newBlock) {
                                           block.append(newBlock, function() {
-                                                
+
                                           });
                                     });
                               }
@@ -437,8 +437,11 @@
                         divBody.className = 'ibox-body';
                         divBody.style.padding = '5px 30px 5px';
                         divBody.style.paddingLeft = (block.level * 20 + 30) + 'px';
+                        divBody.style.webkitUserSelect = 'none';
+                        divBody.style.mozUserSelect = 'none';
+                        divBody.style.msUserSelect = 'none';
                         divBody.style.userSelect = 'none';
-
+                        
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';
                         divSlimScroll.style.position = 'relative';

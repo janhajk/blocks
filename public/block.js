@@ -414,6 +414,7 @@
             if (typeof _id === 'object') {
                   let properties = _id;
                   create(properties, function(e, newBlockData) {
+                        self._id = newBlockData._id;
                         for (let i in newBlockData) {
                               self.data[i] = newBlockData[i];
                         }

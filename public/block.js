@@ -402,7 +402,7 @@
                         divSlimScroll.style.overflow = 'hidden';
                         divSlimScroll.style.width = 'auto';
                         divSlimScroll.style.height = '470px';
-                        divBody.appendChild(divSlimScroll);
+                        // divBody.appendChild(divSlimScroll);
 
                         div.appendChild(h);
                         div.appendChild(divBody);

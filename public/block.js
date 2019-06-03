@@ -3,7 +3,7 @@
 (function() {
 
 
-      var Block = function _Block(_id, domParent) {
+      var Block = function _Block(_id, domParent, next) {
             this._id = (typeof _id === 'string') ? _id : '';
             this.data = {};
             this.data.creator = {};
@@ -67,6 +67,7 @@
                   create(_id, function(e, newBlock) {
                         for (let i in newBlock) {
                               self.data[i] = newBlock[i];
+                              next(self);
                         }
                   });
             }
@@ -202,7 +203,7 @@
                   }
                   // If this is the first child, append to it's parent
                   else {
-                        blockToAppend.domParent.insertAdjacentElement('afterend', blockToAppend.dom.row);
+                        self.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   }
                   return next();
             };
@@ -309,12 +310,9 @@
                               title: 'neuen Sub-Block anhängen',
                               icon: 'angle-double-down',
                               action: function() {
-                                    block.create({ parent: block._id }, function(e, newBlock) {
-                                          let oNewBlock = new _Block(newBlock._id, block.dom.row);
-                                          block.data.children.push(oNewBlock);
-                                          block.append(oNewBlock, function() {
-
-                                          });
+                                    new _Block({parent: block._id}, block.dom.row, function(newBlock){
+                                          block.data.children.push(newBlock);
+                                          block.append(newBlock);
                                     });
                               }
                         },

@@ -17,7 +17,9 @@
    - content_type heading
 
 + bug when adding block, wrong reloading
-- remove block (for testing only)
++ remove block (for testing only)
+- add level in block
+- visualize level of block with padding*level 
 - list blocks without parent in sidebar under documents
 - load selected documents
 - 

@@ -1,7 +1,7 @@
 /*global $ */
 /*global async */
 (function() {
-
+      
 
       var Block = function _Block(_id, domParent, next) {
             this._id = (typeof _id === 'string') ? _id : '';
@@ -19,6 +19,7 @@
             this.data.weight = 0;
             this.data.tags = [];
             this.data.language = 0;
+            this.level = 0;
 
             // the whole dom element, rendered
             this.dom = {};
@@ -141,6 +142,7 @@
                         // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
                         async.eachOfLimit(childrenReverse, 1, function(childId, key, callback) {
                                     self.data.children[key] = new _Block(childId, self.dom.row);
+                                    self.data.children[key].level = self.level + 1;
                                     self.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
@@ -433,6 +435,7 @@
                         let divBody = document.createElement('div');
                         divBody.className = 'ibox-body';
                         divBody.style.padding = '5px 30px 5px';
+                        divBOdy.style.paddingLeft = (block.level * 10) + 'px';
 
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';

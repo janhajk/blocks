@@ -437,6 +437,7 @@
                         divBody.className = 'ibox-body';
                         divBody.style.padding = '5px 30px 5px';
                         divBody.style.paddingLeft = (block.level * 20 + 30) + 'px';
+                        divBody.style.userSelect = 'none';
 
                         let divSlimScroll = document.createElement('div');
                         divSlimScroll.className = 'slimScrollDiv';

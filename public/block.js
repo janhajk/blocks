@@ -193,6 +193,7 @@
             var append = function(blockToAppend, next) {
                   blockToAppend.render();
                   let whereToAppend = findLastNChild(self);
+                  blockToAppend.level = self.level + 1;
                   whereToAppend.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   self.data.children.push(blockToAppend);
                   return next();
@@ -333,7 +334,7 @@
                               action: function() {
                                     new _Block({ parent: block._id }, block.dom.row, function(newBlock) {
                                           block.append(newBlock, function() {
-
+                                                
                                           });
                                     });
                               }

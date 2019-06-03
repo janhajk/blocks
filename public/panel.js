@@ -2,6 +2,16 @@
 /*global Block*/
 (function() {
 
+      const summernoteProps = {
+            toolbar: [
+                  ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                  ['color', ['color']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['table', ['table']],
+                  ['insert', ['link', 'picture']]
+            ]
+      };
+
 
       /**
        * Creates a block panel
@@ -12,15 +22,7 @@
        * 
        */
       Block.fn.blockPanel = function(block) {
-            let summernoteProps = {
-                  toolbar: [
-                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture']]
-                  ]
-            };
+
 
 
             let menuPoints = [
@@ -123,7 +125,7 @@
              * Head with dropdown menu
              * 
              */
-            var panelHead = function() {
+            let panelHead = function() {
                   // Head div container
                   let head = document.createElement('div');
                   head.className = 'ibox-head';
@@ -213,7 +215,7 @@
       };
 
 
-      var findBlockById = function _findBlockById(id, block) {
+      let findBlockById = function _findBlockById(id, block) {
             if (block.data._id === id) {
                   return block;
             }

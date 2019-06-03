@@ -185,16 +185,8 @@
 
             var append = function(blockToAppend, next) {
                   blockToAppend.render();
-                  let childrenCount = self.data.children.length;
-                  // If there is already a child, append after the last child
-                  if (childrenCount > 1) {
-                        let lastChild = self.data.children[self.data.children.length - 1];
-                        lastChild.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
-                  }
-                  // If this is the first child, append to it's parent
-                  else {
-                        self.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
-                  }
+                  let whereToAppend = findLastNChild(self);
+                  whereToAppend.dom.row.insertAdjacentHTML('afterend', blockToAppend.dom.row);
                   return next();
             };
             this.append = append;
@@ -407,6 +399,16 @@
                   }();
 
             };
+
+            var findLastNChild = function _findLastNChild(block) {
+                  let childrenCount = block.data.children.length;
+                  if (childrenCount === 0) {
+                        return block;
+                  }
+                  let lastChild = block.data.children[childrenCount - 1];
+                  return _findLastNChild(lastChild);
+            };
+            this.findLastNChild = findLastNChild;
 
 
             // new Block (alternatively string is given which is a _id)

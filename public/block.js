@@ -124,7 +124,7 @@
                               self.data[i] = block[i];
                         }
                         // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
-                        self.data.children = self.data.children.reverse();
+                        let childrenReverse = self.data.children.reverse();
                         // Render DOM of block
                         self.render();
                         // Top Block get's appended to content of page
@@ -143,7 +143,7 @@
                         self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
-                        async.eachOfLimit(block.children, 1, function(childId, key, callback) {
+                        async.eachOfLimit(childrenReverse, 1, function(childId, key, callback) {
                                     self.data.children[key] = new _Block(childId, self.dom.row);
                                     self.data.children[key].load(function() {
                                           callback(); // report child loaded

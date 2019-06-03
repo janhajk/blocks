@@ -312,6 +312,7 @@
                               action: function() {
                                     new _Block({parent: block._id}, block.dom.row, function(newBlock){
                                           block.data.children.push(newBlock);
+                                          newBlock.render();
                                           block.append(newBlock, function(){
                                                 
                                           });

@@ -199,7 +199,7 @@
                   // If there is already a child, append after the last child
                   if (childrenCount > 1) {
                         let lastChild = self.data.children[self.data.children.length-1];
-                        lastChild.insertAdjacentElement('afterend', blockToAppend.dom.row);
+                        lastChild.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   }
                   // If this is the first child, append to it's parent
                   else {

@@ -119,7 +119,7 @@
                   loadById(self._id, function(e, block) {
                         // remove old data
                         if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
-                        self.children = [];
+                        self.data.children = [];
                         // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
@@ -195,10 +195,10 @@
 
             var append = function(blockToAppend, next) {
                   blockToAppend.render();
-                  let childrenCount = self.children.length;
+                  let childrenCount = self.data.children.length;
                   // If there is already a child, append after the last child
                   if (childrenCount > 1) {
-                        let lastChild = self.children[self.children.length-1];
+                        let lastChild = self.data.children[self.data.children.length-1];
                         lastChild.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   }
                   // If this is the first child, append to it's parent
@@ -312,7 +312,9 @@
                               action: function() {
                                     new _Block({parent: block._id}, block.dom.row, function(newBlock){
                                           block.data.children.push(newBlock);
-                                          block.append(newBlock);
+                                          block.append(newBlock, function(){
+                                                
+                                          });
                                     });
                               }
                         },

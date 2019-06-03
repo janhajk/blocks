@@ -186,7 +186,7 @@
             var append = function(blockToAppend, next) {
                   blockToAppend.render();
                   let whereToAppend = findLastNChild(self);
-                  whereToAppend.dom.row.insertAdjacentHTML('afterend', blockToAppend.dom.row);
+                  whereToAppend.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   self.data.children.push(blockToAppend);
                   return next();
             };

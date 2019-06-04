@@ -33,7 +33,7 @@
              * Creates new block and loads it
              *
              */
-            var create = function(properties, cb) {
+            this.create = function(properties, cb) {
                   var request = new XMLHttpRequest();
                   request.open('POST', '/block/add', true);
                   request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
@@ -60,7 +60,6 @@
                   };
                   request.send(JSON.stringify(properties));
             };
-            this.create = create;
 
 
             /*
@@ -200,7 +199,7 @@
             };
             this.append = append;
 
-            var remove = function(next) {
+            this.remove = function(next) {
                   var params = {
                         _id: self._id
                   };
@@ -230,8 +229,6 @@
                   };
                   request.send(JSON.stringify(params));
             };
-            this.remove = remove;
-
 
             this.render = function() {
                   let panel = new this.blockPanel(self);
@@ -242,12 +239,6 @@
                   self.dom.row = row;
                   self.dom.panel = panelDom;
             };
-
-
-            var renderBlock = function(_id) {
-
-            };
-            this.renderBlock = renderBlock;
 
 
 
@@ -267,7 +258,7 @@
             // object contains properties for new block
             if (typeof _id === 'object') {
                   let properties = _id;
-                  create(properties, function(e, newBlockData) {
+                  this.create(properties, function(e, newBlockData) {
                         self._id = newBlockData._id;
                         for (let i in newBlockData) {
                               self.data[i] = newBlockData[i];

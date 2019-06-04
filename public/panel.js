@@ -34,31 +34,33 @@
                         title: 'Bearbeiten',
                         icon: 'pencil',
                         action: function() {
+                              let panel = block.dom.panel;
                               $(block.dom.body).summernote(summernoteProps);
                               let buttonSave = document.createElement('button');
                               buttonSave.className = 'btn btn-primary';
                               buttonSave.setAttribute('type', 'button');
                               buttonSave.innerHTML = 'Speichern';
                               buttonSave.onclick = function() {
-                                    block.dom.panel.removeChild(buttonSave);
-                                    block.dom.panel.removeChild(buttonCancel);
+                                    panel.removeChild(buttonSave);
+                                    panel.removeChild(buttonCancel);
                                     $(block.dom.body).summernote('destroy');
                                     block.content = block.dom.body.innerHTML;
                                     block.saveContent(function() {
 
                                     });
                               };
-                              block.dom.panel.appendChild(buttonSave);
+                              panel.appendChild(buttonSave);
                               let buttonCancel = document.createElement('button');
                               buttonCancel.className = 'btn btn-primary';
                               buttonCancel.setAttribute('type', 'button');
                               buttonCancel.innerHTML = 'Abbrechen';
                               buttonCancel.onclick = function() {
-                                    block.dom.panel.removeChild(buttonSave);
-                                    block.dom.panel.removeChild(buttonCancel);
+                                    panel.removeChild(buttonSave);
+                                    panel.removeChild(buttonCancel);
                                     $(block.dom.body).summernote('destroy');
                               };
-                              block.dom.panel.appendChild(buttonCancel);
+                              panel.appendChild(buttonCancel);
+                              
                         }
                   },
                   /**
@@ -215,7 +217,7 @@
       };
 
 
-      let findBlockById = function _findBlockById(id, block) {
+      var findBlockById = function _findBlockById(id, block) {
             if (block.data._id === id) {
                   return block;
             }

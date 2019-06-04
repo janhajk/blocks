@@ -9,6 +9,8 @@ Ressources:
 - Tree: jsTree jQuery Plugin https://www.jstree.com/
 - Panels: http://admincast.com/adminca/preview/admin_1/html/panels.html
 - Icons Themefy: https://themify.me/themify-icons
+- pdf: pdfkit.org
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: Add new block goes to the wrong placeholder
@@ -21,6 +23,7 @@ Ressources:
    - content_type heading
 - list blocks without parent in sidebar under documents
 - load selected documents
+- export block as PDF
 - 
 - revisions
 - change in block alters whole line up the tree

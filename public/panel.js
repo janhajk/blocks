@@ -60,7 +60,7 @@
                                     $(block.dom.body).summernote('destroy');
                               };
                               panel.appendChild(buttonCancel);
-                              
+
                         }
                   },
                   /**
@@ -190,6 +190,10 @@
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
+                  divBody.onlclick = function() {
+                        $('.quick-sidebar').backdrop();
+
+                  };
 
                   // Deprecated: if div has maximum height, this makes it scrollable
                   // let divSlimScroll = document.createElement('div');

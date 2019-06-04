@@ -190,7 +190,7 @@
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
-                  divBody.onlclick = function() {
+                  divBody.onclick = function() {
                         $('.quick-sidebar').backdrop();
 
                   };

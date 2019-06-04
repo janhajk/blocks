@@ -14,19 +14,20 @@ Ressources:
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: Add new block goes to the wrong placeholder
+    - have block find it's correct DOM place (separate function)
+    - change loading behaviour that document is loaded first, then rendered
 - when adding block, go to edit mode
 - when adding block, jump to place on page where new block is
 - show parent block with menu entry
 - create editor to add basic content
-   - content_type document
-   + content_type html_simple (https://summernote.org)
    - content_type heading
+   - content_type document
 - list blocks without parent in sidebar under documents
-- load selected documents
+    - load selected documents
 - export block as PDF
 - 
 - revisions
-- change in block alters whole line up the tree
+    - change in block alters whole line up the tree
    
    
 - transfer old content to new database
@@ -35,6 +36,7 @@ Ressources:
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
++ content_type html_simple (https://summernote.org)
 + Setup basic interface
 + Setup basic nodejs structure
 + import database from V01 app

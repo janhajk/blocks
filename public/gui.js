@@ -2,6 +2,17 @@
 /*global toastr */
 /*global Clipboard */
 
+
+// Preloader
+document.getElementsByTagName('body')[0].onload = function() {
+  setTimeout(function() {
+    $('.preloader-backdrop').fadeOut(200),
+      $('body').addClass('has-animation')
+  }, 0)
+};
+
+
+
 var APP = function() {
   this.ASSETS_PATH = './assets/'
 };
@@ -12,13 +23,6 @@ var APP = function() {
 
 $(function() {
 
-  // Preloader
-  window.onload = function() {
-    setTimeout(function() {
-      $('.preloader-backdrop').fadeOut(200),
-        $('body').addClass('has-animation')
-    }, 0)
-  };
 
   $.fn.backdrop = function() {
     $(this).toggleClass('shined');

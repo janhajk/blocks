@@ -8,7 +8,7 @@ document.getElementsByTagName('body')[0].onload = function() {
   setTimeout(function() {
     $('.preloader-backdrop').fadeOut(200),
       $('body').addClass('has-animation')
-  }, 0)
+  }, 500)
 };
 
 

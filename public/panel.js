@@ -90,7 +90,7 @@
                         action: function() {
                               new Block({ parent: block._id }, block.dom.row, function(newBlock) {
                                     block.append(newBlock, function() {
-
+                                          newBlock
                                     });
                               });
                         }

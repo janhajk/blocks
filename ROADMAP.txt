@@ -13,7 +13,6 @@ Ressources:
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-- BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded
 - BUG: Add new block goes to the wrong placeholder
     - have block find it's correct DOM place (separate function)
     - change loading behaviour that document is loaded first, then rendered
@@ -37,6 +36,8 @@ Ressources:
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
+
++ BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded
 + content_type html_simple (https://summernote.org)
 + Setup basic interface
 + Setup basic nodejs structure

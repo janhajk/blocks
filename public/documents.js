@@ -60,7 +60,7 @@
 
             this.update = function() {
                   let self = this;
-                  this.load(function(blocks) {
+                  this.load(function(error, blocks) {
                         // Clear list
                         while (domParent.firstChild) {
                               domParent.removeChild(domParent.firstChild);

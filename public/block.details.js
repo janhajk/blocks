@@ -76,7 +76,6 @@
                     element.innerHTML = this.value;
                 }
             };
-            element.innerHTML = '<input type="text" value="' + value + '" />';
         };
 
 

@@ -59,12 +59,13 @@
             };
 
             this.update = function() {
+                  let self = this;
                   this.load(function(blocks) {
                         // Clear list
                         while (domParent.firstChild) {
                               domParent.removeChild(domParent.firstChild);
                         }
-                        this.render(blocks);
+                        self.render(blocks);
                   });
 
             };

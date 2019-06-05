@@ -92,6 +92,7 @@
             }
             let items = [
                 { label: 'Block ID', content: self._id },
+                { label: 'Block Name', content: self.data.name },
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },

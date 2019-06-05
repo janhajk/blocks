@@ -26,10 +26,9 @@ Version 0.1 PROOF OF CONCEPT
 - BUG: Jump to new Block; add header pixel; also Menu is killed
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
+- FEATURE: Change name of Block
 - FEATURE: Button New Document creates new Document
 - FEATURE: Show blocks with thumbnails in content window
-- FEATURE: show block details in sidebar
-      - blockdetails that are already loaded
 - FEATURE: Append block to new parent
 - FEATURE: create editor to add basic content
    - content_type heading
@@ -44,6 +43,8 @@ Version 0.1 PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
++ FEATURE: show block details in sidebar
+      + blockdetails that are already loaded
 + FEATURE: list blocks without parent in sidebar under documents
     + load selected documents
 + show parent block with menu entry

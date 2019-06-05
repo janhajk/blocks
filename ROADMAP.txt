@@ -25,21 +25,16 @@ Version 1 - PROOF OF CONCEPT
     - change loading behaviour that document is loaded first, then rendered
 - BUG: Jump to new Block; add header pixel
 - BUG: if block is deleted also delete children
-- show block details in sidebar
+- FEATURE: show block details in sidebar
       - blockdetails that are already loaded
-      - 
-- when adding block, jump directly to edit mode
 - FEATURE: create editor to add basic content
    - content_type heading
    - content_type document
-- FEATURE: list blocks without parent in sidebar under documents
-    - load selected documents
-    - order by change date
 - FEATURE: export block as PDF
-
 - FEATURE: revisions
     - change in block alters whole line up the tree
-
+- O: when adding block, jump directly to edit mode
+- O: order Documents sidebar by change date
 - CLEANUP: Routes to seperate files
 - CLEANUP: gui.js to new files
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
@@ -68,6 +63,8 @@ Version 2 - ALPHA
 
 
 
++ FEATURE: list blocks without parent in sidebar under documents
+    + load selected documents
 + show parent block with menu entry
 + basic document viewing with v01 content
 + when adding block, jump to place on page where new block is

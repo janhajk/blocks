@@ -29,13 +29,13 @@ var basic = function(app, connection) {
     app.get('/documents', /*auth.ensureAuthenticated,*/ function(req, res) {
         utils.log('loading all top level blocks...');
         block.getTop(function(e, blocks) {
-            res.send(e ? e : block);
+            res.send(e ? e : blocks);
         });
     });
     app.get('/block/all', /*auth.ensureAuthenticated,*/ function(req, res) {
         utils.log('loading all blocks...');
         block.all(function(e, blocks) {
-            res.send(e ? e : block);
+            res.send(e ? e : blocks);
         });
     });
     app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {

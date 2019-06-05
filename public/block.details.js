@@ -61,6 +61,7 @@
         chat.appendChild(slimscroll);
         slimscroll.appendChild(scroller);
         scroller.appendChild(mediaList);
+        contentContainer.firstChild.appendChild(scroller);
 
 
         Block.fn.details = function() {

@@ -71,6 +71,7 @@
             input.type = 'text';
             input.value = value;
             element.appendChild(input);
+            input.select();
             input.onkeypress = function(key) {
                 if (key.keyCode === 13) {
                     element.innerHTML = this.value;

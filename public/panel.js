@@ -210,6 +210,7 @@
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
                   divBody.onclick = function() {
+                        block.details();
                         $('.quick-sidebar').backdrop();
 
                   };

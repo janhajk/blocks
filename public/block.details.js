@@ -1,49 +1,114 @@
+/*global Block */
 (function() {
-      document.addEventListener('DOMContentLoaded', function() {
-            // Header
-            let ul = document.createElement('ul');
-            ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
-            let liElements = [
-                  { title: 'Details', icon: 'ti-notepad' },
-                  { title: 'Eigensch.', icon: 'ti-settings' },
-                  { title: 'Historie', icon: 'ti-comment' }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Header
+        let ul = document.createElement('ul');
+        ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
+        let liElements = [
+            { title: 'Details', icon: 'ti-notepad' },
+            { title: 'Eigensch.', icon: 'ti-settings' },
+            { title: 'Historie', icon: 'ti-comment' }
+        ];
+        for (let i = 0; i < liElements.length; i++) {
+            let li = document.createElement('li');
+            li.className = 'nav-item';
+            let a = document.createElement('a');
+            a.className = 'nav-link';
+            a.href = '#tab-' + (i + 1);
+            a.setAttribute('data-toggle', 'tab');
+            let icon = document.createElement('i');
+            icon.className = liElements[i].icon;
+            let div = document.createElement('div');
+            div.innerHTML = liElements[i].title;
+            div.style.fontSize = '0.8em';
+            div.style.fontFamily = 'Poppins';
+            a.appendChild(icon).appendChild(div);
+            li.appendChild(a);
+            ul.appendChild(li);
+        }
+
+
+        // Content tabs
+        let contentContainer = document.createElement('div');
+        contentContainer.className = 'tab-content';
+        for (let i = 0; i < liElements.length; i++) {
+            let div = document.createElement('div');
+            div.className = ['tab-pane'].join(' ');
+            div.id = 'tab-' + (i + 1);
+            contentContainer.appendChild(div);
+        }
+
+        let quickSidebarDom = document.getElementById('quick-sidebar');
+        quickSidebarDom.appendChild(ul);
+        quickSidebarDom.appendChild(contentContainer);
+
+        // Block Details Tab Content
+        let chat = document.createElement('div');
+        chat.className = 'chat-list';
+        let slimscroll = document.createElement('div');
+        slimscroll.className = 'slimScrollDiv';
+        slimscroll.style.position = 'relative';
+        slimscroll.style.overflow = 'hidden';
+        slimscroll.style.width = 'auto';
+        slimscroll.style.height = '100%';
+        let scroller = document.createElement('div');
+        scroller.className = 'scroller';
+        scroller.style.overflow = 'hidden';
+        scroller.style.width = 'auto';
+        scroller.style.height = '100%';
+        let mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        chat.appendChild(slimscroll);
+        slimscroll.appendChild(scroller);
+        scroller.appendChild(mediaList);
+
+
+        Block.fn.details = function() {
+            let self = this;
+
+            let detailItem = function(type, detail) {
+                let media = document.createElement('a');
+                media.className = 'media';
+                media.href = 'javascript:;';
+                let body = document.createElement('div');
+                body.className = 'media-body';
+                let heading = document.createElement('div');
+                heading.className = 'media-heading';
+                heading.innerHTML = detail.label;
+                let content = document.createElement('div');
+                content.className = 'font-13 text-lighter';
+                content.innerHTML = detail.content;
+                body.appendChild(heading);
+                body.appendChild(content)
+                media.appendChild(body);
+                return media;
+            };
+
+
+            // clear list
+            while (mediaList.firstChild) {
+                mediaList.removeChild(mediaList.firstChild);
+            }
+            let items = [
+                { label: 'Block ID', content: self._id },
+                { label: 'Inhalts-Typ', content: self.data.content_type },
+                { label: 'Erstellungsdatum', content: self.data.timestamp },
+                { label: 'Block-Typ', content: self.data.type },
+                { label: 'Tags', content: self.data.tags.join(', ') }
             ];
-            for (let i = 0; i < liElements.length; i++) {
-                  let li = document.createElement('li');
-                  li.className = 'nav-item';
-                  let a = document.createElement('a');
-                  a.className = 'nav-link';
-                  a.href = '#tab-' + (i + 1);
-                  a.setAttribute('data-toggle', 'tab');
-                  let icon = document.createElement('i');
-                  icon.className = liElements[i].icon;
-                  let div = document.createElement('div');
-                  div.innerHTML = liElements[i].title;
-                  div.style.fontSize = '0.8em';
-                  div.style.fontFamily = 'Poppins';
-                  a.appendChild(icon).appendChild(div);
-                  li.appendChild(a);
-                  ul.appendChild(li);
+            for (let i = 0; i < items.length; i++) {
+                mediaList.appendChild(detailItem(null, items[i]));
             }
 
+        };
 
-            // Content tabs
-            let contentContainer = document.createElement('div');
-            contentContainer.className = 'tab-content';
-            for (let i = 0; i < liElements.length; i++) {
-                  let div = document.createElement('div');
-                  div.className = ['tab-pane'].join(' ');
-                  div.id = 'tab-' + (i + 1);
-                  contentContainer.appendChild(div);
-            }
 
-            let quickSidebarDom = document.getElementById('quick-sidebar');
-            quickSidebarDom.appendChild(ul);
-            quickSidebarDom.appendChild(contentContainer);
 
-      });
+    });
 
 }());
+
+
 
 /*
 

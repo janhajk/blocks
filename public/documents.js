@@ -70,6 +70,13 @@
                   }
             };
       };
+      
+      
+      Collection.fn = Block.prototype = {
+
+      };
+
+      window.Collection = Collection;
 
 
 }());

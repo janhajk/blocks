@@ -20,6 +20,7 @@
                   let div = document.createElement('div');
                   div.innerHTML = liElements[i].title;
                   div.style.fontSize = '0.8em';
+                  div.style.fontFamily = 'Poppins';
                   a.appendChild(icon).appendChild(div);
                   li.appendChild(a);
                   ul.appendChild(li);

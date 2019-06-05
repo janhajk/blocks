@@ -39,18 +39,6 @@
                   request.send();
             };
 
-
-            this.update = function() {
-                  this.load(function(blocks) {
-                        // Clear list
-                        while (domParent.firstChild) {
-                              domParent.removeChild(domParent.firstChild);
-                        }
-                        this.render(blocks);
-                  });
-
-            };
-
             this.render = function(blocks) {
                   for (let i = 0; i < blocks.length; i++) {
                         let li = document.createElement('li');
@@ -69,6 +57,18 @@
                         domParent.appendChild(li);
                   }
             };
+
+            this.update = function() {
+                  this.load(function(blocks) {
+                        // Clear list
+                        while (domParent.firstChild) {
+                              domParent.removeChild(domParent.firstChild);
+                        }
+                        this.render(blocks);
+                  });
+
+            };
+
       };
       
       

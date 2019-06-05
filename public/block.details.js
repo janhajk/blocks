@@ -15,11 +15,11 @@
             a.className = 'nav-link';
             a.href = '#tab-' + (i + 1);
             a.setAttribute('data-toggle', 'tab');
-            let i = document.createElement('i');
-            i.className = liElements[i].icon;
+            let icon = document.createElement('i');
+            icon.className = liElements[i].icon;
             let div = document.createElement('div');
             div.innerHTML = liElements[i].title;
-            a.appendChild(i).appendChild(div);
+            a.appendChild(icon).appendChild(div);
             li.appendChild(a);
             ul.appendChild(li);
       }

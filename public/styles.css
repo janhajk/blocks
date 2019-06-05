@@ -5141,9 +5141,9 @@ body.drawer-sidebar .page-brand {
       position: fixed;
       top: 0;
       bottom: 0;
-      right: -300px;
+      right: -400px;
       background-color: #fff;
-      width: 300px;
+      width: 400px;
       -webkit-transition: all .3s ease-in-out;
       -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out;

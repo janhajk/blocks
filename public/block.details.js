@@ -64,7 +64,7 @@
         contentContainer.firstChild.appendChild(scroller);
 
 
-        Block.fn.details = function() {
+        Block.fn.details = function(next) {
             let self = this;
 
             let detailItem = function(type, detail) {
@@ -100,6 +100,8 @@
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));
             }
+            
+            return next(contentContainer.firstChild);
 
         };
 

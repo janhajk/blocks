@@ -32,7 +32,7 @@ var basic = function(app, connection) {
             res.send(e ? e : block);
         });
     });
-    app.get('/all', /*auth.ensureAuthenticated,*/ function(req, res) {
+    app.get('/block/all', /*auth.ensureAuthenticated,*/ function(req, res) {
         utils.log('loading all top level blocks...');
         block.all(function(e, blocks) {
             res.send(e ? e : block);

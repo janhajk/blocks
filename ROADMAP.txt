@@ -34,6 +34,7 @@ Version 1 - PROOF OF CONCEPT
    - content_type document
 - FEATURE: list blocks without parent in sidebar under documents
     - load selected documents
+    - order by change date
 - FEATURE: export block as PDF
 
 - FEATURE: revisions

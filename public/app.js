@@ -1,5 +1,6 @@
 /*global $ */
 /*global Block */
+/*global Collection */
 
 (function() {
 
@@ -12,5 +13,9 @@
         console.log(b);
     });
     window.b = b;
+    
+    
+    var collection = new Collection('mydocuments');
+    collection.load();
 
 })();

@@ -27,7 +27,7 @@ var basic = function(app, connection) {
         });
     });
     app.get('/documents', /*auth.ensureAuthenticated,*/ function(req, res) {
-        const id = req.params.id;
+        utils.log('loading all top level blocks...');
         block.getTop(function(e, blocks) {
             res.send(e ? e : block);
         });

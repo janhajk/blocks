@@ -1,45 +1,45 @@
 (function() {
-
-      // Header
-      let ul = document.createElement('ul');
-      ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
-      let liElements = [
-            { title: 'Blockdetails', icon: 'ti-notepad' },
-            { title: 'Eigenschaften', icon: 'ti-settings' },
-            { title: 'Änderungen', icon: 'ti-comment' }
-      ];
-      for (let i = 0; i < liElements.length; i++) {
-            let li = document.createElement('li');
-            li.className = 'nav-item';
-            let a = document.createElement('a');
-            a.className = 'nav-link';
-            a.href = '#tab-' + (i + 1);
-            a.setAttribute('data-toggle', 'tab');
-            let icon = document.createElement('i');
-            icon.className = liElements[i].icon;
-            let div = document.createElement('div');
-            div.innerHTML = liElements[i].title;
-            a.appendChild(icon).appendChild(div);
-            li.appendChild(a);
-            ul.appendChild(li);
-      }
-      
-      
-      // Content tabs
-      let contentContainer = document.createElement('div');
-      contentContainer.className = 'tab-content';
-      for (let i = 0; i< liElements.length;i++) {
-            let div = document.createElement('div');
-            div.className = ['tab-pane'].join(' ');
-            div.id = 'tab-' + (i+1);
-            contentContainer.appendChild(div);
-      }
-      
-      let quickSidebarDom = document.getElementById('quick-sidebar');
-      quickSidebarDom.appendChild(ul);
-      quickSidebarDom.appendChild(contentContainer);
+      document.addEventListener('DOMContentLoaded', function() {
+            // Header
+            let ul = document.createElement('ul');
+            ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
+            let liElements = [
+                  { title: 'Blockdetails', icon: 'ti-notepad' },
+                  { title: 'Eigenschaften', icon: 'ti-settings' },
+                  { title: 'Änderungen', icon: 'ti-comment' }
+            ];
+            for (let i = 0; i < liElements.length; i++) {
+                  let li = document.createElement('li');
+                  li.className = 'nav-item';
+                  let a = document.createElement('a');
+                  a.className = 'nav-link';
+                  a.href = '#tab-' + (i + 1);
+                  a.setAttribute('data-toggle', 'tab');
+                  let icon = document.createElement('i');
+                  icon.className = liElements[i].icon;
+                  let div = document.createElement('div');
+                  div.innerHTML = liElements[i].title;
+                  a.appendChild(icon).appendChild(div);
+                  li.appendChild(a);
+                  ul.appendChild(li);
+            }
 
 
+            // Content tabs
+            let contentContainer = document.createElement('div');
+            contentContainer.className = 'tab-content';
+            for (let i = 0; i < liElements.length; i++) {
+                  let div = document.createElement('div');
+                  div.className = ['tab-pane'].join(' ');
+                  div.id = 'tab-' + (i + 1);
+                  contentContainer.appendChild(div);
+            }
+
+            let quickSidebarDom = document.getElementById('quick-sidebar');
+            quickSidebarDom.appendChild(ul);
+            quickSidebarDom.appendChild(contentContainer);
+
+      });
 
 }());
 

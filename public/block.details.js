@@ -72,7 +72,7 @@
             input.value = value;
             element.appendChild(input);
             input.onkeypress = function(key) {
-                if (key.code === 13) {
+                if (key.keyCode === 13) {
                     element.innerHTML = this.value;
                 }
             };

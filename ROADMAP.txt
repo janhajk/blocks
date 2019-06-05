@@ -24,6 +24,7 @@ Version 1 - PROOF OF CONCEPT
     - have block find it's correct DOM place (separate function)
     - change loading behaviour that document is loaded first, then rendered
 - BUG: Jump to new Block; add header pixel
+- BUG: if block is deleted also delete children
 - show block details in sidebar
       - blockdetails that are already loaded
       - 
@@ -59,6 +60,7 @@ Version 2 - ALPHA
 - setup basic deploying mechanism
 - change block parent
 - search blocks
+- don't delete blocks, make blocks hidden instead.
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 

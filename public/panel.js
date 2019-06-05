@@ -78,6 +78,23 @@
                               });
                         }
                   },
+                  /**
+                   * 
+                   * load parent block and make main
+                   * 
+                   * 
+                   */
+                  {
+                        title: 'ein Block nach oben',
+                        icon: 'fullscreen',
+                        action: function() {
+                              window.b = new Block(block.data.parent, block.contentDom);
+                              window.currentBlockId = block.data.parent;
+                              window.b.load(function() {
+                                    console.log('success!');
+                              });
+                        }
+                  },
                   // { title: 'neuen Block darüber', icon: 'angle-double-up' },
                   /**
                    * 

@@ -8,7 +8,6 @@
    },
    "dependencies": {
       "express": "4.x",
-      "mysql": "2.12.x",
       "async": "2.1.4",
       "compression": "1.x.x",
       "body-parser": "1.x.x",

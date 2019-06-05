@@ -10,33 +10,62 @@ Ressources:
 - Panels: http://admincast.com/adminca/preview/admin_1/html/panels.html
 - Icons Themefy: https://themify.me/themify-icons
 - pdf: pdfkit.org
+----------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 1 - PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: Add new block goes to the wrong placeholder
     - have block find it's correct DOM place (separate function)
     - change loading behaviour that document is loaded first, then rendered
-- when adding block, go to edit mode
-- when adding block, jump to place on page where new block is
+- BUG: Jump to new Block; add header pixel
+- show block details in sidebar
+      - blockdetails that are already loaded
+      - 
+- when adding block, jump directly to edit mode
 - show parent block with menu entry
-- create editor to add basic content
+- FEATURE: create editor to add basic content
    - content_type heading
    - content_type document
-- list blocks without parent in sidebar under documents
+- FEATURE: list blocks without parent in sidebar under documents
     - load selected documents
-- export block as PDF
-- 
-- revisions
+- FEATURE: export block as PDF
+
+- FEATURE: revisions
     - change in block alters whole line up the tree
+
+- CLEANUP: Routes to seperate files
+- CLEANUP: gui.js to new files
+- CLEANUP: Proper DELETE, PUT, UPDATE REST API
+- CLEANUP: Split CSS Files in multiple files
    
-   
-- transfer old content to new database
-- basic document viewing with v01 content
-- render document tree with colors for diffrent kinds of content (original, cloned etc)
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 2 - ALPHA
+----------------------------------------------------------------------------------------------------------------------------------------
+- User Roles
+- Diff changes
+- Document Variables
+- content_type image/graphic
+- content_type form
+- block discussions
+- block revision comments
+- block temperory edits / create new document vresion; adds new temporary db-entry for every save; then publish new version and delete all the temporary entries since last
+- render document tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
+- setup basic deploying mechanism
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+
++ basic document viewing with v01 content
++ when adding block, jump to place on page where new block is
 + BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded
 + content_type html_simple (https://summernote.org)
 + Setup basic interface

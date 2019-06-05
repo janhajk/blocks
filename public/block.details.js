@@ -95,7 +95,9 @@
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },
-                { label: 'Tags', content: self.data.tags.join(', ') }
+                { label: 'Tags', content: self.data.tags.join(', ') },
+                { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
+                { label: 'Übergeordneter Block', content: self.data.parent }
             ];
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));

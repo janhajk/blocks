@@ -72,7 +72,7 @@
       };
       
       
-      Collection.fn = Block.prototype = {
+      Collection.fn = Collection.prototype = {
 
       };
 

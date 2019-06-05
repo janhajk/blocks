@@ -1,4 +1,5 @@
 /*global Block */
+/*global $ */
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
         // Header
@@ -79,6 +80,11 @@
                 let content = document.createElement('div');
                 content.className = 'font-13 text-lighter';
                 content.innerHTML = detail.content;
+                if (detail.write !== undefined && detail.write) {
+                    content.ondblclick = function() {
+                        $(content).summernote({toolbar:[]});
+                    };
+                }
                 body.appendChild(heading);
                 body.appendChild(content)
                 media.appendChild(body);
@@ -92,7 +98,7 @@
             }
             let items = [
                 { label: 'Block ID', content: self._id },
-                { label: 'Block Name', content: self.data.name },
+                { label: 'Block Name', content: self.data.name, write: true },
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },

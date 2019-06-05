@@ -10,6 +10,7 @@ Ressources:
 - Panels: http://admincast.com/adminca/preview/admin_1/html/panels.html
 - Icons Themefy: https://themify.me/themify-icons
 - pdf: pdfkit.org
+- automation: https://gruntjs.com
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 

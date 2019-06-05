@@ -19,6 +19,7 @@
                   icon.className = liElements[i].icon;
                   let div = document.createElement('div');
                   div.innerHTML = liElements[i].title;
+                  div.style.fontSize = '0.8em';
                   a.appendChild(icon).appendChild(div);
                   li.appendChild(a);
                   ul.appendChild(li);

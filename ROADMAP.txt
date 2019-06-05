@@ -28,7 +28,6 @@ Version 1 - PROOF OF CONCEPT
       - blockdetails that are already loaded
       - 
 - when adding block, jump directly to edit mode
-- show parent block with menu entry
 - FEATURE: create editor to add basic content
    - content_type heading
    - content_type document
@@ -58,12 +57,15 @@ Version 2 - ALPHA
 - block temperory edits / create new document vresion; adds new temporary db-entry for every save; then publish new version and delete all the temporary entries since last
 - render document tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
 - setup basic deploying mechanism
+- change block parent
+- search blocks
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
++ show parent block with menu entry
 + basic document viewing with v01 content
 + when adding block, jump to place on page where new block is
 + BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded

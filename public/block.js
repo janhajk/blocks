@@ -10,7 +10,7 @@
             this.data.owner = {};
             this.data.timestamp = 0;
             this.data.type = '';
-            this.data.parent = {};
+            this.data.parent = '';
             this.data.children = [];
             this.data.ancestor = {};
             this.data.content = '';

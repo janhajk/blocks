@@ -4,9 +4,9 @@
             let ul = document.createElement('ul');
             ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
             let liElements = [
-                  { title: 'Blockdetails', icon: 'ti-notepad' },
-                  { title: 'Eigenschaften', icon: 'ti-settings' },
-                  { title: 'Änderungen', icon: 'ti-comment' }
+                  { title: 'Details', icon: 'ti-notepad' },
+                  { title: 'Eigensch.', icon: 'ti-settings' },
+                  { title: 'Historie', icon: 'ti-comment' }
             ];
             for (let i = 0; i < liElements.length; i++) {
                   let li = document.createElement('li');

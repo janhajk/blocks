@@ -18,15 +18,19 @@ Ressources:
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-Version 1 - PROOF OF CONCEPT
+Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: Add new block goes to the wrong placeholder
     - have block find it's correct DOM place (separate function)
     - change loading behaviour that document is loaded first, then rendered
-- BUG: Jump to new Block; add header pixel
+- BUG: Jump to new Block; add header pixel; also Menu is killed
 - BUG: if block is deleted also delete children
+- BUG: New block has wrong level (Level is always 0)
+- FEATURE: Button New Document creates new Document
+- FEATURE: Show blocks with thumbnails in content window
 - FEATURE: show block details in sidebar
       - blockdetails that are already loaded
+- FEATURE: Append block to new parent
 - FEATURE: create editor to add basic content
    - content_type heading
    - content_type document
@@ -40,29 +44,6 @@ Version 1 - PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
-
-----------------------------------------------------------------------------------------------------------------------------------------
-Version 2 - ALPHA
-----------------------------------------------------------------------------------------------------------------------------------------
-- User Roles
-- Diff changes
-- Document Variables
-- content_type image/graphic
-- content_type form
-- block discussions
-- block revision comments
-- block temperory edits / create new document vresion; adds new temporary db-entry for every save; then publish new version and delete all the temporary entries since last
-- render document tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
-- setup basic deploying mechanism
-- change block parent
-- search blocks
-- don't delete blocks, make blocks hidden instead.
-
-----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
 + FEATURE: list blocks without parent in sidebar under documents
     + load selected documents
 + show parent block with menu entry
@@ -85,6 +66,45 @@ Version 2 - ALPHA
 + remove block (for testing only)
 + add level in block
 + visualize level of block with padding*level 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 0.2
+----------------------------------------------------------------------------------------------------------------------------------------
+- buy domain "baublock"
+- User Roles
+- FEATURE: Secret link to document
+- Adressbar with tags/links
+- Diff changes
+- Document Variables
+- content_type image/graphic
+- content_type form
+- block discussions
+- block revision comments
+- block temperory edits / create new document vresion; adds new temporary db-entry for every save; then publish new version and delete all the temporary entries since last
+- render document tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
+- setup basic deploying mechanism of webapp
+- change block parent
+- search blocks
+- new block creation above/after
+- don't delete blocks, make blocks hidden instead.
+- public website (external or wordpress)
+- create bugtracker
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 0.3
+----------------------------------------------------------------------------------------------------------------------------------------
+
+- approval workflow
+- GUI translation
+- languages
+- new content_types
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 

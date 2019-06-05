@@ -85,7 +85,7 @@
                    * 
                    */
                   {
-                        title: 'ein Block nach oben',
+                        title: 'Übergeordneten Block öffnen',
                         icon: 'fullscreen',
                         action: function() {
                               if (block.data.parent !== '') {

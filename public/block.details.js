@@ -65,6 +65,21 @@
         contentContainer.firstChild.appendChild(scroller);
 
 
+        let inplaceEditor = function(element, block, name, value) {
+            element.innerHTML = '';
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            element.appendChild(input);
+            input.onkeypress = function(key) {
+                if (key.code === 13) {
+                    element.innerHTML = this.value;
+                }
+            };
+            element.innerHTML = '<input type="text" value="' + value + '" />';
+        };
+
+
         Block.fn.details = function(next) {
             let self = this;
 
@@ -82,7 +97,7 @@
                 content.innerHTML = detail.content;
                 if (detail.write !== undefined && detail.write) {
                     content.ondblclick = function() {
-                        $(content).summernote({toolbar:[]});
+                        inplaceEditor(content, self, detail.field, detail.content);
                     };
                 }
                 body.appendChild(heading);
@@ -98,7 +113,7 @@
             }
             let items = [
                 { label: 'Block ID', content: self._id },
-                { label: 'Block Name', content: self.data.name, write: true },
+                { label: 'Block Name', content: self.data.name, write: true, field: 'name' },
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },
@@ -109,7 +124,7 @@
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));
             }
-            
+
             return next(contentContainer.firstChild);
 
         };

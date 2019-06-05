@@ -16,6 +16,6 @@
     
     
     var collection = new Collection('mydocuments');
-    collection.load();
+    collection.update();
 
 })();

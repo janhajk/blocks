@@ -23,6 +23,14 @@
             div.className = ['dropdown-menu', 'dropdown-menu-right', 'dropdown-menu-media'].join(' ');
             div.style.zIndex = 99999999;
             div.style.margin = '0 auto';
+            div.style.width = '30em';
+            div.style.height = '30em';
+            div.style.display = 'block';
+            div.style.position = 'fixed';
+            div.style.top = '50%';
+            div.style.left = '50%';
+            div.style.marginTop = '-15em';
+            div.style.marginLeft = '-15em';
 
 
             // Header

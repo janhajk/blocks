@@ -81,7 +81,6 @@
             input.focus();
             input.onkeypress = function(key) {
                 if (key.keyCode === 13) { // Enter
-                    element.innerHTML = this.value;
                     let values;
                     if (iArray) {
                         values = this.value.split(',');
@@ -92,7 +91,9 @@
                     else {
                         values = this.value;
                     }
-                    block.saveValue(detail.field, values);
+                    block.saveValue(detail.field, values, function(){
+                        element.innerHTML = this.value;
+                    });
                 }
             };
         };

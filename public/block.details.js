@@ -138,7 +138,7 @@
                 { label: 'Block-Typ', content: self.data.type },
                 { label: 'Tags', content: self.data.tags, write: true, field: 'tags' },
                 { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
-                { label: 'Übergeordneter Block', content: self.data.parent }
+                { label: 'Übergeordneter Block', content: self.data.parent===''?'keiner':self.data.parent }
             ];
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));

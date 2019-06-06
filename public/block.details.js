@@ -84,14 +84,14 @@
                     let values;
                     if (iArray) {
                         values = this.value.split(',');
-                        for (let i=0;i<values.length;i++) {
+                        for (let i = 0; i < values.length; i++) {
                             values[i] = values[i].trim();
                         }
                     }
                     else {
                         values = this.value;
                     }
-                    block.saveValue(detail.field, values, function(){
+                    block.saveValue(detail.field, values, function() {
                         element.innerHTML = this.value;
                     });
                 }
@@ -113,11 +113,14 @@
                 heading.innerHTML = detail.label;
                 let content = document.createElement('div');
                 content.className = 'font-13 text-lighter';
-                content.innerHTML = (Array.isArray(detail.content))?detail.content.join(', '):detail.content;
+                content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;
                 if (detail.write !== undefined && detail.write) {
                     content.ondblclick = function() {
                         inplaceEditor(content, self, detail);
                     };
+                }
+                if (detail.action !== undefined) {
+                    content.onclick = detail.action;
                 }
                 body.appendChild(heading);
                 body.appendChild(content)
@@ -138,7 +141,17 @@
                 { label: 'Block-Typ', content: self.data.type },
                 { label: 'Tags', content: self.data.tags, write: true, field: 'tags' },
                 { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
-                { label: 'Übergeordneter Block', content: self.data.parent===''?'keiner':self.data.parent }
+                {
+                    label: 'Übergeordneter Block',
+                    content: self.data.parent === '' ? 'keiner' : self.data.parent,
+                    action: function() {
+                        window.b = new Block(self.data.parent, self.contentDom);
+                        window.currentBlockId = self.data.parent;
+                        window.b.load(function() {
+                            console.log('success');
+                        });
+                    }
+                }
             ];
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));

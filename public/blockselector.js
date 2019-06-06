@@ -85,6 +85,8 @@
                   button.style.color = '#32373c';
                   button.style.alignItems = 'stretch';
                   button.style.flexDirection = 'column';
+                  button.style.background = 'transparent';
+                  button.style.border = 'transparent';
             }
 
             document.getElementsByTagName('body')[0].appendChild(div);

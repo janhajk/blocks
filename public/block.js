@@ -188,7 +188,7 @@
                   };
                   request.send(JSON.stringify(params));
             };
-            this.saveContent = saveContent;
+            this.saveValue = saveValue;
 
 
             var saveContent = function(next) {

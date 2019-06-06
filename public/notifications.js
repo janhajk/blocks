@@ -67,7 +67,6 @@
             this.ul = null;
             this.items = [];
 
-            let content = document.getElementById('content');
 
             var html = function() {
 

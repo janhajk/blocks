@@ -7,7 +7,7 @@
         ul.className = ['nav', 'nav-tabs', 'tabs-line'].join(' ');
         let liElements = [
             { title: 'Details', icon: 'ti-notepad' },
-            { title: 'Eigensch.', icon: 'ti-settings' },
+            { title: 'Eigenschaften', icon: 'ti-settings' },
             { title: 'Historie', icon: 'ti-comment' }
         ];
         for (let i = 0; i < liElements.length; i++) {
@@ -65,16 +65,34 @@
         contentContainer.firstChild.appendChild(scroller);
 
 
-        let inplaceEditor = function(element, block, name, value) {
+        let inplaceEditor = function(element, block, detail) {
+            let iArray = false;
             element.innerHTML = '';
             let input = document.createElement('input');
             input.type = 'text';
-            input.value = value;
+            if (Array.isArray(detail.content)) {
+                input.value = detail.content.join(', ');
+                iArray = true;
+            }
+            else {
+                input.value = detail.content;
+            }
             element.appendChild(input);
-            input.select();
+            input.focus();
             input.onkeypress = function(key) {
-                if (key.keyCode === 13) {
+                if (key.keyCode === 13) { // Enter
                     element.innerHTML = this.value;
+                    let values;
+                    if (iArray) {
+                        values = this.value.split(',');
+                        for (let i=0;i<values.length;i++) {
+                            values[i] = values[i].trim();
+                        }
+                    }
+                    else {
+                        values = this.value;
+                    }
+                    block.updateValue(detail.field, values);
                 }
             };
         };
@@ -94,10 +112,10 @@
                 heading.innerHTML = detail.label;
                 let content = document.createElement('div');
                 content.className = 'font-13 text-lighter';
-                content.innerHTML = detail.content;
+                content.innerHTML = (Array.isArray(detail.content))?detail.content.join(', '):detail.content;
                 if (detail.write !== undefined && detail.write) {
                     content.ondblclick = function() {
-                        inplaceEditor(content, self, detail.field, detail.content);
+                        inplaceEditor(content, self, detail);
                     };
                 }
                 body.appendChild(heading);
@@ -117,7 +135,7 @@
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },
-                { label: 'Tags', content: self.data.tags.join(', ') },
+                { label: 'Tags', content: self.data.tags, write: true, field: 'tags' },
                 { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
                 { label: 'Übergeordneter Block', content: self.data.parent }
             ];

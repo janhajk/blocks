@@ -156,10 +156,11 @@
             this.load = load;
 
 
-            var saveContent = function(next) {
+            var saveValue = function(field, value, next) {
                   var params = {
-                        content: self.content,
-                        _id: self._id
+                        _id: self._id,
+                        field: field,
+                        value: value
                   };
                   var request = new XMLHttpRequest();
                   request.open('POST', '/block/save', true);
@@ -186,6 +187,14 @@
                         return next(true);
                   };
                   request.send(JSON.stringify(params));
+            };
+            this.saveContent = saveContent;
+
+
+            var saveContent = function(next) {
+                  saveValue('content', self.content, function(e, res) {
+                        next (e, res);
+                  });
             };
             this.saveContent = saveContent;
 

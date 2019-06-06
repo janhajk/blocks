@@ -1,6 +1,8 @@
 /*global Block*/
 /*global $*/
 (function() {
+      
+      let div;
 
 
       let blockTypes = [
@@ -8,6 +10,12 @@
             { name: 'heading', label: 'Kapitel', icon: 'ti-text' },
             { name: 'document', label: 'Dokument', icon: 'ti-file' }
       ];
+
+      let o = function() {
+            $('body').removeClass('has-backdrop');
+            $('.shined').removeClass('shined');
+            document.getElementsByTagName('body')[0].removeChild(div);
+      };
 
 
       Block.fn.blockSelector = function(next) {
@@ -19,7 +27,7 @@
 
 
             // content
-            let div = document.createElement('div');
+            div = document.createElement('div');
             div.className = ['dropdown-menu', 'dropdown-menu-right', 'dropdown-menu-media'].join(' ');
             div.style.zIndex = 99999999;
             div.style.margin = '0 auto';
@@ -73,9 +81,10 @@
                   ul.appendChild(li);
                   button.onclick = function() {
                         document.getElementsByTagName('body')[0].removeChild(div);
+                        o();
                         return next(blockTypes[i].name);
                   };
-                  li.style.float ='left';
+                  li.style.float = 'left';
                   button.style.display = 'flex';
                   button.style.width = '100%';
                   button.style.fontSize = '13px';
@@ -90,6 +99,7 @@
 
             document.getElementsByTagName('body')[0].appendChild(div);
             $(div).backdrop();
+            $('.backdrop').click(o);
 
 
 

@@ -60,23 +60,21 @@
                   let li = document.createElement('li');
                   let button = document.createElement('button');
                   let iconSpan = document.createElement('span');
-                  let titleSpan = document.createElement('span');
                   let icon = document.createElement('i');
                   let name = document.createTextNode(blockTypes[i].label);
                   button.appendChild(iconSpan);
-                  button.appendChild(titleSpan);
                   li.appendChild(button);
                   iconSpan.appendChild(icon);
                   iconSpan.appendChild(name);
                   li.className = 'list-group-item flexbox';
                   iconSpan.className = 'flexbox';
                   icon.className = blockTypes[i].icon;
-                  titleSpan.innerHTML = blockTypes[i].label;
                   ul.appendChild(li);
                   button.onclick = function() {
                         document.getElementsByTagName('body')[0].removeChild(div);
                         return next(blockTypes[i].name);
                   };
+                  li.style.float ='left';
                   button.style.display = 'flex';
                   button.style.width = '100%';
                   button.style.fontSize = '13px';

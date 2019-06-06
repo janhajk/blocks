@@ -23,11 +23,13 @@
             box.appendChild(input);
             box.appendChild(scrollBox);
             container.appendChild(box);
-            container.className = '';
-            box.className = '';
+            container.className = 'ibox ibox-fullheight';
+            box.className = 'ibox-body';
+            ul.className = 'list-group list-group-divider list-group-full';
             label.style.color = '#72777C';
             label.style.border = '0';
             label.style.clip = 'rect(1px,1px,1px,1px)';
+            input.className = 'form-control';
             input.type = 'search';
             input.placeholder = 'Block suchen';
             input.style.fontSize = '13px';

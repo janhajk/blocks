@@ -89,10 +89,11 @@
                         }
                     }
                     else {
-                        values = this.value;
+                        values = [this.value];
                     }
                     block.saveValue(detail.field, values, function() {
-                        element.innerHTML = this.value;
+                        element.innerHTML = values.join(', ');
+                        block.data[detail.field] = values;
                     });
                 }
             };

@@ -31,8 +31,10 @@
             // Create new Document link
             let linkNewDocument = document.getElementById('linkNewDocument');
             linkNewDocument.onclick = function() {
-                  window.b = new Block({ content_type: 'document', content: 'Neues Dokument' }, document.getElementById('content'), function(newBlock) {
-                        newBlock.load(function() {
+                  new Block({ content_type: 'document', content: 'Neues Dokument' }, document.getElementById('content'), function(newBlock) {
+                        window.b = newBlock;
+                        window.currentBlockId = newBlock._id;
+                        window.b.load(function() {
                               window.blockCollection.update();
                         });
                   });

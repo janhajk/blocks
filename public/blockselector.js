@@ -1,7 +1,7 @@
 /*global Block*/
 /*global $*/
 (function() {
-      
+
       let div;
 
 
@@ -14,7 +14,7 @@
       let o = function() {
             $('body').removeClass('has-backdrop');
             $('.shined').removeClass('shined');
-            document.getElementsByTagName('body')[0].removeChild(div);
+            if (div !== undefined) document.getElementsByTagName('body')[0].removeChild(div);
       };
 
 

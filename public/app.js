@@ -17,5 +17,6 @@
     
     var collection = new Collection('mydocuments');
     collection.update();
+    window.blockCollection = collection;
 
 })();

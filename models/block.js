@@ -49,7 +49,7 @@ const Block = new Schema({
       /**
        * properties of the block itself; diffrent properties for different
        * content_types
-       * exp: heading size, css etc.
+       * exp: document, heading size, css etc.
        * takes key:values
        */
       properties: { type: Map, of: String },

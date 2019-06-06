@@ -28,6 +28,17 @@
             var self = this;
 
 
+            // Create new Document link
+            let linkNewDocument = document.getElementById('linkNewDocument');
+            linkNewDocument.onclick = function() {
+                  window.b = new Block({ content_type: 'document', content: 'Neues Dokument' }, document.getElementById('content'), function(newBlock) {
+                        newBlock.load(function() {
+                              window.blockCollection.update();
+                        });
+                  });
+            };
+
+
 
             /*
              * Creates new block and loads it
@@ -193,7 +204,7 @@
 
             var saveContent = function(next) {
                   saveValue('content', self.content, function(e, res) {
-                        next (e, res);
+                        next(e, res);
                   });
             };
             this.saveContent = saveContent;

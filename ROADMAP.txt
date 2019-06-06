@@ -30,12 +30,11 @@ Version 0.1 PROOF OF CONCEPT
 - FEATURE: Create Block type: "Clone"
       - server side loading of block clone
       - GUI for New block type selection
+- FEATURE: Handle content_type variations through properties
+      - new Properties fn
 - FEATURE: Button New Document creates new Document
 - FEATURE: Show blocks with thumbnails in content window
 - FEATURE: Append block to new parent
-- FEATURE: create editor to add basic content
-   - content_type heading
-   - content_type document
 - FEATURE: export block as PDF
 - FEATURE: revisions
     - change in block alters whole line up the tree
@@ -47,6 +46,9 @@ Version 0.1 PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
++ FEATURE: create editor to add basic content
+   + content_type heading
+   + content_type document
 + FEATURE: Change name of Block
 + FEATURE: show block details in sidebar
       + blockdetails that are already loaded

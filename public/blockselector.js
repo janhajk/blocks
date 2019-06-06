@@ -4,9 +4,9 @@
 
 
       let blockTypes = [
-            { name: 'html_simple', label: 'Text' },
-            { name: 'heading', label: 'Kapitel' },
-            { name: 'document', label: 'Dokument' }
+            { name: 'html_simple', label: 'Text', icon: 'ti-paragraph' },
+            { name: 'heading', label: 'Kapitel', icon: 'ti-text' },
+            { name: 'document', label: 'Dokument', icon: 'ti-file' }
       ];
 
 
@@ -39,7 +39,7 @@
             input.style.position = 'relative';
             input.style.borderRadius = '4px';
             ul.style.listStyle = 'none';
-            ul.style.display  = 'flex';
+            ul.style.display = 'flex';
             ul.style.flexWrap = 'wrap';
             ul.style.overflow = 'hidden';
             ul.style.padding = '2px 0';
@@ -48,9 +48,16 @@
                   let button = document.createElement('button');
                   let iconSpan = document.createElement('span');
                   let titleSpan = document.createElement('span');
+                  let icon = document.createElement('i');
+                  let name = document.createTextNode(blockTypes[i].label);
                   button.appendChild(iconSpan);
                   button.appendChild(titleSpan);
                   li.appendChild(button);
+                  iconSpan.appendChild(icon);
+                  iconSpan.appendChild(name);
+                  li.className = 'list-group-item flexbox';
+                  iconSpan.className = 'flexbox';
+                  icon.className = blockTypes[i].icon;
                   titleSpan.innerHTML = blockTypes[i].label;
                   ul.appendChild(li);
                   button.onclick = function() {

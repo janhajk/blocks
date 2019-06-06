@@ -107,7 +107,7 @@
 
             document.getElementsByTagName('body')[0].appendChild(div);
             $(div).backdrop();
-            $('.backdrop').click(backdropHide(function() {}));
+            $('.backdrop').click(backdropHide);
 
 
       };

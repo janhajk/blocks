@@ -69,6 +69,7 @@
                   li.className = 'list-group-item flexbox';
                   iconSpan.className = 'flexbox';
                   icon.className = blockTypes[i].icon;
+                  icon.style.marginRight = '10px';
                   ul.appendChild(li);
                   button.onclick = function() {
                         document.getElementsByTagName('body')[0].removeChild(div);

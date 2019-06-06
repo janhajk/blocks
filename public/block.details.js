@@ -113,13 +113,24 @@
                 heading.innerHTML = detail.label;
                 let content = document.createElement('div');
                 content.className = 'font-13 text-lighter';
-                content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;
+
+                if (detail.content !== undefined) {
+                    content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;
+                }
+                // content must be loaded first
+                else if (detail.loadData !== undefined) {
+                    detail.loadData(self._id, function(ids) {
+                        content.innerHTML = ids;
+                    });
+                }
+                // If field is writable
                 if (detail.write !== undefined && detail.write) {
                     content.ondblclick = function() {
                         inplaceEditor(content, self, detail);
                     };
                 }
-                if (detail.action !== undefined) {
+                // 
+                if (detail.action !== undefined && detail.content !== 'keiner') {
                     content.onclick = detail.action;
                 }
                 body.appendChild(heading);
@@ -151,7 +162,13 @@
                             console.log('success');
                         });
                     }
-                }
+                },
+                {
+                    label: 'Orte, wo dieser Block verwendet wird',
+                    loadData: function(_id, next) {
+                        // load all occurences
+                    }
+                },
             ];
             for (let i = 0; i < items.length; i++) {
                 mediaList.appendChild(detailItem(null, items[i]));

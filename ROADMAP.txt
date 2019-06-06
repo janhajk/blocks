@@ -27,7 +27,9 @@ Version 0.1 PROOF OF CONCEPT
 - BUG: Jump to new Block; add header pixel; also Menu is killed
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
-- FEATURE: Change name of Block
+- FEATURE: Create Block type: "Clone"
+      - server side loading of block clone
+      - GUI for New block type selection
 - FEATURE: Button New Document creates new Document
 - FEATURE: Show blocks with thumbnails in content window
 - FEATURE: Append block to new parent
@@ -37,6 +39,7 @@ Version 0.1 PROOF OF CONCEPT
 - FEATURE: export block as PDF
 - FEATURE: revisions
     - change in block alters whole line up the tree
+- FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
 - O: when adding block, jump directly to edit mode
 - O: order Documents sidebar by change date
 - CLEANUP: Routes to seperate files
@@ -44,6 +47,7 @@ Version 0.1 PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
++ FEATURE: Change name of Block
 + FEATURE: show block details in sidebar
       + blockdetails that are already loaded
 + FEATURE: list blocks without parent in sidebar under documents
@@ -91,6 +95,7 @@ Version 0.2
 - don't delete blocks, make blocks hidden instead.
 - public website (external or wordpress)
 - create bugtracker
+- FEATURE: under settings, be able to sort children (using jquery ui sortable)
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 

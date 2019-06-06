@@ -107,10 +107,16 @@
                         title: 'neuen Sub-Block anhängen',
                         icon: 'angle-double-down',
                         action: function() {
-                              new Block({ parent: block._id }, block.dom.row, function(newBlock) {
+                              block.blockSelector(function(type) {
+                                    let props = {
+                                          parent: block._id,
+                                          content_type: type
+                                    };
+                              new Block(props, block.dom.row, function(newBlock) {
                                     block.append(newBlock, function() {
                                           newBlock
                                     });
+                              });
                               });
                         }
                   },

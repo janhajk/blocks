@@ -14,7 +14,7 @@
       let o = function() {
             $('body').removeClass('has-backdrop');
             $('.shined').removeClass('shined');
-            if (div !== undefined) document.getElementsByTagName('body')[0].removeChild(div);
+            document.getElementsByTagName('body')[0].removeChild(div);
       };
 
 
@@ -80,7 +80,6 @@
                   icon.style.marginRight = '10px';
                   ul.appendChild(li);
                   button.onclick = function() {
-                        document.getElementsByTagName('body')[0].removeChild(div);
                         o();
                         return next(blockTypes[i].name);
                   };

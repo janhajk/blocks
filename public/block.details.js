@@ -92,7 +92,7 @@
                     else {
                         values = this.value;
                     }
-                    block.updateValue(detail.field, values);
+                    block.saveValue(detail.field, values);
                 }
             };
         };

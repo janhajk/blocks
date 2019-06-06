@@ -204,7 +204,7 @@
                   blockToAppend.level = self.level + 1;
                   whereToAppend.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   self.data.children.push(blockToAppend);
-                  blockToAppend.dom.row.scrollIntoView();
+                  // blockToAppend.dom.row.scrollIntoView();
                   return next();
             };
             this.append = append;

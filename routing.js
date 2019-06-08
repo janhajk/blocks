@@ -44,12 +44,6 @@ var basic = function(app, connection) {
             res.send(e ? e : blocks);
         });
     });
-    app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
-        const id = req.params.id;
-        block.getById(id, function(e, block) {
-            res.send(e ? e : block);
-        });
-    });
     app.post('/block/save', /*auth.ensureAuthenticated,*/ function(req, res) {
         let properties = req.body;
         utils.log(properties);
@@ -62,6 +56,12 @@ var basic = function(app, connection) {
         utils.log(properties);
         block.remove(properties, function(e, block) {
             res.send(e ? { success: false, error: e } : { success: true });
+        });
+    });
+    app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
+        const id = req.params.id;
+        block.getById(id, function(e, block) {
+            res.send(e ? e : block);
         });
     });
 

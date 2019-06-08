@@ -96,6 +96,13 @@
             header_div_div.appendChild(header_span);
             header_div.appendChild(header_div_div);
             div.appendChild(header_div);
+            
+            // Search Form
+            let searchContainer = document.createElement('div');
+            let searchInput = document.createElement('input');
+            searchInput.type = 'search';
+            searchContainer.appendChild(searchInput);
+            div.appendChild(searchContainer);
 
             // content
             let content_div = document.createElement('div');

@@ -38,6 +38,12 @@ var basic = function(app, connection) {
             res.send(e ? e : blocks);
         });
     });
+    app.get('/block/byNameAndTag', /*auth.ensureAuthenticated,*/ function(req, res) {
+        utils.log('loading blocks by name and tag...');
+        block.byNameAndTag(function(e, blocks) {
+            res.send(e ? e : blocks);
+        });
+    });
     app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
         const id = req.params.id;
         block.getById(id, function(e, block) {

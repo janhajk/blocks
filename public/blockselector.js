@@ -3,6 +3,7 @@
 (function() {
 
       let div;
+      let searchBlocks = [];
 
 
       let blockTypes = [
@@ -23,6 +24,42 @@
             finally {
                   return next();
             }
+      };
+
+
+      /**
+       * 
+       * Loads list of available blocks to user
+       * needs tags, names and _ids
+       * 
+       * 
+       */
+      let loadMyBlocks = function(next) {
+            var request = new XMLHttpRequest();
+            request.open('GET', '/block/byNameAndTag', true);
+            request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+            request.onload = function() {
+                  if (request.status >= 200 && request.status < 405) {
+                        try {
+                              let newBlock = JSON.parse(request.responseText);
+                              console.log(newBlock);
+                              return next(null, newBlock);
+                        }
+                        catch (e) {
+                              console.log(e);
+                              return next(e);
+                        }
+                  }
+                  else {
+                        console.log('Error in request; status was: ' + request.status);
+                        return next(true);
+                  }
+            };
+            request.onerror = function() {
+                  console.log('There was an error in xmlHttpRequest!');
+                  return next(true);
+            };
+            request.send();
       };
 
 

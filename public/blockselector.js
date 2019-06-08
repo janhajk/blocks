@@ -96,11 +96,14 @@
             header_div_div.appendChild(header_span);
             header_div.appendChild(header_div_div);
             div.appendChild(header_div);
-            
+
             // Search Form
             let searchContainer = document.createElement('div');
             let searchInput = document.createElement('input');
             searchInput.type = 'search';
+            searchInput.className = 'form-control';
+            searchInput.placeholder = 'Suche nach Blocktyp oder Blockname';
+            searchInput.autocomplete = 'false';
             searchContainer.appendChild(searchInput);
             div.appendChild(searchContainer);
 

@@ -31,7 +31,11 @@
             searchString = searchString.trim().toLowerCase();
             if (searchString.length > 2) {
                   for (let i = 0; i < searchBlocks.length; i++) {
-                        if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.indexOf(searchString) > -1) || searchBlocks[i].tags.filter(function(item) {return typeof item == 'string' && item.indexOf(searchString) > -1;})) {
+                        if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.indexOf(searchString) > -1) ||
+                              searchBlocks[i].tags.filter(function(item) {
+                                    return (typeof item == 'string' && item.indexOf(searchString) > -1);
+
+                              })) {
                               let item = document.createElement('li');
                               item.className = 'timeline-item';
                               let span = document.createElement('span');
@@ -40,7 +44,7 @@
                               link.href = 'javascript:;';
                               link.innerHTML = searchBlocks[i].name;
                               link.onclick = function() {
-                                    
+
                               };
                               item.appendChild(span)
                               item.appendChild(link);

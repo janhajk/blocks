@@ -31,9 +31,9 @@
             searchString = searchString.trim().toLowerCase();
             if (searchString.length > 2) {
                   for (let i = 0; i < searchBlocks.length; i++) {
-                        if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.indexOf(searchString) > -1) ||
+                        if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.toLowerCase().indexOf(searchString) > -1) ||
                               searchBlocks[i].tags.filter(function(item) {
-                                    return (typeof item == 'string' && item.indexOf(searchString) > -1);
+                                    return (typeof item == 'string' && item.toLowerCase().indexOf(searchString) > -1);
 
                               }).length > 0) {
                               let item = document.createElement('li');

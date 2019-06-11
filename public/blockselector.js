@@ -198,7 +198,8 @@
             let cloneContainer = document.createElement('div');
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
-            cloneContainer.className = 'timeline';
+            cloneList.className = 'timeline scroller';
+            cloneContainer.className = 'slimScrollDiv';
             cloneContainer.appendChild(cloneList);
             content_div.appendChild(cloneContainer);
 

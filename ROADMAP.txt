@@ -23,7 +23,7 @@ Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: Add new block goes to the wrong placeholder
     - have block find it's correct DOM place (separate function)
-    - change loading behaviour that document is loaded first, then rendered
+    + change loading behaviour that document is loaded first, then rendered
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
 - FEATURE: Create Block type: "Clone"

@@ -74,7 +74,7 @@
                               window.b = new Block(block._id, block.contentDom);
                               window.currentBlockId = block._id;
                               window.b.load(function() {
-                                    window.b.output(function() {
+                                    window.b.output(window.b, function() {
                                           console.log('success, fallowing your block:');
                                     });
                               });
@@ -94,7 +94,7 @@
                                     window.b = new Block(block.data.parent, block.contentDom);
                                     window.currentBlockId = block.data.parent;
                                     window.b.load(function() {
-                                          window.b.output(function() {
+                                          window.b.output(window.b, function() {
                                                 console.log('success!');
                                           });
                                     });

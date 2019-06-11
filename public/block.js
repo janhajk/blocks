@@ -199,6 +199,10 @@
                   self.dom.panel = panelDom;
             };
 
+            /**
+             * Appends the block to the parent DOM (recursive with sub-blocks)
+             * 
+             */
             this.output = function output(block, next) {
                   let self = block;
                   // remove old dom
@@ -220,7 +224,7 @@
                   // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
                   // can't use reverse() because it changes input array, so make a copy
                   let childrenReverse = [];
-                  for (let i = 0;i<self.data.children.length;i++) {
+                  for (let i = 0; i < self.data.children.length; i++) {
                         childrenReverse.unshift(self.data.children[i]);
                   }
                   async.eachLimit(childrenReverse, 1, function(childBlock, callback) {

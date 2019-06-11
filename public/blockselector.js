@@ -199,10 +199,9 @@
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
             cloneList.className = 'timeline scroller';
-            cloneContainer.className = 'slimScrollDiv';
             $(cloneList).slimscroll({
-                        height: $(this).attr('data-height') || '100%',
-                        color: $(this).attr('data-color') || '#71808f',
+                        height: $(cloneList).attr('data-height') || '100%',
+                        color: $(cloneList).attr('data-color') || '#71808f',
                         railOpacity: '0.9',
                         size: '4px'
                   });

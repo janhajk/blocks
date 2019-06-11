@@ -119,7 +119,7 @@
                   loadById(self._id, function(e, block) {
                         self.data.children = [];
                         // set new data
-                        for (let i = 0; i < block.length; i++) {
+                        for (let i in block) {
                               self.data[i] = block[i];
                         }
                         // Render DOM of block

@@ -198,7 +198,7 @@
 
             this.output = function output(next) {
                   // remove old data
-                  if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
+                  // if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
                   // Top Block get's appended to content of page
                   if (self._id === window.currentBlockId) {
                         while (self.contentDom.firstChild) {

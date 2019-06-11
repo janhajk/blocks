@@ -35,7 +35,7 @@
                               searchBlocks[i].tags.filter(function(item) {
                                     return (typeof item == 'string' && item.indexOf(searchString) > -1);
 
-                              })) {
+                              }).length > 0) {
                               let item = document.createElement('li');
                               item.className = 'timeline-item';
                               let span = document.createElement('span');

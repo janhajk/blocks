@@ -40,7 +40,7 @@
 
 
       /*
-       * Oututs:
+       * Outputs:
        * <li class="timeline-item"><i class="ti-check timeline-icon"></i>2 Issue fixed<small class="float-right text-muted ml-2 nowrap">Just now</small></li>
        **/
       var element = function(content, contentSmall, icon) {

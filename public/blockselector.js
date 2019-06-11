@@ -199,18 +199,26 @@
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
             cloneList.className = 'timeline scroller';
-            $(cloneList).slimscroll({
-                        height: $(cloneList).attr('data-height') || '100%',
-                        color: $(cloneList).attr('data-color') || '#71808f',
-                        railOpacity: '0.9',
-                        size: '4px'
-                  });
+            // $(cloneList).slimscroll({
+            //             height: $(cloneList).attr('data-height') || '100%',
+            //             color: $(cloneList).attr('data-color') || '#71808f',
+            //             railOpacity: '0.9',
+            //             size: '4px'
+            //       });
             cloneContainer.appendChild(cloneList);
             content_div.appendChild(cloneContainer);
 
             document.getElementsByTagName('body')[0].appendChild(div);
             $(div).backdrop();
             $('.backdrop').click(backdropHide);
+            $('.scroller').each(function() {
+                  $(this).slimScroll({
+                        height: $(this).attr('data-height') || '100%',
+                        color: $(this).attr('data-color') || '#71808f',
+                        railOpacity: '0.9',
+                        size: '4px'
+                  });
+            });
 
 
       };

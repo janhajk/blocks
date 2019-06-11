@@ -2,6 +2,38 @@
 /*global async */
 (function() {
 
+      const req = function(params, next) {
+            if (params.method === undefined) { params.method = 'GET' }
+            var request = new XMLHttpRequest();
+            request.open(params.method, params.url, true);
+            if (params.method === 'POST') request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+            request.onload = function() {
+                  if (request.status >= 200 && request.status < 405) {
+                        try {
+                              var json = JSON.parse(request.responseText);
+                              // console.log(json);
+                              return next(null, json);
+                        }
+                        catch (e) {
+                              console.log(e);
+                              return next(e);
+                        }
+                  }
+                  // status error
+                  else {
+                        console.log('Error in request; status was: ' + request.status);
+                        return next(true);
+                  }
+            };
+            // connection error
+            request.onerror = function(e) {
+                  console.log('There was an error in xmlHttpRequest!');
+                  return next(e);
+            };
+            if (params.method === 'POST') {}
+            request.send(params.method === 'POST' ? JSON.stringify(params.data) : null);
+      };
+
 
       var Block = function _Block(_id, domParent, next) {
             this._id = (typeof _id === 'string') ? _id : '';
@@ -35,7 +67,9 @@
                         window.b = newBlock;
                         window.currentBlockId = newBlock._id;
                         window.b.load(function() {
-                              window.blockCollection.update();
+                              window.b.output(function() {
+                                    window.blockCollection.update();
+                              });
                         });
                   });
             };
@@ -46,32 +80,14 @@
              * Creates new block and loads it
              *
              */
-            this.create = function(properties, cb) {
-                  var request = new XMLHttpRequest();
-                  request.open('POST', '/block/add', true);
-                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                  request.onload = function() {
-                        if (request.status >= 200 && request.status < 405) {
-                              try {
-                                    let newBlock = JSON.parse(request.responseText);
-                                    console.log(newBlock);
-                                    return cb(null, newBlock);
-                              }
-                              catch (e) {
-                                    console.log(e);
-                                    return cb(e);
-                              }
-                        }
-                        else {
-                              console.log('Error in request; status was: ' + request.status);
-                              return cb(true);
-                        }
-                  };
-                  request.onerror = function() {
-                        console.log('There was an error in xmlHttpRequest!');
-                        return cb(true);
-                  };
-                  request.send(JSON.stringify(properties));
+            this.create = function(properties, next) {
+                  req({
+                              data: properties,
+                              url: '/block/add'
+                        },
+                        function(e, newBlock) {
+                              return next(e, newBlock);
+                        });
             };
 
 
@@ -80,33 +96,10 @@
              *
              *
              */
-            var loadById = function(id, cb) {
-                  var request = new XMLHttpRequest();
-                  request.open('GET', '/block/' + id, true);
-                  request.onload = function() {
-                        if (request.status >= 200 && request.status < 405) {
-                              try {
-                                    var block = JSON.parse(request.responseText);
-                                    console.log(block);
-                                    return cb(null, block);
-                              }
-                              catch (e) {
-                                    console.log(e);
-                                    return cb(e);
-                              }
-                        }
-                        // status error
-                        else {
-                              console.log('Error in request; status was: ' + request.status);
-                              return cb(true);
-                        }
-                  };
-                  // connection error
-                  request.onerror = function(e) {
-                        console.log('There was an error in xmlHttpRequest!');
-                        return cb(e);
-                  };
-                  request.send();
+            var loadById = function(id, next) {
+                  req({ url: '/block/' + id }, function(e, block) {
+                        next(e, block);
+                  });
             };
             this.loadById = loadById;
 
@@ -120,46 +113,23 @@
              */
             var load = function(next) {
                   loadById(self._id, function(e, block) {
-                        // remove old data
-                        if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
                         self.data.children = [];
                         // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
-                        // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
-                        // can't use reverse() because it changes input array, so make a copy
-                        let childrenReverse = [];
-                        for (let i in self.data.children) {
-                              childrenReverse.unshift(self.data.children[i]);
-                        }
-
                         // Render DOM of block
                         self.render();
-                        // Top Block get's appended to content of page
-                        if (self._id === window.currentBlockId) {
-                              while (self.contentDom.firstChild) {
-                                    self.contentDom.removeChild(self.contentDom.firstChild);
-                              }
-                              self.contentDom.appendChild(self.dom.row);
-                        }
-                        else {
-                              // Blocks are inserted from bottom to top; that's why they are processed in reverse order
-                              // ToDo: This ends up to be very slow; must implement way to order
-                              self.domParent.insertAdjacentElement('afterend', self.dom.row);
-                        }
-                        // Add content to Block-DOM-Element
-                        self.dom.body.innerHTML = self.data.content;
                         // Go trough all children and load them
                         // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
-                        async.eachOfLimit(childrenReverse, 1, function(childId, key, callback) {
+                        async.eachOf(self.data.children, function(childId, key, callback) {
                                     self.data.children[key] = new _Block(childId, self.dom.row);
                                     self.data.children[key].level = self.level + 1;
                                     self.data.children[key].load(function() {
                                           callback(); // report child loaded
                                     });
                               },
-                              // when async finishes
+                              // when async finishes / all has loaded
                               function(e) {
                                     return next(); // report block and children loaded
                               });
@@ -170,36 +140,18 @@
 
 
             var saveValue = function(field, value, next) {
-                  var params = {
-                        _id: self._id,
-                        field: field,
-                        value: value
-                  };
-                  var request = new XMLHttpRequest();
-                  request.open('POST', '/block/save', true);
-                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                  request.onload = function() {
-                        if (request.status >= 200 && request.status < 405) {
-                              try {
-                                    var response = JSON.parse(request.responseText);
-                                    console.log(response);
-                                    return next(null, response);
+                  req({
+                              url: '/block/save',
+                              method: 'POST',
+                              data: {
+                                    _id: self._id,
+                                    field: field,
+                                    value: value
                               }
-                              catch (e) {
-                                    console.log(e);
-                                    return next(e);
-                              }
-                        }
-                        else {
-                              console.log('Error in request; status was: ' + request.status);
-                              return next(true);
-                        }
-                  };
-                  request.onerror = function() {
-                        console.log('There was an error in xmlHttpRequest!');
-                        return next(true);
-                  };
-                  request.send(JSON.stringify(params));
+                        },
+                        function(e, response) {
+                              next(e, response);
+                        });
             };
             this.saveValue = saveValue;
 
@@ -223,34 +175,15 @@
             this.append = append;
 
             this.remove = function(next) {
-                  var params = {
-                        _id: self._id
-                  };
-                  var request = new XMLHttpRequest();
-                  request.open('POST', '/block/remove', true);
-                  request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                  request.onload = function() {
-                        if (request.status >= 200 && request.status < 405) {
-                              try {
-                                    var response = JSON.parse(request.responseText);
-                                    console.log(response);
-                                    return next(null, response);
-                              }
-                              catch (e) {
-                                    console.log(e);
-                                    return next(e);
-                              }
+                  req({
+                        url: '/block/remove',
+                        method: 'POST',
+                        data: {
+                              _id: self._id
                         }
-                        else {
-                              console.log('Error in request; status was: ' + request.status);
-                              return next(true);
-                        }
-                  };
-                  request.onerror = function() {
-                        console.log('There was an error in xmlHttpRequest!');
-                        return next(true);
-                  };
-                  request.send(JSON.stringify(params));
+                  }, function(e, res) {
+                        next(e, res);
+                  });
             };
 
             this.render = function() {
@@ -261,6 +194,40 @@
                   self.dom.body = body;
                   self.dom.row = row;
                   self.dom.panel = panelDom;
+            };
+
+            this.output = function output(next) {
+                  // remove old data
+                  if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
+                  // Top Block get's appended to content of page
+                  if (self._id === window.currentBlockId) {
+                        while (self.contentDom.firstChild) {
+                              self.contentDom.removeChild(self.contentDom.firstChild);
+                        }
+                        self.contentDom.appendChild(self.dom.row);
+                  }
+                  else {
+                        // Blocks are inserted from bottom to top; that's why they are processed in reverse order
+                        // ToDo: This ends up to be very slow; must implement way to order
+                        self.domParent.insertAdjacentElement('afterend', self.dom.row);
+                  }
+                  // Add content to Block-DOM-Element
+                  self.dom.body.innerHTML = self.data.content;
+                  // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
+                  // can't use reverse() because it changes input array, so make a copy
+                  let childrenReverse = [];
+                  for (let i in self.data.children) {
+                        childrenReverse.unshift(self.data.children[i]);
+                  }
+                  async.eachOfLimit(childrenReverse, 1, function(childId, key, callback) {
+                              output(function() {
+                                    callback(); // report child loaded
+                              });
+                        },
+                        // when async finishes / all has loaded
+                        function(e) {
+                              return next(); // report block and children loaded
+                        });
             };
 
 

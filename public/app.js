@@ -11,6 +11,9 @@
     b.load(function() {
         console.log('success, fallowing your block:');
         console.log(b);
+        b.output(function(){
+            
+        });
     });
     window.b = b;
     

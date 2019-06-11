@@ -49,7 +49,9 @@
                               window.b = new Block(_id, document.getElementById('content'));
                               window.currentBlockId = _id;
                               window.b.load(function() {
+                                    window.b.output(function(){
                                     console.log('success!');
+                                    });
                               });
                         };
                         a.innerHTML = blocks[i].name;

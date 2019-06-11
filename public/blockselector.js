@@ -4,12 +4,13 @@
 
       let div;
       let searchBlocks = [];
+      let cloneList;
 
 
       let blockTypes = [
-            { name: 'html_simple', label: 'Text', icon: 'ti-paragraph' },
+            { name: 'document', label: 'Dokument', icon: 'ti-file' },
             { name: 'heading', label: 'Kapitel', icon: 'ti-text' },
-            { name: 'document', label: 'Dokument', icon: 'ti-file' }
+            { name: 'html_simple', label: 'Text', icon: 'ti-paragraph' }
       ];
 
       let backdropHide = function(next) {
@@ -23,6 +24,27 @@
             }
             finally {
                   return next();
+            }
+      };
+
+      let filterCloneList = function(searchString) {
+            
+            if (searchString.length > 2) {
+                  for (let i = 0; i < searchBlocks.length; i++) {
+                        if (searchBlocks[i].name.indexOf(searchString) > -1 || searchBlocks[i].tags.filter(function(item) {return typeof item == 'string' && item.indexOf(searchString) > -1;})) {
+                              let item = document.createElement('li');
+                              item.className = 'timeline-item';
+                              let span = document.createElement('span');
+                              span.className = 'timeline-point';
+                              let link = document.createElement('a');
+                              link.href = 'javascript:;';
+                              link.innerHTML = searchBlocks[i].name;
+                              link.onclick = function() {
+                                    
+                              };
+                              cloneList.appendChild(item);
+                        }
+                  }
             }
       };
 
@@ -41,29 +63,32 @@
             request.onload = function() {
                   if (request.status >= 200 && request.status < 405) {
                         try {
-                              let newBlock = JSON.parse(request.responseText);
-                              console.log(newBlock);
-                              return next(null, newBlock);
+                              let blocks = JSON.parse(request.responseText);
+                              return next(null, blocks);
                         }
                         catch (e) {
-                              console.log(e);
-                              return next(e);
+                              return console.log(e), next(e);
                         }
                   }
                   else {
-                        console.log('Error in request; status was: ' + request.status);
-                        return next(true);
+                        return console.log('Error in request; status was: ' + request.status);
                   }
             };
             request.onerror = function() {
-                  console.log('There was an error in xmlHttpRequest!');
-                  return next(true);
+                  return console.log('There was an error in xmlHttpRequest!');
             };
             request.send();
       };
 
 
       Block.fn.blockSelector = function(next) {
+
+            loadMyBlocks(function(e, blocks) {
+                  if (e) {}
+                  else {
+                        searchBlocks = blocks;
+                  }
+            });
 
 
             let header = {
@@ -100,10 +125,18 @@
             // Search Form
             let searchContainer = document.createElement('div');
             let searchInput = document.createElement('input');
+            searchContainer.style.margin = 'auto';
+            searchContainer.style.width = '90%';
             searchInput.type = 'search';
             searchInput.className = 'form-control';
             searchInput.placeholder = 'Suche nach Blocktyp oder Blockname';
             searchInput.autocomplete = 'false';
+            searchInput.placeholder = 'Suche nach Blocktyp oder Blockname';
+            searchInput.autocomplete = 'false';
+            searchInput.onkeyup = function() {
+                  let value = searchInput.value;
+                  filterCloneList(value);
+            };
             searchContainer.appendChild(searchInput);
             div.appendChild(searchContainer);
 
@@ -151,6 +184,14 @@
                   button.style.background = 'transparent';
                   button.style.border = 'transparent';
             }
+
+            // Search Results for clone blocks
+            let cloneContainer = document.createElement('div');
+            cloneContainer.className = 'ibox-body';
+            cloneList = document.createElement('ul');
+            ul.className = 'timeline';
+            cloneContainer.appendChild(cloneList);
+            content_div.appendChild(cloneContainer);
 
             document.getElementsByTagName('body')[0].appendChild(div);
             $(div).backdrop();

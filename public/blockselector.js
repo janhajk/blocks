@@ -28,6 +28,9 @@
       };
 
       let filterCloneList = function(searchString) {
+            while (cloneList.firstChild) {
+                  cloneList.removeChild(cloneList.firstChild);
+            }
             searchString = searchString.trim().toLowerCase();
             if (searchString.length > 2) {
                   for (let i = 0; i < searchBlocks.length; i++) {

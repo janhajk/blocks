@@ -28,10 +28,10 @@
       };
 
       let filterCloneList = function(searchString) {
-            
+            searchString = searchString.trim().toLowerCase();
             if (searchString.length > 2) {
                   for (let i = 0; i < searchBlocks.length; i++) {
-                        if (searchBlocks[i].name.indexOf(searchString) > -1 || searchBlocks[i].tags.filter(function(item) {return typeof item == 'string' && item.indexOf(searchString) > -1;})) {
+                        if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.indexOf(searchString) > -1) || searchBlocks[i].tags.filter(function(item) {return typeof item == 'string' && item.indexOf(searchString) > -1;})) {
                               let item = document.createElement('li');
                               item.className = 'timeline-item';
                               let span = document.createElement('span');
@@ -189,7 +189,7 @@
             let cloneContainer = document.createElement('div');
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
-            ul.className = 'timeline';
+            cloneContainer.className = 'timeline';
             cloneContainer.appendChild(cloneList);
             content_div.appendChild(cloneContainer);
 

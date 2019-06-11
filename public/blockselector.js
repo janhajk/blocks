@@ -200,8 +200,7 @@
             cloneList = document.createElement('ul');
             cloneList.className = 'timeline scroller';
             cloneContainer.className = 'slimScrollDiv';
-            cloneContainer.style.position = 'relative';
-            $(cloneContainer).slimscroll({
+            $(cloneList).slimscroll({
                         height: $(this).attr('data-height') || '100%',
                         color: $(this).attr('data-color') || '#71808f',
                         railOpacity: '0.9',

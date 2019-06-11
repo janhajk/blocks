@@ -71,7 +71,7 @@
                         window.b = newBlock;
                         window.currentBlockId = newBlock._id;
                         window.b.load(function() {
-                              window.b.output(function() {
+                              window.b.output(window.b, function() {
                                     window.blockCollection.update();
                               });
                         });

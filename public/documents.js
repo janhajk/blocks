@@ -49,7 +49,7 @@
                               window.b = new Block(_id, document.getElementById('content'));
                               window.currentBlockId = _id;
                               window.b.load(function() {
-                                    window.b.output(function(){
+                                    window.b.output(window.b, function(){
                                     console.log('success!');
                                     });
                               });

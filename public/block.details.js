@@ -160,9 +160,9 @@
                         window.b = new Block(self.data.parent, self.contentDom);
                         window.currentBlockId = self.data.parent;
                         window.b.load(function() {
-                            window.b.output(function() {
+                            window.b.output(b, function() {
                                 console.log('success');
-                            })
+                            });
                         });
                     }
                 },

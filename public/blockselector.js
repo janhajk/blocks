@@ -42,6 +42,8 @@
                               link.onclick = function() {
                                     
                               };
+                              item.appendChild(span)
+                              item.appendChild(link);
                               cloneList.appendChild(item);
                         }
                   }

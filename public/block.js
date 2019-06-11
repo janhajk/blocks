@@ -30,8 +30,12 @@
                   console.log('There was an error in xmlHttpRequest!');
                   return next(e);
             };
-            if (params.method === 'POST') {}
-            request.send(params.method === 'POST' ? JSON.stringify(params.data) : null);
+            if (params.method === 'POST') {
+                  request.send(JSON.stringify(params.data));
+            }
+            else {
+                  request.send();
+            }
       };
 
 
@@ -115,7 +119,7 @@
                   loadById(self._id, function(e, block) {
                         self.data.children = [];
                         // set new data
-                        for (let i in block) {
+                        for (let i = 0; i < block.length; i++) {
                               self.data[i] = block[i];
                         }
                         // Render DOM of block
@@ -131,10 +135,9 @@
                               },
                               // when async finishes / all has loaded
                               function(e) {
-                                    return next(); // report block and children loaded
+                                    next(); // report block and children loaded
                               });
                   });
-
             };
             this.load = load;
 
@@ -196,8 +199,9 @@
                   self.dom.panel = panelDom;
             };
 
-            this.output = function output(next) {
-                  // remove old data
+            this.output = function output(block, next) {
+                  let self = block;
+                  // remove old dom
                   // if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
                   // Top Block get's appended to content of page
                   if (self._id === window.currentBlockId) {
@@ -216,11 +220,11 @@
                   // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
                   // can't use reverse() because it changes input array, so make a copy
                   let childrenReverse = [];
-                  for (let i in self.data.children) {
+                  for (let i = 0;i<self.data.children.length;i++) {
                         childrenReverse.unshift(self.data.children[i]);
                   }
-                  async.eachOfLimit(childrenReverse, 1, function(childId, key, callback) {
-                              output(function() {
+                  async.eachLimit(childrenReverse, 1, function(childBlock, callback) {
+                              output(childBlock, function() {
                                     callback(); // report child loaded
                               });
                         },

@@ -7,10 +7,8 @@
                   ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
                   ['color', ['color']],
                   ['para', ['ul', 'ol', 'paragraph']],
-                  ['table', ['table']],
-                  ['insert', ['link', 'picture'],
-                  ['codeview']]
-                  
+                  ['table', ['table', 'codeview']],
+                  ['insert', ['link', 'picture']]
             ]
       };
 

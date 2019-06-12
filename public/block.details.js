@@ -122,6 +122,7 @@
                 heading.innerHTML = detail.label;
                 let content = document.createElement('div');
                 content.className = 'font-13 text-lighter';
+                content.style.minHeight = '20px';
 
                 if (detail.content !== undefined) {
                     content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;

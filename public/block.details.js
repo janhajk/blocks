@@ -70,17 +70,18 @@
          * 
          * @param DOM element the html DOM element
          * @param Block block the block beeing edited
-         * @param array/string detail data content of the field
+         * @param object detail data content of the field (label, content, write, field, type)
          * 
          */
         let inplaceEditor = function(element, block, detail) {
-            let iArray = false;
+            if (detail.type === undefined) {
+                detail.type = 'string';
+            }
             element.innerHTML = '';
             let input = document.createElement('input');
             input.type = 'text';
-            if (Array.isArray(detail.content)) {
+            if (detail.type === 'array') {
                 input.value = detail.content.join(', ');
-                iArray = true;
             }
             else {
                 input.value = detail.content;
@@ -90,18 +91,18 @@
             input.onkeypress = function(key) {
                 if (key.keyCode === 13) { // Enter
                     let values = [];
-                    if (iArray) {
+                    if (detail.type === 'array') {
                         let aValues = this.value.split(',');
                         for (let i = 0; i < aValues.length; i++) {
                             values.push(aValues[i].trim());
                         }
                     }
                     else {
-                        values = [this.value];
+                        values.push(this.value);
                     }
                     block.saveValue(detail.field, values, function() {
                         element.innerHTML = values.join(', ');
-                        block.data[detail.field] = iArray ? values : values.join('');
+                        block.data[detail.field] = detail.type === 'string' ? values.join('') : values;
                     });
                 }
             };
@@ -160,7 +161,7 @@
                 { label: 'Inhalts-Typ', content: self.data.content_type },
                 { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
                 { label: 'Block-Typ', content: self.data.type },
-                { label: 'Tags', content: self.data.tags, write: true, field: 'tags' },
+                { label: 'Tags', content: self.data.tags, write: true, field: 'tags', type: 'array' },
                 { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
                 {
                     label: 'Übergeordneter Block',

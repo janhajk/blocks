@@ -44,7 +44,7 @@
        * 
        */
       const findBlockById = function _findBlockById(id, block) {
-            if (block.data._id === id) {
+            if (block._id === id) {
                   return block;
             }
             for (let i in block.data.children) {

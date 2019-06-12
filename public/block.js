@@ -293,7 +293,6 @@
                   if (self.data.type === 'clone') {
                         self.dom.body.innerHTML = '&lt;Kopie&gt;';
                         self.dom.body.style.color = 'gray';
-                        self.dom.panel.style.background = '#FFFFCC';
                   }
 
                   // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement

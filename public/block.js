@@ -251,7 +251,7 @@
             };
 
             this.parentDom = function() {
-                  if (this._id === window.currentBlockId) return this.content.dom;
+                  if (this._id === window.currentBlockId) return this.contentDom;
                   let parent = findBlockById(this.data.parent, this);
                   return parent.dom.row;
             };

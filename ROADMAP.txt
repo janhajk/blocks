@@ -28,7 +28,6 @@ Version 0.1 PROOF OF CONCEPT
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
 - BUG: Prevent infinite recursion when adding clone
-- BUG: Can't edit tags, if none are present
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
 - FEATURE: Show blocks with thumbnails in content window
@@ -44,6 +43,7 @@ Version 0.1 PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
++ BUG: Can't edit tags, if none are present
 + FEATURE: Create Block type: "Clone"
       + server side loading of block clone
       + GUI for New block type selection

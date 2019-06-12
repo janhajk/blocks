@@ -89,11 +89,11 @@
             input.focus();
             input.onkeypress = function(key) {
                 if (key.keyCode === 13) { // Enter
-                    let values;
+                    let values = [];
                     if (iArray) {
-                        values = this.value.split(',');
-                        for (let i = 0; i < values.length; i++) {
-                            values[i] = values[i].trim();
+                        let aValues = this.value.split(',');
+                        for (let i = 0; i < aValues.length; i++) {
+                            values.push(aValues[i].trim());
                         }
                     }
                     else {
@@ -101,7 +101,7 @@
                     }
                     block.saveValue(detail.field, values, function() {
                         element.innerHTML = values.join(', ');
-                        block.data[detail.field] = values;
+                        block.data[detail.field] = iArray ? values : values.join('');
                     });
                 }
             };

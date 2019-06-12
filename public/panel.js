@@ -225,7 +225,7 @@
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
-                  divBody.style.background = block.isClone?'plum':'white';
+                  divBody.style.background = block.isClone?'#FFFFCC':'white';
                   divBody.onclick = function() {
                         block.details(function(firstTab) {
                               $(firstTab).tab('show');

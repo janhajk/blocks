@@ -169,12 +169,28 @@
                                           }
                                     )
                               },
-                              // Load clone ancestor as child
+                              /**
+                               * Load clone ancestor as child
+                               * 
+                               * Clone-IDS: all the loaded clones need new ids. This is necessary, 
+                               * because clone content can be loaded multiple times in the same document.
+                               * We have to make sure, that it still gets placed at the correct
+                               * place.
+                               * 
+                               * Level: The first clone content has the same level as the owner. Because
+                               * the level is used for indention and the clone element has no visual
+                               * representation in the document but the clones are appended to it
+                               * 
+                               * Parent: The parent of the first element is changed to it's clone 
+                               * 
+                               * owner
+                               */
                               function(callback) {
                                     if (self.data.ancestor !== '') {
                                           // Load Add ancestor as new child
                                           self.data.children.push(new _Block(self.data.ancestor));
-                                          self.data.children[0].level = self.level + 1;
+                                          
+                                          self.data.children[0].level = self.level;
                                           // set parent as clone owner
                                           self.data.children[0].data.parent = self._id;
                                           self.data.children[0]._id = self._id + '_' + self.data.ancestor;

@@ -25,7 +25,7 @@
 
 
 
-            let menuPoints = [
+            const menuPoints = [
                   /**
                    * 
                    * Block edit content
@@ -225,6 +225,7 @@
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
+                  divBody.style.background = block.isClone?'lavender':'white';
                   divBody.onclick = function() {
                         block.details(function(firstTab) {
                               $(firstTab).tab('show');
@@ -264,7 +265,7 @@
        * 
        */
       var findBlockById = function _findBlockById(id, block) {
-            if (block.data._id === id) {
+            if (block._id === id) {
                   return block;
             }
             for (let i in block.data.children) {

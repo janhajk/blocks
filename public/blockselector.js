@@ -156,9 +156,9 @@
 
             // Item List
             let ul = document.createElement('ul');
-            // ul.className = ['timeline', 'scroller'].join(' ');
-            ul.className = ['timeline'].join(' ');
-            // ul.setAttribute('data-height', '320px');
+            ul.className = ['timeline', 'scroller'].join(' ');
+            // ul.className = ['timeline'].join(' ');
+            ul.setAttribute('data-height', '160px');
             content_div.appendChild(ul);
 
             // Items
@@ -200,7 +200,7 @@
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
             cloneList.className = 'timeline scroller';
-            cloneList.setAttribute('data-height', '320px');
+            cloneList.setAttribute('data-height', '160px');
             // $(cloneList).slimscroll({
             //             height: $(cloneList).attr('data-height') || '100%',
             //             color: $(cloneList).attr('data-color') || '#71808f',

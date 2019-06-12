@@ -124,7 +124,7 @@
                                     }
                                     new Block(props, function(newBlock) {
                                           block.append(newBlock, function() {
-                                                newBlock
+                                                newBlock;
                                           });
                                     });
                               });

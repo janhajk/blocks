@@ -8,7 +8,9 @@
                   ['color', ['color']],
                   ['para', ['ul', 'ol', 'paragraph']],
                   ['table', ['table']],
-                  ['insert', ['link', 'picture']]
+                  ['insert', ['link', 'picture'],
+                  ['codeview']]
+                  
             ]
       };
 

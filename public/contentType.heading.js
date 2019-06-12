@@ -4,7 +4,7 @@
 
 
       Block.fn.contentType.heading = {
-            content: function(block) {
+            contentOutput: function(block) {
                   return '<h' + (block.level + 2) + '>' + block.data.content + '</h' + (block.level + 2) + '>';
             }
 

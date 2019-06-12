@@ -290,8 +290,8 @@
                   }
                   // Add content to Block-DOM-Element
                   // check for content_type specific content injection
-                  if (self.contentType[self.data.content_type] !== undefined && self.contentType[self.data.content_type].content !== undefined) {
-                        self.dom.body.innerHTML = self.contentType[self.data.content_type].content(self);
+                  if (self.contentType[self.data.content_type] !== undefined && self.contentType[self.data.content_type].contentOutput !== undefined) {
+                        self.dom.body.innerHTML = self.contentType[self.data.content_type].contentOutput(self);
                   }
                   else {
                         self.dom.body.innerHTML = self.data.content;

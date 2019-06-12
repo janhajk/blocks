@@ -39,7 +39,25 @@
       };
 
 
-      var Block = function _Block(_id, domParent, next) {
+      /**
+       * Goes through a block and all of it's children and returns the block that matches the id
+       * 
+       */
+      const findBlockById = function _findBlockById(id, block) {
+            if (block.data._id === id) {
+                  return block;
+            }
+            for (let i in block.data.children) {
+                  let curBlock = _findBlockById(id, block.data.children[i]);
+                  if (curBlock) {
+                        return curBlock;
+                  }
+            }
+            return false;
+      };
+
+
+      var Block = function _Block(_id, next) {
             this._id = (typeof _id === 'string') ? _id : '';
             this.data = {};
             this.data.creator = {};
@@ -59,7 +77,6 @@
 
             // the whole dom element, rendered
             this.dom = {};
-            this.domParent = domParent;
             this.contentDom = document.getElementById('content');
             var self = this;
 
@@ -67,7 +84,7 @@
             // Create new Document link
             let linkNewDocument = document.getElementById('linkNewDocument');
             linkNewDocument.onclick = function() {
-                  new Block({ content_type: 'document', content: 'Neues Dokument' }, document.getElementById('content'), function(newBlock) {
+                  new Block({ content_type: 'document', content: 'Neues Dokument' }, function(newBlock) {
                         window.b = newBlock;
                         window.currentBlockId = newBlock._id;
                         window.b.load(function() {
@@ -204,24 +221,18 @@
              */
             this.output = function output(block, next) {
                   let self = block;
-                  // remove old dom
-                  // if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
                   // Render DOM of block
                   self.render();
-                  // Top Block get's appended to content of page
+                  // if top block, then clear content area
                   if (self._id === window.currentBlockId) {
                         while (self.contentDom.firstChild) {
                               self.contentDom.removeChild(self.contentDom.firstChild);
                         }
-                        self.contentDom.appendChild(self.dom.row);
                   }
-                  else {
-                        // Blocks are inserted from bottom to top; that's why they are processed in reverse order
-                        // ToDo: This ends up to be very slow; must implement way to order
-                        self.domParent.insertAdjacentElement('afterend', self.dom.row);
-                  }
+                  self.parentDom().insertAdjacentElement('afterend', self.dom.row);
                   // Add content to Block-DOM-Element
                   self.dom.body.innerHTML = self.data.content;
+
                   // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
                   // can't use reverse() because it changes input array, so make a copy
                   let childrenReverse = [];
@@ -237,6 +248,12 @@
                         function(e) {
                               return next(); // report block and children loaded
                         });
+            };
+
+            this.parentDom = function() {
+                  if (this._id === window.currentBlockId) return this.content.dom;
+                  let parent = findBlockById(this.data.parent, this);
+                  return parent.dom.row;
             };
 
 

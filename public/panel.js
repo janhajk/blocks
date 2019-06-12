@@ -259,7 +259,10 @@
 
       };
 
-
+      /**
+       * Goes through a block and all of it's children and returns the block that matches the id
+       * 
+       */
       var findBlockById = function _findBlockById(id, block) {
             if (block.data._id === id) {
                   return block;

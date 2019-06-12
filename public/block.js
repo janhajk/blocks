@@ -290,7 +290,7 @@
                   }
                   // Add content to Block-DOM-Element
                   self.dom.body.innerHTML = self.data.content;
-                  if (self.type === 'clone') {
+                  if (self.data.type === 'clone') {
                         self.dom.body.innerHTML = 'Clone';
                         self.dom.body.style.color = 'gray';
                   }

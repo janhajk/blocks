@@ -173,6 +173,9 @@
                                                 callback();
                                           }, true);
                                     }
+                                    else {
+                                          callback();
+                                    }
                               }
                         ], function(e) {
                               next();

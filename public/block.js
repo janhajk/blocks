@@ -142,6 +142,7 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
+                        self.isClone = isClone;
                         async.parallel([
                               // Go trough all children and load them
                               // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
@@ -150,9 +151,6 @@
                                           function(childId, key, callback) {
                                                 self.data.children[key] = new _Block(childId);
                                                 self.data.children[key].level = self.level + 1;
-                                                if (isClone) {
-                                                      self.data.children[key].isClone = true;
-                                                }
                                                 self.data.children[key].load(function() {
                                                       callback(); // report child loaded
                                                 }, isClone);
@@ -162,13 +160,12 @@
                                                 callback(); // report block and children loaded
                                           }
                                     )
-                              },
+                              }/*,
                               // Load clone ancestor as child
                               function(callback) {
                                     if (self.ancestor !== '') {
                                           self.data.children.push(new _Block(self.ancestor));
                                           self.data.children[0].level = self.level + 1;
-                                          self.data.children[0].isClone = true;
                                           self.data.children[0].load(function() {
                                                 callback();
                                           }, true);
@@ -176,7 +173,7 @@
                                     else {
                                           callback();
                                     }
-                              }
+                              }*/
                         ], function(e) {
                               next();
                         });

@@ -156,6 +156,7 @@
 
             // Item List
             let ul = document.createElement('ul');
+            // ul.className = ['timeline', 'scroller'].join(' ');
             ul.className = ['timeline', 'scroller'].join(' ');
             ul.setAttribute('data-height', '320px');
             content_div.appendChild(ul);

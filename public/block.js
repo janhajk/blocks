@@ -291,7 +291,7 @@
                   // Add content to Block-DOM-Element
                   self.dom.body.innerHTML = self.data.content;
                   if (self.data.type === 'clone') {
-                        self.dom.body.innerHTML = '<Kopie>';
+                        self.dom.body.innerHTML = '&lt;Kopie&gt;';
                         self.dom.body.style.color = 'gray';
                         self.dom.panel.style.background = '#FFFFCC';
                   }

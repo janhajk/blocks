@@ -11,6 +11,7 @@ Ressources:
 - Icons Themefy: https://themify.me/themify-icons
 - pdf: pdfkit.org
 - automation: https://gruntjs.com
+- vanilla: https://plainjs.com
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 

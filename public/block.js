@@ -87,7 +87,8 @@
             this.create = function(properties, next) {
                   req({
                               data: properties,
-                              url: '/block/add'
+                              url: '/block/add',
+                              method: 'POST'
                         },
                         function(e, newBlock) {
                               return next(e, newBlock);
@@ -122,8 +123,6 @@
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
-                        // Render DOM of block
-                        self.render();
                         // Go trough all children and load them
                         // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
                         async.eachOf(self.data.children, function(childId, key, callback) {
@@ -207,6 +206,8 @@
                   let self = block;
                   // remove old dom
                   // if (self.dom.row !== undefined) self.contentDom.removeChild(self.dom.row);
+                  // Render DOM of block
+                  self.render();
                   // Top Block get's appended to content of page
                   if (self._id === window.currentBlockId) {
                         while (self.contentDom.firstChild) {
@@ -239,7 +240,9 @@
             };
 
 
-
+            /**
+             * returns block of last child of a block
+             */
             var findLastNChild = function _findLastNChild(block) {
                   let childrenCount = block.data.children.length;
                   if (childrenCount === 0) {

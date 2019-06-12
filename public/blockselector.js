@@ -200,6 +200,7 @@
             cloneContainer.className = 'ibox-body';
             cloneList = document.createElement('ul');
             cloneList.className = 'timeline scroller';
+            cloneList.setAttribute('data-height', '320px');
             // $(cloneList).slimscroll({
             //             height: $(cloneList).attr('data-height') || '100%',
             //             color: $(cloneList).attr('data-color') || '#71808f',

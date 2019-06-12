@@ -28,6 +28,7 @@ Version 0.1 PROOF OF CONCEPT
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
 - BUG: Prevent infinite recursion when adding clone
+- BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
 - FEATURE: Show blocks with thumbnails in content window
@@ -36,6 +37,7 @@ Version 0.1 PROOF OF CONCEPT
 - FEATURE: revisions
     - change in block alters whole line up the tree
 - FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
+- FEATURE: Heading formating
 - O: when adding block, jump directly to edit mode
 - O: order Documents sidebar by change date
 - CLEANUP: Routes to seperate files

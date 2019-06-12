@@ -191,7 +191,7 @@
                                     if (self.data.ancestor !== '') {
                                           // Load Add ancestor as new child
                                           self.data.children.push(new _Block(self.data.ancestor));
-                                          
+
                                           self.data.children[0].level = self.level;
                                           // set parent as clone owner
                                           self.data.children[0].data.parent = self._id;
@@ -289,7 +289,13 @@
                         self.parentDom().insertAdjacentElement('afterend', self.dom.row);
                   }
                   // Add content to Block-DOM-Element
-                  self.dom.body.innerHTML = self.data.content;
+                  // check for content_type specific content injection
+                  if (self.contentType[self.data.content_type] !== undefined && self.contentType[self.data.content_type].content !== undefined) {
+                        self.dom.body.innerHTML = self.contentType[self.data.content_type].content(self);
+                  }
+                  else {
+                        self.dom.body.innerHTML = self.data.content;
+                  }
                   if (self.data.type === 'clone') {
                         self.dom.body.innerHTML = '&lt;Kopie&gt;';
                         self.dom.body.style.color = 'gray';
@@ -352,6 +358,8 @@
       };
 
       Block.fn = Block.prototype = {
+
+            contentType: {}
 
       };
 

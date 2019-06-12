@@ -166,6 +166,7 @@
                                     if (self.data.ancestor !== '') {
                                           self.data.children.push(new _Block(self.data.ancestor));
                                           self.data.children[0].level = self.level + 1;
+                                          self.data.children[0].data.parent = self._id;
                                           self.data.children[0].load(function() {
                                                 callback();
                                           }, true);

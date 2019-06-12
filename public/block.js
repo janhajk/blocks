@@ -160,11 +160,11 @@
                                                 callback(); // report block and children loaded
                                           }
                                     )
-                              }/*,
+                              },
                               // Load clone ancestor as child
                               function(callback) {
-                                    if (self.ancestor !== '') {
-                                          self.data.children.push(new _Block(self.ancestor));
+                                    if (self.data.ancestor !== '') {
+                                          self.data.children.push(new _Block(self.data.ancestor));
                                           self.data.children[0].level = self.level + 1;
                                           self.data.children[0].load(function() {
                                                 callback();
@@ -173,7 +173,7 @@
                                     else {
                                           callback();
                                     }
-                              }*/
+                              }
                         ], function(e) {
                               next();
                         });

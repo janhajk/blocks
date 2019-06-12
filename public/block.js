@@ -228,8 +228,11 @@
                         while (self.contentDom.firstChild) {
                               self.contentDom.removeChild(self.contentDom.firstChild);
                         }
+                        self.parentDom().appendChild(self.dom.row);
                   }
-                  self.parentDom().insertAdjacentElement('afterend', self.dom.row);
+                  else {
+                        self.parentDom().insertAdjacentElement('afterend', self.dom.row);
+                  }
                   // Add content to Block-DOM-Element
                   self.dom.body.innerHTML = self.data.content;
 

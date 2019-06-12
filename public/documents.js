@@ -46,7 +46,7 @@
                         a.href = 'javascript:;';
                         let _id = blocks[i]._id;
                         a.onclick = function() {
-                              window.b = new Block(_id, document.getElementById('content'));
+                              window.b = new Block(_id);
                               window.currentBlockId = _id;
                               window.b.load(function() {
                                     window.b.output(window.b, function(){

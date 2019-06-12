@@ -157,7 +157,7 @@
                     label: 'Übergeordneter Block',
                     content: self.data.parent === '' ? 'keiner' : self.data.parent,
                     action: function() {
-                        window.b = new Block(self.data.parent, self.contentDom);
+                        window.b = new Block(self.data.parent);
                         window.currentBlockId = self.data.parent;
                         window.b.load(function() {
                             window.b.output(b, function() {

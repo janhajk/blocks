@@ -71,7 +71,7 @@
                         title: 'Block öffnen',
                         icon: 'fullscreen',
                         action: function() {
-                              window.b = new Block(block._id, block.contentDom);
+                              window.b = new Block(block._id);
                               window.currentBlockId = block._id;
                               window.b.load(function() {
                                     window.b.output(window.b, function() {
@@ -91,7 +91,7 @@
                         icon: 'fullscreen',
                         action: function() {
                               if (block.data.parent !== '') {
-                                    window.b = new Block(block.data.parent, block.contentDom);
+                                    window.b = new Block(block.data.parent);
                                     window.currentBlockId = block.data.parent;
                                     window.b.load(function() {
                                           window.b.output(window.b, function() {
@@ -122,7 +122,7 @@
                                     if (type === 'clone') {
                                           props.type = 'clone';
                                     }
-                                    new Block(props, block.dom.row, function(newBlock) {
+                                    new Block(props, function(newBlock) {
                                           block.append(newBlock, function() {
                                                 newBlock
                                           });

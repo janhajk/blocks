@@ -252,7 +252,7 @@
 
             this.parentDom = function() {
                   if (this._id === window.currentBlockId) return this.contentDom;
-                  let parent = findBlockById(this.data.parent, this);
+                  let parent = findBlockById(this.data.parent, window.b);
                   return parent.dom.row;
             };
 

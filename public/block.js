@@ -60,6 +60,7 @@
       var Block = function _Block(_id, next) {
             this._id = (typeof _id === 'string') ? _id : '';
             this.data = {};
+            this.data._id = (typeof _id === 'string') ? _id : '';
             this.data.creator = {};
             this.data.owner = {};
             this.data.timestamp = 0;
@@ -136,8 +137,11 @@
              */
             var load = function(next, isClone) {
                   if (isClone === undefined) isClone = false;
-                  loadById(self._id, function(e, block) {
+                  loadById(self.data._id, function(e, block) {
                         self.data.children = [];
+                        if (isClone) {
+                              delete block.parent;
+                        }
                         // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
@@ -151,6 +155,10 @@
                                           function(childId, key, callback) {
                                                 self.data.children[key] = new _Block(childId);
                                                 self.data.children[key].level = self.level + 1;
+                                                if (isClone) {
+                                                      self.data.children[key].data.parent = self._id;
+                                                      self.data.children[key]._id = self._id + '_' + childId;
+                                                }
                                                 self.data.children[key].load(function() {
                                                       callback(); // report child loaded
                                                 }, isClone);
@@ -164,9 +172,13 @@
                               // Load clone ancestor as child
                               function(callback) {
                                     if (self.data.ancestor !== '') {
+                                          // Load Add ancestor as new child
                                           self.data.children.push(new _Block(self.data.ancestor));
                                           self.data.children[0].level = self.level + 1;
+                                          // set parent as clone owner
                                           self.data.children[0].data.parent = self._id;
+                                          self.data.children[0]._id = self._id + '_' + self.data.ancestor;
+                                          // load 
                                           self.data.children[0].load(function() {
                                                 callback();
                                           }, true);
@@ -281,6 +293,7 @@
             this.parentDom = function() {
                   if (this._id === window.currentBlockId) return this.contentDom;
                   let parent = findBlockById(this.data.parent, window.b);
+                  if (!parent) return console.log('The Following Block has no loaded parent'), console.log(this);
                   return parent.dom.row;
             };
 

@@ -66,7 +66,7 @@
             this.data.type = '';
             this.data.parent = '';
             this.data.children = [];
-            this.data.ancestor = {};
+            this.data.ancestor = '';
             this.data.content = '';
             this.data.content_type = '';
             this.data.properties = [];
@@ -74,6 +74,7 @@
             this.data.tags = [];
             this.data.language = 0;
             this.level = 0;
+            this.isClone = false;
 
             // the whole dom element, rendered
             this.dom = {};
@@ -133,26 +134,49 @@
              *
              * TODO: load 
              */
-            var load = function(next) {
+            var load = function(next, isClone) {
+                  if (isClone === undefined) isClone = false;
                   loadById(self._id, function(e, block) {
                         self.data.children = [];
                         // set new data
                         for (let i in block) {
                               self.data[i] = block[i];
                         }
-                        // Go trough all children and load them
-                        // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
-                        async.eachOf(self.data.children, function(childId, key, callback) {
-                                    self.data.children[key] = new _Block(childId, self.dom.row);
-                                    self.data.children[key].level = self.level + 1;
-                                    self.data.children[key].load(function() {
-                                          callback(); // report child loaded
-                                    });
+                        async.parallel([
+                              // Go trough all children and load them
+                              // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
+                              function(callback) {
+                                    async.eachOf(self.data.children,
+                                          function(childId, key, callback) {
+                                                self.data.children[key] = new _Block(childId);
+                                                self.data.children[key].level = self.level + 1;
+                                                if (isClone) {
+                                                      self.data.children[key].isClone = true;
+                                                }
+                                                self.data.children[key].load(function() {
+                                                      callback(); // report child loaded
+                                                }, isClone);
+                                          },
+                                          // when async finishes / all has loaded
+                                          function(e) {
+                                                callback(); // report block and children loaded
+                                          }
+                                    )
                               },
-                              // when async finishes / all has loaded
-                              function(e) {
-                                    next(); // report block and children loaded
-                              });
+                              // Load clone ancestor as child
+                              function(callback) {
+                                    if (self.ancestor !== '') {
+                                          self.data.children.push(new _Block(self.ancestor));
+                                          self.data.children[0].level = self.level + 1;
+                                          self.data.children[0].isClone = true;
+                                          self.data.children[0].load(function() {
+                                                callback();
+                                          }, true);
+                                    }
+                              }
+                        ], function(e) {
+                              next();
+                        });
                   });
             };
             this.load = load;

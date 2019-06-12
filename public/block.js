@@ -128,12 +128,13 @@
             this.loadById = loadById;
 
 
-            /*
+            /**
              * Load block data
-             
+             * 
              * this is recursive as it loads all the children within
+             * loads clones
              *
-             * TODO: load 
+             * 
              */
             var load = function(next, isClone) {
                   if (isClone === undefined) isClone = false;
@@ -155,6 +156,7 @@
                                           function(childId, key, callback) {
                                                 self.data.children[key] = new _Block(childId);
                                                 self.data.children[key].level = self.level + 1;
+                                                // If clone, we need to use new assigned parent and _id
                                                 if (isClone) {
                                                       self.data.children[key].data.parent = self._id;
                                                       self.data.children[key]._id = self._id + '_' + childId;
@@ -288,6 +290,10 @@
                   }
                   // Add content to Block-DOM-Element
                   self.dom.body.innerHTML = self.data.content;
+                  if (self.type === 'clone') {
+                        self.dom.body.innerHTML = 'Clone';
+                        self.dom.body.style.color = 'gray';
+                  }
 
                   // Children must be reversed in order, because they are added from bottom to top through isertAdjacentElement
                   // can't use reverse() because it changes input array, so make a copy

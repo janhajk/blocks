@@ -222,10 +222,14 @@
                   divBody.className = 'ibox-body';
                   divBody.style.padding = '5px 30px 5px';
                   divBody.style.paddingLeft = (block.level * 20 + 30) + 'px';
+                  
+                  // Make none selectable
                   divBody.style.webkitUserSelect = 'none';
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
+                  
+                  // Oben block properties when clicking
                   divBody.onclick = function() {
                         block.details(function(firstTab) {
                               $(firstTab).tab('show');
@@ -234,15 +238,6 @@
 
 
                   };
-
-                  // Deprecated: if div has maximum height, this makes it scrollable
-                  // let divSlimScroll = document.createElement('div');
-                  // divSlimScroll.className = 'slimScrollDiv';
-                  // divSlimScroll.style.position = 'relative';
-                  // divSlimScroll.style.overflow = 'hidden';
-                  // divSlimScroll.style.width = 'auto';
-                  // divSlimScroll.style.height = '470px';
-                  // divBody.appendChild(divSlimScroll);
 
                   div.appendChild(panelHead);
                   div.appendChild(divBody);

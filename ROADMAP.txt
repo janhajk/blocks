@@ -27,6 +27,8 @@ Version 0.1 PROOF OF CONCEPT
     + change loading behaviour that document is loaded first, then rendered
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
+- BUG: Prevent infinite recursion when adding clone
+- BUG: Can't edit tags, if none are present
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
 - FEATURE: Show blocks with thumbnails in content window

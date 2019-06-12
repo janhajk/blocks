@@ -27,9 +27,6 @@ Version 0.1 PROOF OF CONCEPT
     + change loading behaviour that document is loaded first, then rendered
 - BUG: if block is deleted also delete children
 - BUG: New block has wrong level (Level is always 0)
-- FEATURE: Create Block type: "Clone"
-      - server side loading of block clone
-      + GUI for New block type selection
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
 - FEATURE: Show blocks with thumbnails in content window
@@ -45,6 +42,9 @@ Version 0.1 PROOF OF CONCEPT
 - CLEANUP: Proper DELETE, PUT, UPDATE REST API
 - CLEANUP: Split CSS Files in multiple files
    
++ FEATURE: Create Block type: "Clone"
+      + server side loading of block clone
+      + GUI for New block type selection
 + create bugtracker
 + FEATURE: Button New Document creates new Document
 + FEATURE: create editor to add basic content

@@ -65,6 +65,14 @@
         contentContainer.firstChild.appendChild(scroller);
 
 
+        /**
+         * Edit a text field in place. Saves after pressing <enter>
+         * 
+         * @param DOM element the html DOM element
+         * @param Block block the block beeing edited
+         * @param array/string detail data content of the field
+         * 
+         */
         let inplaceEditor = function(element, block, detail) {
             let iArray = false;
             element.innerHTML = '';
@@ -135,7 +143,7 @@
                     content.onclick = detail.action;
                 }
                 body.appendChild(heading);
-                body.appendChild(content)
+                body.appendChild(content);
                 media.appendChild(body);
                 return media;
             };
@@ -160,7 +168,7 @@
                         window.b = new Block(self.data.parent);
                         window.currentBlockId = self.data.parent;
                         window.b.load(function() {
-                            window.b.output(b, function() {
+                            window.b.output(window.b, function() {
                                 console.log('success');
                             });
                         });

@@ -215,6 +215,7 @@
                   div.className = 'ibox ibox-fullheight';
                   div.style.height = 'calc(100% - 5px)';
                   div.style.marginBottom = '5px';
+                  div.style.background = block.isClone?'#FFFFCC':'white';
 
                   // Body div with content in innerHTML
                   let divBody = document.createElement('div');
@@ -225,7 +226,6 @@
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
-                  divBody.style.background = block.isClone?'#FFFFCC':'white';
                   divBody.onclick = function() {
                         block.details(function(firstTab) {
                               $(firstTab).tab('show');

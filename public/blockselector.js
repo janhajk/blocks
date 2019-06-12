@@ -27,7 +27,7 @@
             }
       };
 
-      let filterCloneList = function(searchString) {
+      let filterCloneList = function(searchString, next) {
             while (cloneList.firstChild) {
                   cloneList.removeChild(cloneList.firstChild);
             }
@@ -47,7 +47,7 @@
                               link.href = 'javascript:;';
                               link.innerHTML = searchBlocks[i].name;
                               link.onclick = function() {
-
+                                    next('clone', searchBlocks[i]._id);
                               };
                               item.appendChild(span)
                               item.appendChild(link);
@@ -144,7 +144,7 @@
             searchInput.autocomplete = 'false';
             searchInput.onkeyup = function() {
                   let value = searchInput.value;
-                  filterCloneList(value);
+                  filterCloneList(value, next);
             };
             searchContainer.appendChild(searchInput);
             div.appendChild(searchContainer);

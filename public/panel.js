@@ -111,11 +111,17 @@
                         title: 'neuen Sub-Block anhängen',
                         icon: 'angle-double-down',
                         action: function() {
-                              block.blockSelector(function(type) {
+                              block.blockSelector(function(type, ancestor) {
                                     let props = {
                                           parent: block._id,
                                           content_type: type
                                     };
+                                    if (ancestor !== undefined) {
+                                          props.ancestor = ancestor;
+                                    }
+                                    if (type === 'clone') {
+                                          props.type = 'clone';
+                                    }
                                     new Block(props, block.dom.row, function(newBlock) {
                                           block.append(newBlock, function() {
                                                 newBlock

@@ -63,6 +63,7 @@
                                     panel.removeChild(buttonSave);
                                     panel.removeChild(buttonCancel);
                                     $(block.dom.body).summernote('destroy');
+                                    block.dom.body.innerHTML = block.formatedContent();
                               };
                               panel.appendChild(buttonCancel);
 

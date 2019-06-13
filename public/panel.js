@@ -49,7 +49,7 @@
                                     $(block.dom.body).summernote('destroy');
                                     block.content = block.dom.body.innerHTML;
                                     block.saveContent(function() {
-
+                                          block.dom.body.innerHTML = block.formatedContent();
                                     });
                               };
                               panel.appendChild(buttonSave);

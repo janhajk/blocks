@@ -289,15 +289,8 @@
                         self.parentDom().insertAdjacentElement('afterend', self.dom.row);
                   }
                   // Add content to Block-DOM-Element
-                  // check for content_type specific content injection
-                  if (self.contentType[self.data.content_type] !== undefined && self.contentType[self.data.content_type].contentOutput !== undefined) {
-                        self.dom.body.innerHTML = self.contentType[self.data.content_type].contentOutput(self);
-                  }
-                  else {
-                        self.dom.body.innerHTML = self.data.content;
-                  }
+                  self.dom.body.innerHTML = self.formatedContent();
                   if (self.data.type === 'clone') {
-                        self.dom.body.innerHTML = '&lt;Kopie&gt;';
                         self.dom.body.style.color = 'gray';
                   }
 
@@ -316,6 +309,21 @@
                         function(e) {
                               return next(); // report block and children loaded
                         });
+            };
+
+            this.formatedContent = function() {
+                  let content = '';
+                  // check for content_type specific content injection
+                  if (self.contentType[self.data.content_type] !== undefined && self.contentType[self.data.content_type].contentOutput !== undefined) {
+                        content = self.contentType[self.data.content_type].contentOutput(self);
+                  }
+                  else {
+                        content = self.data.content;
+                  }
+                  if (self.data.type === 'clone') {
+                        content = '&lt;Kopie&gt;';
+                  }
+                  return content;
             };
 
             this.parentDom = function() {

@@ -36,8 +36,9 @@
                         action: function() {
                               let panel = block.dom.panel;
                               let props = summernoteProps;
-                              props.placeholder = block.data.content;
-                              $(block.dom.body).summernote(summernoteProps);
+                              props.code = block.data.content;
+                              // block.dom.body.innerHTML = '';
+                              $(block.dom.body).summernote(props);
                               
                               // Button Save
                               let buttonSave = document.createElement('button');

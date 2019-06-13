@@ -35,11 +35,8 @@
                         icon: 'pencil',
                         action: function() {
                               let panel = block.dom.panel;
-                              let props = summernoteProps;
-                              props.code = block.data.content;
-                              block.dom.body.innerHTML = '';
-                              $(block.dom.body).summernote(props);
-                              $(block.dom.body).summernote('editor.insertText', block.data.content)
+                              block.dom.body.innerHTML = block.data.content;
+                              $(block.dom.body).summernote(summernoteProps);
                               
                               // Button Save
                               let buttonSave = document.createElement('button');

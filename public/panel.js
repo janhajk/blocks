@@ -35,7 +35,11 @@
                         icon: 'pencil',
                         action: function() {
                               let panel = block.dom.panel;
+                              let props = summernoteProps;
+                              props.code = block.data.content;
                               $(block.dom.body).summernote(summernoteProps);
+                              
+                              // Button Save
                               let buttonSave = document.createElement('button');
                               buttonSave.className = 'btn btn-primary';
                               buttonSave.setAttribute('type', 'button');
@@ -50,6 +54,8 @@
                                     });
                               };
                               panel.appendChild(buttonSave);
+                              
+                              // Button Cancel
                               let buttonCancel = document.createElement('button');
                               buttonCancel.className = 'btn btn-primary';
                               buttonCancel.setAttribute('type', 'button');
@@ -75,7 +81,7 @@
                               window.currentBlockId = block._id;
                               window.b.load(function() {
                                     window.b.output(window.b, function() {
-                                          console.log('success, fallowing your block:');
+                                          console.log('success, following your block:');
                                     });
                               });
                         }

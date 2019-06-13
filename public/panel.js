@@ -39,6 +39,7 @@
                               props.code = block.data.content;
                               block.dom.body.innerHTML = '';
                               $(block.dom.body).summernote(props);
+                              $(block.dom.body).summernote('insertText', block.data.content)
                               
                               // Button Save
                               let buttonSave = document.createElement('button');

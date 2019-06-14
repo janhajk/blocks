@@ -35,8 +35,9 @@
                         icon: 'pencil',
                         action: function() {
                               let panel = block.dom.panel;
-                              block.dom.body.innerHTML = block.data.content;
-                              $(block.dom.body).summernote(summernoteProps);
+                              let body = block.dom.body;
+                              body.innerHTML = block.data.content;
+                              $(body).summernote(summernoteProps);
                               
                               // Button Save
                               let buttonSave = document.createElement('button');
@@ -46,10 +47,10 @@
                               buttonSave.onclick = function() {
                                     panel.removeChild(buttonSave);
                                     panel.removeChild(buttonCancel);
-                                    $(block.dom.body).summernote('destroy');
-                                    block.data.content = block.dom.body.innerHTML;
+                                    $(body).summernote('destroy');
+                                    block.data.content = body.innerHTML;
                                     block.saveContent(function() {
-                                          block.dom.body.innerHTML = block.formatedContent();
+                                          body.innerHTML = block.formatedContent();
                                     });
                               };
                               panel.appendChild(buttonSave);

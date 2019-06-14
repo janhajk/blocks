@@ -231,7 +231,7 @@
 
 
             var saveContent = function(next) {
-                  saveValue('content', self.content, function(e, res) {
+                  saveValue('content', self.data.content, function(e, res) {
                         next(e, res);
                   });
             };

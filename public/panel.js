@@ -47,7 +47,7 @@
                                     panel.removeChild(buttonSave);
                                     panel.removeChild(buttonCancel);
                                     $(block.dom.body).summernote('destroy');
-                                    block.content = block.dom.body.innerHTML;
+                                    block.data.content = block.dom.body.innerHTML;
                                     block.saveContent(function() {
                                           block.dom.body.innerHTML = block.formatedContent();
                                     });

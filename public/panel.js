@@ -78,10 +78,10 @@
                         title: 'Block öffnen',
                         icon: 'fullscreen',
                         action: function() {
-                              window.b = new Block(block._id);
+                              window.$B = new Block(block._id);
                               window.currentBlockId = block._id;
-                              window.b.load(function() {
-                                    window.b.output(window.b, function() {
+                              window.$B.load(function() {
+                                    window.$B.output(window.$B, function() {
                                           console.log('success, following your block:');
                                     });
                               });
@@ -98,10 +98,10 @@
                         icon: 'fullscreen',
                         action: function() {
                               if (block.data.parent !== '') {
-                                    window.b = new Block(block.data.parent);
+                                    window.$B = new Block(block.data.parent);
                                     window.currentBlockId = block.data.parent;
-                                    window.b.load(function() {
-                                          window.b.output(window.b, function() {
+                                    window.$B.load(function() {
+                                          window.$B.output(window.$B, function() {
                                                 console.log('success!');
                                           });
                                     });
@@ -151,7 +151,7 @@
                         icon: 'trash',
                         action: function() {
                               block.remove(function() {
-                                    let parentBlock = findBlockById(block.data.parent, window.b);
+                                    let parentBlock = findBlockById(block.data.parent, window.$B);
                                     for (let i in parentBlock.data.children) {
                                           if (parentBlock.data.children[i].data._id === block.data._id) {
                                                 parentBlock.data.children.splice(i, 1);

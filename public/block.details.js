@@ -167,10 +167,10 @@
                     label: 'Übergeordneter Block',
                     content: self.data.parent === '' ? 'keiner' : self.data.parent,
                     action: function() {
-                        window.b = new Block(self.data.parent);
+                        window.$B = new Block(self.data.parent);
                         window.currentBlockId = self.data.parent;
-                        window.b.load(function() {
-                            window.b.output(window.b, function() {
+                        window.$B.load(function() {
+                            window.$B.output(window.$B, function() {
                                 console.log('success');
                             });
                         });

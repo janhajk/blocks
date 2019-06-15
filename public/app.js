@@ -15,7 +15,7 @@
             
         });
     });
-    window.b = b;
+    window.$B = b;
     
     
     var collection = new Collection('mydocuments');

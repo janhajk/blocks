@@ -47,7 +47,7 @@
             if (block._id === id) {
                   return block;
             }
-            for (let i in block.data.children) {
+            for (let i = 0; i < block.data.children.length; i++) {
                   let curBlock = _findBlockById(id, block.data.children[i]);
                   if (curBlock) {
                         return curBlock;
@@ -58,39 +58,42 @@
 
 
       var Block = function _Block(_id, next) {
-            this._id = (typeof _id === 'string') ? _id : '';
-            this.data = {};
-            this.data._id = (typeof _id === 'string') ? _id : '';
-            this.data.creator = {};
-            this.data.owner = {};
-            this.data.timestamp = 0;
-            this.data.type = '';
-            this.data.parent = '';
-            this.data.children = [];
-            this.data.ancestor = '';
-            this.data.content = '';
-            this.data.content_type = '';
-            this.data.properties = [];
-            this.data.weight = 0;
-            this.data.tags = [];
-            this.data.language = 0;
+            this._id = (typeof _id === 'string') ? _id : ''; // this id may be changed i.e clones will get a new _id during runtime
+            // set default data
+            this.data = {
+                  _id: (typeof _id === 'string') ? _id : '', // original _id; unchangable
+                  creator: {},
+                  owner: {},
+                  timestamp: 0,
+                  type: '',
+                  parent: '',
+                  children: [],
+                  ancestor: '',
+                  content: '',
+                  content_type: '',
+                  properties: [],
+                  weight: 0,
+                  tags: [],
+                  language: 0
+            };
             this.level = 0;
             this.isClone = false;
 
             // the whole dom element, rendered
             this.dom = {};
+            // the dom element, where the document is rendered into
             this.contentDom = document.getElementById('content');
-            var self = this;
 
+            var self = this;
 
             // Create new Document link
             let linkNewDocument = document.getElementById('linkNewDocument');
             linkNewDocument.onclick = function() {
                   new Block({ content_type: 'document', content: 'Neues Dokument' }, function(newBlock) {
-                        window.b = newBlock;
+                        window.$B = newBlock;
                         window.currentBlockId = newBlock._id;
                         window.b.load(function() {
-                              window.b.output(window.b, function() {
+                              window.$B.output(window.$B, function() {
                                     window.blockCollection.update();
                               });
                         });
@@ -138,19 +141,24 @@
              */
             var load = function(next, isClone) {
                   if (isClone === undefined) isClone = false;
+                  // using data._id as original _id
                   loadById(self.data._id, function(e, block) {
                         self.data.children = [];
+                        // Clones will be assigned new parent
                         if (isClone) {
                               delete block.parent;
                         }
                         // set new data
                         for (let i in block) {
-                              self.data[i] = block[i];
+                              if (block.hasOwnProperty(i)) {
+                                    self.data[i] = block[i];
+                              }
                         }
                         self.isClone = isClone;
                         async.parallel([
-                              // Go trough all children and load them
-                              // Limit 1/serial loading is important, or the order can get messed up, because on might load faster than the other
+                              /**
+                               * Go trough all children and load them
+                               */
                               function(callback) {
                                     async.eachOf(self.data.children,
                                           function(childId, key, callback) {
@@ -158,7 +166,9 @@
                                                 self.data.children[key].level = self.level + 1;
                                                 // If clone, we need to use new assigned parent and _id
                                                 if (isClone) {
+                                                      // assign new created _id and hand it down the tree as parent
                                                       self.data.children[key].data.parent = self._id;
+                                                      // new id = 'parentId'_'blockId'
                                                       self.data.children[key]._id = self._id + '_' + childId;
                                                 }
                                                 self.data.children[key].load(function() {
@@ -169,7 +179,7 @@
                                           function(e) {
                                                 callback(); // report block and children loaded
                                           }
-                                    )
+                                    );
                               },
                               /**
                                * Load clone ancestor as child
@@ -183,22 +193,24 @@
                                * the level is used for indention and the clone element has no visual
                                * representation in the document but the clones are appended to it
                                * 
-                               * Parent: The parent of the first element is changed to it's clone 
+                               * Parent: The parent of the first element is changed to it's clone instead to
+                               * its original parent
                                * 
-                               * owner
                                */
                               function(callback) {
                                     if (self.data.ancestor !== '') {
-                                          // Load Add ancestor as new child
-                                          self.data.children.push(new _Block(self.data.ancestor));
+                                          // Load Add ancestor as new child; store key; we need the key
+                                          // in case there's also children attached to this block that
+                                          // are loaded
+                                          let key = self.data.children.push(new _Block(self.data.ancestor));
 
-                                          self.data.children[0].level = self.level;
+                                          self.data.children[key].level = self.level;
                                           // set parent as clone owner
-                                          self.data.children[0].data.parent = self._id;
-                                          self.data.children[0]._id = self._id + '_' + self.data.ancestor;
+                                          self.data.children[key].data.parent = self._id;
+                                          self.data.children[key]._id = self._id + '_' + self.data.ancestor;
                                           // load 
-                                          self.data.children[0].load(function() {
-                                                callback();
+                                          self.data.children[key].load(function() {
+                                                callback(); // report async that finished
                                           }, true);
                                     }
                                     else {
@@ -237,6 +249,9 @@
             };
             this.saveContent = saveContent;
 
+            /**
+             * Appends block to last Child of block
+             */
             var append = function(blockToAppend, next) {
                   blockToAppend.render();
                   let whereToAppend = findLastNChild(self);
@@ -248,6 +263,9 @@
             };
             this.append = append;
 
+            /**
+             * Removes the block
+             */
             this.remove = function(next) {
                   req({
                         url: '/block/remove',
@@ -260,6 +278,9 @@
                   });
             };
 
+            /**
+             * creates the DOM for the block
+             */
             this.render = function() {
                   let panel = new this.blockPanel(self);
                   let row = panel.content.row;
@@ -271,7 +292,7 @@
             };
 
             /**
-             * Appends the block to the parent DOM (recursive with sub-blocks)
+             * Appends the block DOM to the parent DOM (recursive with sub-blocks)
              * 
              */
             this.output = function output(block, next) {
@@ -325,11 +346,16 @@
                   }
                   return content;
             };
-
+            
+            
+            /**
+             * Returns the DOM element of the blocks parent
+             * 
+             */
             this.parentDom = function() {
                   if (this._id === window.currentBlockId) return this.contentDom;
-                  let parent = findBlockById(this.data.parent, window.b);
-                  if (!parent) return console.log('The Following Block has no loaded parent'), console.log(this);
+                  let parent = findBlockById(this.data.parent, window.$B);
+                  if (!parent) return console.log('The Following Block has no loaded parent:'), console.log(this);
                   return parent.dom.row;
             };
 
@@ -356,7 +382,9 @@
                   this.create(properties, function(e, newBlockData) {
                         self._id = newBlockData._id;
                         for (let i in newBlockData) {
-                              self.data[i] = newBlockData[i];
+                              if (newBlockData.hasOwnProperty(i)) {
+                                    self.data[i] = newBlockData[i];
+                              }
                         }
                         next(self);
                   });

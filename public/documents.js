@@ -117,6 +117,7 @@
                         div.style.height = 'calc(100% - 5px)';
                         div.style.marginBottom = '5px';
                         div.style.cursor = 'pointer';
+                        div.style.wordWrap = 'break-word';
 
                         // Body div with content in innerHTML
                         let divBody = document.createElement('div');

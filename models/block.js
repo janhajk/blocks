@@ -54,6 +54,11 @@ const Block = new Schema({
        */
       properties: { type: Map, of: Schema.Types.Mixed },
       /**
+       * 
+       * 
+       */
+      variables: [{ type: Map, of: String }],
+      /**
        * tags for searching
        */
       tags: [String],

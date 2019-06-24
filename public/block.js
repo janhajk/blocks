@@ -318,7 +318,7 @@
                   }
                   parentBlock.saveValue('children', newOrder, function(e, res) {
                         next();
-                  })
+                  });
             };
 
             /**
@@ -401,6 +401,8 @@
                   if (!parent) return console.log('The Following Block has no loaded parent:'), console.log(this);
                   return parent.dom.row;
             };
+            
+
 
 
             /**
@@ -443,5 +445,17 @@
       };
 
       window.Block = Block;
+
+
+      Array.prototype.unique = function() {
+            var a = this.concat();
+            for (var i = 0; i < a.length; ++i) {
+                  for (var j = i + 1; j < a.length; ++j) {
+                        if (a[i] === a[j])
+                              a.splice(j--, 1);
+                  }
+            }
+            return a;
+      };
 
 })();

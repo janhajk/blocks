@@ -34,6 +34,9 @@ Version 0.1 PROOF OF CONCEPT
     - change in block alters whole line up the tree
     
 - FEATURE: Variables valid for all subblocks
+    - New list in Properties tab in block.details.js
+    - reload all variables from blocks and subblocks and also clones and it's subblocks
+    - save variables with save button
 
  
    

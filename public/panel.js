@@ -195,8 +195,10 @@
                         type: ['original', 'clone']
                   }
             ];
-            for (let i in block.blockPanelMenu) {
-                  menuPoints = menuPoints.concat(block.blockPanelMenu[i](block));
+            for (let i = 0; i < block.blockPanelMenu.length; i++) {
+                  if (block.blockPanelMenu.hasOwnProperty(i)) {
+                        menuPoints = menuPoints.concat(block.blockPanelMenu[i](block));
+                  }
             }
             return menuPoints;
       };
@@ -253,7 +255,7 @@
                   let menu = document.createElement('div');
                   menu.className = 'dropdown-menu dropdown-menu-right';
                   // read items
-                  for (let i in menuPoints) {
+                  for (let i = 0; i < menuPoints.length; i++) {
                         if (menuPoints[i].type.indexOf(block.data.type) > -1) {
                               let a = document.createElement('a');
                               a.className = 'dropdown-item';

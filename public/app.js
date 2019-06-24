@@ -4,22 +4,11 @@
 
 (function() {
 
-    var currentBlockId = '';
-    currentBlockId = '5cf4e39259749d3d1d9d16f3';
-    window.currentBlockId = currentBlockId;
-    var b = new Block(currentBlockId);
-    b.load(function() {
-        console.log('success, fallowing your block:');
-        console.log(b);
-        b.output(b, function(){
-            
-        });
-    });
-    window.$B = b;
-    
-    
     var collection = new Collection('mydocuments');
     collection.update();
     window.blockCollection = collection;
+    
+    let documentOverview = new Collection('content');
+    documentOverview.thumbnailView();
 
 })();

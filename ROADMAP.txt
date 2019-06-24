@@ -9,9 +9,10 @@ Ressources:
 - Tree: jsTree jQuery Plugin https://www.jstree.com/
 - Panels: http://admincast.com/adminca/preview/admin_1/html/panels.html
 - Icons Themefy: https://themify.me/themify-icons
-- pdf: pdfkit.org
-- automation: https://gruntjs.com
+- pdf: pdfMake: https://pdfmake.github.io/docs, pdfkit.org
 - vanilla: https://plainjs.com
+- Testing and bundeling: https://en.wikipedia.org/wiki/Grunt_(software)
+- automation: https://gruntjs.com
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -22,29 +23,31 @@ Ressources:
 ----------------------------------------------------------------------------------------------------------------------------------------
 Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
-- BUG: Add new block goes to the wrong placeholder
-    - have block find it's correct DOM place (separate function)
-    + change loading behaviour that document is loaded first, then rendered
-- BUG: if block is deleted also delete children
-- BUG: New block has wrong level (Level is always 0)
+- BUG: if blick is deleted also delete children
 - BUG: Prevent infinite recursion when adding clone
 - BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
+
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
-- FEATURE: Show blocks with thumbnails in content window
-- FEATURE: Append block to new parent
-- FEATURE: export block as PDF
+- FEATURE: Append block to new parent > make parent editable
 - FEATURE: revisions
     - change in block alters whole line up the tree
-- FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
-- FEATURE: Heading formating
-- O: when adding block, jump directly to edit mode
-- O: order Documents sidebar by change date
-- CLEANUP: Routes to seperate files
-- CLEANUP: gui.js to new files
-- CLEANUP: Proper DELETE, PUT, UPDATE REST API
-- CLEANUP: Split CSS Files in multiple files
+    
+- FEATURE: Variables valid for all subblocks
+
+ 
    
++ FEATURE: Block weight changable on children level
++ FEATURE: Show blocks with thumbnails in content window
++ O: order Documents sidebar by change date
++ CLEANUP: Proper DELETE, PUT, UPDATE REST API
++ BUG: Add new block goes to the wrong placeholder
+    + have block find it's correct DOM place (separate function)
+    + change loading behaviour that document is loaded first, then rendered
++ FEATURE: export block as PDF
++ FEATURE: Heading formating
++ O: when adding block, jump directly to edit mode
++ BUG: New block has wrong level (Level is always 0)
 + BUG: Can't edit tags, if none are present
 + FEATURE: Create Block type: "Clone"
       + server side loading of block clone
@@ -83,8 +86,10 @@ Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
 Version 0.2
 ----------------------------------------------------------------------------------------------------------------------------------------
+- FEATURE: Import from json file
 - BUG: Jump to new Block; add header pixel; also Menu is killed
 - buy domain "baublock"
+- tag block (aka star); make new list with tagged blocks
 - User Roles
 - FEATURE: Secret link to document
 - Adressbar with tags/links
@@ -102,7 +107,11 @@ Version 0.2
 - new block creation above/after
 - don't delete blocks, make blocks hidden instead.
 - public website (external or wordpress)
+- FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
 - FEATURE: under settings, be able to sort children (using jquery ui sortable)
+- CLEANUP: Routes to seperate files
+- CLEANUP: gui.js to new files
+- CLEANUP: Split CSS Files in multiple files
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 

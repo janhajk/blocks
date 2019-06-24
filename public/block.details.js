@@ -103,6 +103,7 @@
                     block.saveValue(detail.field, values, function() {
                         element.innerHTML = values.join(', ');
                         block.data[detail.field] = detail.type === 'string' ? values.join('') : values;
+                        if (detail.field === 'name') window.blockCollection.update();
                     });
                 }
             };

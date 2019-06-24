@@ -6,7 +6,7 @@
             if (params.method === undefined) { params.method = 'GET' }
             var request = new XMLHttpRequest();
             request.open(params.method, params.url, true);
-            if (params.method === 'POST') request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+            if (params.method === 'POST' || params.method === 'PUT') request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
             request.onload = function() {
                   if (request.status >= 200 && request.status < 405) {
                         try {
@@ -30,7 +30,7 @@
                   console.log('There was an error in xmlHttpRequest!');
                   return next(e);
             };
-            if (params.method === 'POST') {
+            if (params.method === 'POST' || params.method === 'PUT' || params.method === 'DELETE') {
                   request.send(JSON.stringify(params.data));
             }
             else {
@@ -86,21 +86,6 @@
 
             var self = this;
 
-            // Create new Document link
-            let linkNewDocument = document.getElementById('linkNewDocument');
-            linkNewDocument.onclick = function() {
-                  new Block({ content_type: 'document', content: 'Neues Dokument' }, function(newBlock) {
-                        window.$B = newBlock;
-                        window.currentBlockId = newBlock._id;
-                        window.b.load(function() {
-                              window.$B.output(window.$B, function() {
-                                    window.blockCollection.update();
-                              });
-                        });
-                  });
-            };
-
-
 
             /*
              * Creates new block and loads it
@@ -108,8 +93,8 @@
              */
             this.create = function(properties, next) {
                   req({
-                              data: properties,
                               url: '/block/add',
+                              data: properties,
                               method: 'POST'
                         },
                         function(e, newBlock) {
@@ -119,14 +104,18 @@
 
 
             /*
-             * Loads a block by 'id'
+             * Loads a block by its 'id'
              *
              *
              */
-            var loadById = function(id, next) {
-                  req({ url: '/block/' + id }, function(e, block) {
-                        next(e, block);
-                  });
+            let loadById = function(id, next) {
+                  req({
+                              url: '/block/' + id,
+                              method: 'GET'
+                        },
+                        function(e, block) {
+                              next(e, block);
+                        });
             };
             this.loadById = loadById;
 
@@ -140,13 +129,14 @@
              * 
              */
             var load = function(next, isClone) {
-                  if (isClone === undefined) isClone = false;
-                  // using data._id as original _id
+                  if (isClone === undefined) isClone = false; // default is no clone
+                  // using data._id as original _id (not self._id which contains changable _id)
                   loadById(self.data._id, function(e, block) {
                         self.data.children = [];
-                        // Clones will be assigned new parent
+                        // Clones keeps parent and type, because it get's reassigned before getting here
                         if (isClone) {
                               delete block.parent;
+                              delete block.type;
                         }
                         // set new data
                         for (let i in block) {
@@ -170,6 +160,7 @@
                                                       self.data.children[key].data.parent = self._id;
                                                       // new id = 'parentId'_'blockId'
                                                       self.data.children[key]._id = self._id + '_' + childId;
+                                                      self.data.children[key].data.type = 'copy';
                                                 }
                                                 self.data.children[key].load(function() {
                                                       callback(); // report child loaded
@@ -196,17 +187,20 @@
                                * Parent: The parent of the first element is changed to it's clone instead to
                                * its original parent
                                * 
+                               * type: the type of the block is changed to "copy"
+                               * 
                                */
                               function(callback) {
                                     if (self.data.ancestor !== '') {
                                           // Load Add ancestor as new child; store key; we need the key
                                           // in case there's also children attached to this block that
                                           // are loaded
-                                          let key = self.data.children.push(new _Block(self.data.ancestor));
+                                          let key = self.data.children.push(new _Block(self.data.ancestor)) - 1;
 
                                           self.data.children[key].level = self.level;
                                           // set parent as clone owner
                                           self.data.children[key].data.parent = self._id;
+                                          self.data.children[key].data.type = 'copy';
                                           self.data.children[key]._id = self._id + '_' + self.data.ancestor;
                                           // load 
                                           self.data.children[key].load(function() {
@@ -251,11 +245,12 @@
 
             /**
              * Appends block to last Child of block
+             * solely DOM part
              */
             var append = function(blockToAppend, next) {
+                  blockToAppend.level = self.level + 1;
                   blockToAppend.render();
                   let whereToAppend = findLastNChild(self);
-                  blockToAppend.level = self.level + 1;
                   whereToAppend.dom.row.insertAdjacentElement('afterend', blockToAppend.dom.row);
                   self.data.children.push(blockToAppend);
                   // blockToAppend.dom.row.scrollIntoView();
@@ -276,6 +271,54 @@
                   }, function(e, res) {
                         next(e, res);
                   });
+            };
+
+
+            /**
+             * Moves block up or down in weight. if block is already top block of children or last
+             * nothing happens
+             * 
+             * @param string type can be either 'up' or 'down', default is down
+             * 
+             */
+            this.move = function(type, next) {
+
+                  // retrieve parent block
+                  let parentBlock = findBlockById(this.data.parent, window.$B);
+                  // If top block / document / no parent then don't do anything
+                  if (!parentBlock) return next();
+                  let siblings = parentBlock.data.children;
+                  let newOrder = [];
+
+                  // Move up
+                  if (type === 'up') {
+                        for (let i = 0; i < siblings.length; i++) {
+                              if (i > 0 && siblings[i]._id === this._id) {
+                                    let before = newOrder.splice(i - 1, 1);
+                                    newOrder.push(siblings[i].data._id);
+                                    newOrder.push(before[0]);
+                              }
+                              else {
+                                    newOrder.push(siblings[i].data._id);
+                              }
+                        }
+                  }
+                  // Move down
+                  else {
+                        for (let i = 0; i < siblings.length; i++) {
+                              if (i > 0 && siblings[i - 1]._id === this._id) {
+                                    let before = newOrder.splice(i - 1, 1);
+                                    newOrder.push(siblings[i].data._id);
+                                    newOrder.push(before[0]);
+                              }
+                              else {
+                                    newOrder.push(siblings[i].data._id);
+                              }
+                        }
+                  }
+                  parentBlock.saveValue('children', newOrder, function(e, res) {
+                        next();
+                  })
             };
 
             /**
@@ -346,8 +389,8 @@
                   }
                   return content;
             };
-            
-            
+
+
             /**
              * Returns the DOM element of the blocks parent
              * 

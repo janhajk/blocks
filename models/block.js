@@ -52,7 +52,7 @@ const Block = new Schema({
        * exp: document, heading size, css etc.
        * takes key:values
        */
-      properties: { type: Map, of: String },
+      properties: { type: Map, of: Schema.Types.Mixed },
       /**
        * tags for searching
        */

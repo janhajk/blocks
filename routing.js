@@ -8,13 +8,12 @@ var block = require(__dirname + '/lib/blocks.js');
 
 
 // System
-var path = require('path');
 var fs = require('fs');
 
 
 var basic = function(app, connection) {
     app.get('/', function(req, res) {
-        fs.readFile(__dirname + '/public/index.html', 'utf-8', function(err, data) {
+        fs.readFile(__dirname + '/public/index.html', 'utf-8', function(e, data) {
             res.send(data);
         });
     });
@@ -26,9 +25,10 @@ var basic = function(app, connection) {
             res.send(e ? e : block);
         });
     });
-    app.get('/documents', /*auth.ensureAuthenticated,*/ function(req, res) {
+    app.get('/documents/:limit', /*auth.ensureAuthenticated,*/ function(req, res) {
         utils.log('loading all top level blocks...');
-        block.getTop(function(e, blocks) {
+        const limit = parseInt(req.params.limit,10);
+        block.getTop(limit, function(e, blocks) {
             res.send(e ? e : blocks);
         });
     });
@@ -57,6 +57,11 @@ var basic = function(app, connection) {
         block.remove(properties, function(e, block) {
             res.send(e ? { success: false, error: e } : { success: true });
         });
+    });
+    app.get('/block/pdf/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
+        const id = req.params.id;
+        const pdf = require(__dirname + '/lib/pdf.js');
+        pdf.output(id, res);
     });
     app.get('/block/:id', /*auth.ensureAuthenticated,*/ function(req, res) {
         const id = req.params.id;

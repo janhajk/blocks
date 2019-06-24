@@ -9,6 +9,7 @@ if (dev !== undefined && dev) {
     config.dev = true;
     utils.log('running in dev mode');
 }
+config.dev = true;
 
 // Routing
 var routing = require(__dirname + '/routing.js');
@@ -20,7 +21,7 @@ var auth = require(__dirname + '/auth.js');
 var path = require('path');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blocks', {useNewUrlParser: true});
+mongoose.connect('mongodb://mongodb/test', {useNewUrlParser: true});
 
 
 

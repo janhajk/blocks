@@ -12,20 +12,50 @@
             ]
       };
 
+      const editAction = function(block) {
+            let panel = block.dom.panel;
+            let body = block.dom.body;
+            body.innerHTML = block.data.content;
+            $(body).summernote(summernoteProps);
+            $(body).summernote('focus');
 
-      /**
-       * Creates a block panel
-       * 
-       * Type: Object
-       * 
-       * @param string title the title of the panel
-       * 
-       */
-      Block.fn.blockPanel = function(block) {
+            // Button Save
+            let buttonSave = document.createElement('button');
+            buttonSave.className = 'btn btn-primary';
+            buttonSave.setAttribute('type', 'button');
+            buttonSave.innerHTML = 'Speichern';
+            buttonSave.onclick = function() {
+                  panel.removeChild(buttonSave);
+                  panel.removeChild(buttonCancel);
+                  $(body).summernote('destroy');
+                  block.data.content = body.innerHTML;
+                  block.saveContent(function() {
+                        body.innerHTML = block.formatedContent();
+                  });
+            };
+            panel.appendChild(buttonSave);
+
+            // Button Cancel
+            let buttonCancel = document.createElement('button');
+            buttonCancel.className = 'btn btn-primary';
+            buttonCancel.setAttribute('type', 'button');
+            buttonCancel.innerHTML = 'Abbrechen';
+            buttonCancel.onclick = function() {
+                  panel.removeChild(buttonSave);
+                  panel.removeChild(buttonCancel);
+                  $(block.dom.body).summernote('destroy');
+                  block.dom.body.innerHTML = block.formatedContent();
+            };
+            panel.appendChild(buttonCancel);
+      };
+
+      Block.fn.blockPanelMenu = [];
 
 
+      let getMenu = function(block) {
 
-            const menuPoints = [
+
+            let menuPoints = [
                   /**
                    * 
                    * Block edit content
@@ -34,41 +64,9 @@
                         title: 'Bearbeiten',
                         icon: 'pencil',
                         action: function() {
-                              let panel = block.dom.panel;
-                              let body = block.dom.body;
-                              body.innerHTML = block.data.content;
-                              $(body).summernote(summernoteProps);
-                              
-                              // Button Save
-                              let buttonSave = document.createElement('button');
-                              buttonSave.className = 'btn btn-primary';
-                              buttonSave.setAttribute('type', 'button');
-                              buttonSave.innerHTML = 'Speichern';
-                              buttonSave.onclick = function() {
-                                    panel.removeChild(buttonSave);
-                                    panel.removeChild(buttonCancel);
-                                    $(body).summernote('destroy');
-                                    block.data.content = body.innerHTML;
-                                    block.saveContent(function() {
-                                          body.innerHTML = block.formatedContent();
-                                    });
-                              };
-                              panel.appendChild(buttonSave);
-                              
-                              // Button Cancel
-                              let buttonCancel = document.createElement('button');
-                              buttonCancel.className = 'btn btn-primary';
-                              buttonCancel.setAttribute('type', 'button');
-                              buttonCancel.innerHTML = 'Abbrechen';
-                              buttonCancel.onclick = function() {
-                                    panel.removeChild(buttonSave);
-                                    panel.removeChild(buttonCancel);
-                                    $(block.dom.body).summernote('destroy');
-                                    block.dom.body.innerHTML = block.formatedContent();
-                              };
-                              panel.appendChild(buttonCancel);
-
-                        }
+                              return editAction(block);
+                        },
+                        type: ['original']
                   },
                   /**
                    * Open Block
@@ -85,7 +83,8 @@
                                           console.log('success, following your block:');
                                     });
                               });
-                        }
+                        },
+                        type: ['original', 'clone']
                   },
                   /**
                    * 
@@ -106,7 +105,8 @@
                                           });
                                     });
                               }
-                        }
+                        },
+                        type: ['original', 'clone']
                   },
                   // { title: 'neuen Block darüber', icon: 'angle-double-up' },
                   /**
@@ -131,15 +131,46 @@
                                     }
                                     new Block(props, function(newBlock) {
                                           block.append(newBlock, function() {
-                                                newBlock;
+                                                return editAction(newBlock);
+                                          });
+                                    });
+                              });
+                        },
+                        type: ['original']
+                  },
+                  // { title: 'Block unterordnen', icon: 'angle-double-right' },
+                  {
+                        title: 'Block nach oben',
+                        icon: 'arrow-up',
+                        type: ['original', 'clone'],
+                        action: function() {
+                              block.move('up', function() {
+                                    // Reload block
+                                    // TODO: don't reload whole block
+                                    window.$B.load(function() {
+                                          window.$B.output(window.$B, function() {
+                                                console.log('success!');
                                           });
                                     });
                               });
                         }
                   },
-                  // { title: 'Block unterordnen', icon: 'angle-double-right' },
-                  { title: 'Block nach oben', icon: 'arrow-up' },
-                  { title: 'Block nach unten', icon: 'arrow-down' },
+                  {
+                        title: 'Block nach unten',
+                        icon: 'arrow-down',
+                        type: ['original', 'clone'],
+                        action: function() {
+                              block.move('down', function() {
+                                    // Reload block
+                                    // TODO: don't reload whole block
+                                    window.$B.load(function() {
+                                          window.$B.output(window.$B, function() {
+                                                console.log('success!');
+                                          });
+                                    });
+                              });
+                        }
+                  },
                   /**
                    * 
                    * Delete/Remove block completely
@@ -160,9 +191,32 @@
                                     }
                                     block.contentDom.removeChild(block.dom.row);
                               });
-                        }
+                        },
+                        type: ['original', 'clone']
                   }
             ];
+            for (let i in block.blockPanelMenu) {
+                  menuPoints = menuPoints.concat(block.blockPanelMenu[i](block));
+            }
+            return menuPoints;
+      };
+
+
+
+
+
+
+      /**
+       * Creates a block panel
+       * 
+       * Type: Object
+       * 
+       * @param string title the title of the panel
+       * 
+       */
+      Block.fn.blockPanel = function(block) {
+
+            const menuPoints = getMenu(block);
 
 
             /**
@@ -200,14 +254,16 @@
                   menu.className = 'dropdown-menu dropdown-menu-right';
                   // read items
                   for (let i in menuPoints) {
-                        let a = document.createElement('a');
-                        a.className = 'dropdown-item';
-                        let icon = document.createElement('i');
-                        icon.className = 'ti-' + menuPoints[i].icon;
-                        a.appendChild(icon);
-                        a.innerHTML += menuPoints[i].title;
-                        a.onclick = menuPoints[i].action;
-                        menu.appendChild(a);
+                        if (menuPoints[i].type.indexOf(block.data.type) > -1) {
+                              let a = document.createElement('a');
+                              a.className = 'dropdown-item';
+                              let icon = document.createElement('i');
+                              icon.className = 'ti-' + menuPoints[i].icon;
+                              a.appendChild(icon);
+                              a.innerHTML += menuPoints[i].title;
+                              a.onclick = menuPoints[i].action;
+                              menu.appendChild(a);
+                        }
                   }
                   tools.appendChild(menu);
 
@@ -222,20 +278,20 @@
                   div.className = 'ibox ibox-fullheight';
                   div.style.height = 'calc(100% - 5px)';
                   div.style.marginBottom = '5px';
-                  div.style.background = block.isClone?'#FFFFCC':'white';
+                  div.style.background = block.isClone ? '#FFFFCC' : 'white';
 
                   // Body div with content in innerHTML
                   let divBody = document.createElement('div');
                   divBody.className = 'ibox-body';
                   divBody.style.padding = '5px 30px 5px';
                   divBody.style.paddingLeft = (block.level * 20 + 30) + 'px';
-                  
+
                   // Make none selectable
                   divBody.style.webkitUserSelect = 'none';
                   divBody.style.mozUserSelect = 'none';
                   divBody.style.msUserSelect = 'none';
                   divBody.style.userSelect = 'none';
-                  
+
                   // Oben block properties when clicking
                   divBody.onclick = function() {
                         block.details(function(firstTab) {

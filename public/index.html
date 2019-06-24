@@ -118,9 +118,9 @@
                             <div class="dropdown-arrow"></div>
                             <div class="dropdown-header text-center">
                                 <div>
-                                    <span class="font-18"><strong>7 New</strong> Messages</span>
+                                    <span class="font-18"><strong>1 neue</strong> Nachricht</span>
                                 </div>
-                                <a class="text-muted font-13" href="javascript:;">view all</a>
+                                <a class="text-muted font-13" href="javascript:;">alle zeigen</a>
                             </div>
                             <div class="p-3">
                                 <div class="media-list media-list-divider scroller" data-height="350px" data-color="#71808f">
@@ -129,10 +129,10 @@
                                             <img class="img-circle" src="https://www.parlament.ch/sitecollectionimages/profil/portrait-260/2328.jpg" alt="image" />
                                         </div>
                                         <div class="media-body">
-                                            <div class="media-heading">Lynn Weaver<small class="text-muted float-right">Just now</small></div>
-                                            <div class="font-13 text-muted">Your proposal interested me.</div>
+                                            <div class="media-heading">KBOB<small class="text-muted float-right">Just now</small></div>
+                                            <div class="font-13 text-muted">Neue KBOB Texte verfügbar</div>
                                             <div class="font-13 mt-1">
-                                                <span class="d-inline-flex align-items-center text-primary"><i class="ti-support mr-2"></i>Support</span>
+                                                <span class="d-inline-flex align-items-center text-primary"><i class="ti-support mr-2"></i>zu den Änderungen</span>
                                             </div>
                                         </div>
                                     </a>
@@ -163,10 +163,10 @@
                                     <img src="https://www.parlament.ch/sitecollectionimages/profil/portrait-260/2328.jpg" alt="image" />
                                 </div>
                                 <div>
-                                    <h5 class="font-strong text-white">Super User</h5>
+                                    <h5 class="font-strong text-white">Kanton Bern</h5>
                                     <div>
                                         <span class="admin-badge mr-3"><i class="ti-alarm-clock mr-2"></i>30m.</span>
-                                        <span class="admin-badge"><i class="ti-lock mr-2"></i>Safe Mode</span>
+                                        <span class="admin-badge"><i class="ti-lock mr-2"></i>Blabla</span>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
         <nav class="page-sidebar" id="sidebar">
             <div id="sidebar-collapse">
                 <ul class="side-menu metismenu">
-                    <li class="active">
+                    <li class="active mm-active">
                         <a href="javascript:;"><i class="sidebar-item-icon ti-home"></i>
                             <span class="nav-label">Meine Dokumente</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse in" aria-expanded="true" id="mydocuments">
@@ -215,6 +215,9 @@
                         <a href="javascript:;"><i class="sidebar-item-icon ti-paint-roller"></i>
                             <span class="nav-label">Meine Blocks</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collaps" aria-expanded="false">
+                            <li>
+                                <a href="#">Markiert</a>
+                            </li>
                             <li>
                                 <a href="#">Häufig verwendet</a>
                             </li>
@@ -297,6 +300,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/async@3.0.1/dist/async.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.57/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.57/vfs_fonts.js"></script>
     <script src="gui.js"></script>
     <script src="notifications.js"></script>
     <script src="code.js"></script>
@@ -305,6 +310,7 @@
     <script src="panel.js"></script>
     <script src="blockselector.js"></script>
     <script src="documents.js"></script>
+    <script src="pdf.js"></script>
     <script src="contentType.heading.js"></script>
     <script src="app.js"></script>
 </body>

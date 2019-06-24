@@ -21,7 +21,7 @@ var auth = require(__dirname + '/auth.js');
 var path = require('path');
 
 const mongoose = require('mongoose');
-mongoose.connect(config.mongod + '/test', {useNewUrlParser: true});
+mongoose.connect(config.mongod, {useNewUrlParser: true});
 
 
 

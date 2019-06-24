@@ -60,12 +60,12 @@
                   let a = document.createElement('a');
                   a.href = 'javascript:;';
                   a.onclick = function() {
-                            new Collection('content').thumbnailView();
+                        new Collection('content').thumbnailView();
                   };
                   a.innerHTML = 'Alle Dokumente anzeigen';
                   li.appendChild(a);
                   domParent.appendChild(li);
-                  
+
                   for (let i = 0; i < blocks.length; i++) {
                         let li = document.createElement('li');
                         let a = document.createElement('a');
@@ -84,7 +84,7 @@
                         li.appendChild(a);
                         domParent.appendChild(li);
                   }
-                  
+
 
             };
 
@@ -156,7 +156,7 @@
                   let row = document.createElement('div');
                   row.className = 'row';
                   this.load(50, function(error, blocks) {
-                        for (let i in blocks) {
+                        for (let i = 0; i < blocks.length; i++) {
                               row.appendChild(thumb(blocks[i]));
                               if ((i + 1) % thumbsPerRow === 0) {
                                     domParent.appendChild(row);

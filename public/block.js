@@ -401,8 +401,32 @@
                   if (!parent) return console.log('The Following Block has no loaded parent:'), console.log(this);
                   return parent.dom.row;
             };
-            
 
+
+            /**
+             * 
+             * Finds all unique Variables recursive in a block and returns array
+             * 
+             */
+            this.findAllVariables = function(next) {
+                  let variables = [];
+                  async.each(this.data.children, function(child, callback) {
+                              let content = child.data.content;
+                              let res = content.match(/(%[a-zA-Z_]*?%)/g);
+                              if (res !== null && res.length) {
+                                    variables = variables.concat(res).unique();
+                              }
+                              child.findAllVariables(function(vars) {
+                                    variables = variables.concat(vars).unique();
+                                    callback();
+                              });
+                        },
+                        // when async finishes / all has loaded
+                        function(e) {
+                              next(variables); // report block and children loaded
+                        }
+                  );
+            };
 
 
             /**

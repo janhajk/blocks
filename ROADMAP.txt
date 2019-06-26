@@ -37,6 +37,7 @@ Version 0.1 PROOF OF CONCEPT
     - New list in Properties tab in block.details.js
     - reload all variables from blocks and subblocks and also clones and it's subblocks
     - save variables with save button
+    - variable can also be another block; add block-id
 
  
    
@@ -112,6 +113,8 @@ Version 0.2
 - public website (external or wordpress)
 - FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
 - FEATURE: under settings, be able to sort children (using jquery ui sortable)
+- FEATURE: Split block in <p>-Blocks.
+- LOGIC: How are parent variables handeled? if parent block has variables set, the block won't show them.
 - CLEANUP: Routes to seperate files
 - CLEANUP: gui.js to new files
 - CLEANUP: Split CSS Files in multiple files

@@ -24,7 +24,7 @@ Ressources:
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-Version 0.1 PROOF OF CONCEPT
+Version 0.2
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: if blick is deleted also delete children > getOffspring Function; then delete all offspring
 - BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
@@ -33,65 +33,6 @@ Version 0.1 PROOF OF CONCEPT
       - new Properties fn
 - FEATURE: revisions
     - change in block alters whole line up the tree
-    
-
- 
-   
-+ BUG: Prevent infinite recursion when adding clone > Load maximum of n-Level
-+ FEATURE: Variables valid for all subblocks
-    + New list in Properties tab in block.details.js
-    + reload all variables from blocks and subblocks and also clones and it's subblocks
-    + change variables when rendering and highlight
-    + save variables with save button
-+ FEATURE: Block weight changable on children level
-+ FEATURE: Show blocks with thumbnails in content window
-+ O: order Documents sidebar by change date
-+ CLEANUP: Proper DELETE, PUT, UPDATE REST API
-+ BUG: Add new block goes to the wrong placeholder
-    + have block find it's correct DOM place (separate function)
-    + change loading behaviour that document is loaded first, then rendered
-+ FEATURE: export block as PDF
-+ FEATURE: Heading formating
-+ O: when adding block, jump directly to edit mode
-+ BUG: New block has wrong level (Level is always 0)
-+ BUG: Can't edit tags, if none are present
-+ FEATURE: Create Block type: "Clone"
-      + server side loading of block clone
-      + GUI for New block type selection
-+ create bugtracker
-+ FEATURE: Button New Document creates new Document
-+ FEATURE: create editor to add basic content
-   + content_type heading
-   + content_type document
-+ FEATURE: Change name of Block
-+ FEATURE: show block details in sidebar
-      + blockdetails that are already loaded
-+ FEATURE: list blocks without parent in sidebar under documents
-    + load selected documents
-+ show parent block with menu entry
-+ basic document viewing with v01 content
-+ when adding block, jump to place on page where new block is
-+ BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded
-+ content_type html_simple (https://summernote.org)
-+ Setup basic interface
-+ Setup basic nodejs structure
-+ import database from V01 app
-+ js-calls to add new block
-+ render block function
-+ setup Mongoose Schemas
-    + parents and children
-+ setup API for 
-    + insert new
-    + read block
-    + edit/update block
-+ bug when adding block, wrong reloading
-+ remove block (for testing only)
-+ add level in block
-+ visualize level of block with padding*level 
-
-----------------------------------------------------------------------------------------------------------------------------------------
-Version 0.2
-----------------------------------------------------------------------------------------------------------------------------------------
 - FEATURE: Append block to new parent > make parent editable
 - FEATURE: variable can also be another block; add block-id
 - FEATURE: Remove Variable from block > button "cross"
@@ -145,3 +86,59 @@ Version 0.3
 
 
 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 0.1 PROOF OF CONCEPT
+----------------------------------------------------------------------------------------------------------------------------------------
++ BUG: Prevent infinite recursion when adding clone > Load maximum of n-Level
++ FEATURE: Variables valid for all subblocks
+    + New list in Properties tab in block.details.js
+    + reload all variables from blocks and subblocks and also clones and it's subblocks
+    + change variables when rendering and highlight
+    + save variables with save button
++ FEATURE: Block weight changable on children level
++ FEATURE: Show blocks with thumbnails in content window
++ O: order Documents sidebar by change date
++ CLEANUP: Proper DELETE, PUT, UPDATE REST API
++ BUG: Add new block goes to the wrong placeholder
+    + have block find it's correct DOM place (separate function)
+    + change loading behaviour that document is loaded first, then rendered
++ FEATURE: export block as PDF
++ FEATURE: Heading formating
++ O: when adding block, jump directly to edit mode
++ BUG: New block has wrong level (Level is always 0)
++ BUG: Can't edit tags, if none are present
++ FEATURE: Create Block type: "Clone"
+      + server side loading of block clone
+      + GUI for New block type selection
++ create bugtracker
++ FEATURE: Button New Document creates new Document
++ FEATURE: create editor to add basic content
+   + content_type heading
+   + content_type document
++ FEATURE: Change name of Block
++ FEATURE: show block details in sidebar
+      + blockdetails that are already loaded
++ FEATURE: list blocks without parent in sidebar under documents
+    + load selected documents
++ show parent block with menu entry
++ basic document viewing with v01 content
++ when adding block, jump to place on page where new block is
++ BUG: Pageloader doesn't disappear after loading; make it disappear after page has loaded
++ content_type html_simple (https://summernote.org)
++ Setup basic interface
++ Setup basic nodejs structure
++ import database from V01 app
++ js-calls to add new block
++ render block function
++ setup Mongoose Schemas
+    + parents and children
++ setup API for 
+    + insert new
+    + read block
+    + edit/update block
++ bug when adding block, wrong reloading
++ remove block (for testing only)
++ add level in block
++ visualize level of block with padding*level 

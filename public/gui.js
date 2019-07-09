@@ -216,20 +216,23 @@ $(function() {
   $('.metismenu').metisMenu();
 
   // Make Left Sidebar big or narrow
-  $('.js-sidebar-toggler').click(function() {
-    if ($('body').hasClass('drawer-sidebar')) {
-      $('#sidebar').backdrop();
-    }
-    else {
-      $('body').toggleClass('sidebar-mini');
-      if (!$('body').hasClass('sidebar-mini')) {
-        $('#sidebar-collapse').hide();
-        setTimeout(function() {
-          $('#sidebar-collapse').fadeIn(300)
-        }, 200);
-      }
-    }
+  $(".js-sidebar-toggler").click(function() {
+    $("body").toggleClass("sidebar-mini");
   });
+  // $('.js-sidebar-toggler').click(function() {
+  //   if ($('body').hasClass('drawer-sidebar')) {
+  //     $('#sidebar').backdrop();
+  //   }
+  //   else {
+  //     $('body').toggleClass('sidebar-mini');
+  //     if (!$('body').hasClass('sidebar-mini')) {
+  //       $('#sidebar-collapse').hide();
+  //       setTimeout(function() {
+  //         $('#sidebar-collapse').fadeIn(300)
+  //       }, 200);
+  //     }
+  //   }
+  // });
 
   $('#_fixedlayout').change(function() {
     $(this).is(':checked') ? ($('body').addClass('fixed-layout'), $('#sidebar-collapse').slimScroll({
@@ -265,15 +268,21 @@ $(function() {
   });
 
 
-  $(window).on('load resize scroll', function() {
-    if ($(this).width() < 992) {
-      if (!$('body').hasClass('sidebar-mini')) {
-        $('body').addClass('drawer-sidebar');
-        $('#sidebar-collapse').slimScroll({
-          height: '100%',
-          railOpacity: '0.9'
-        });
-      }
-    }
+  $(window).on("load resize scroll", function() {
+    $(this).width() < 992 && $("body").addClass("sidebar-mini");
+    $(this).width() > 992 && $("body").removeClass("sidebar-mini");
   });
+
+
+  // $(window).on('load resize scroll', function() {
+  //   if ($(this).width() < 992) {
+  //     if (!$('body').hasClass('sidebar-mini')) {
+  //       $('body').addClass('drawer-sidebar');
+  //       $('#sidebar-collapse').slimScroll({
+  //         height: '100%',
+  //         railOpacity: '0.9'
+  //       });
+  //     }
+  //   }
+  // });
 });

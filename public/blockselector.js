@@ -36,9 +36,8 @@
                   for (let i = 0; i < searchBlocks.length; i++) {
                         if ((searchBlocks[i].name !== undefined && searchBlocks[i].name.toLowerCase().indexOf(searchString) > -1) ||
                               searchBlocks[i].tags.filter(function(item) {
-                                    return (typeof item == 'string' && item.toLowerCase().indexOf(searchString) > -1);
-
-                              }).length > 0) {
+                                    return (typeof item === 'string' && item.toLowerCase().indexOf(searchString) > -1);
+                              }).length > 0 || (searchBlocks[i]._id.indexOf(searchString) > -1)) {
                               let item = document.createElement('li');
                               item.className = 'timeline-item';
                               let span = document.createElement('span');
@@ -47,7 +46,9 @@
                               link.href = 'javascript:;';
                               link.innerHTML = searchBlocks[i].name;
                               link.onclick = function() {
-                                    next('clone', searchBlocks[i]._id);
+                                    backdropHide(function() {
+                                          next('clone', searchBlocks[i]._id);
+                                    });
                               };
                               item.appendChild(span)
                               item.appendChild(link);

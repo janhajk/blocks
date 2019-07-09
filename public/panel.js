@@ -120,6 +120,7 @@
                         icon: 'angle-double-down',
                         action: function() {
                               block.blockSelector(function(type, ancestor) {
+                                    let reload = false;
                                     let props = {
                                           parent: block._id,
                                           content_type: type
@@ -129,10 +130,18 @@
                                     }
                                     if (type === 'clone') {
                                           props.type = 'clone';
+                                          reload = true;
                                     }
                                     new Block(props, function(newBlock) {
                                           block.append(newBlock, function() {
-                                                return editAction(newBlock);
+                                                if (reload) {
+                                                      $B.load(function() {
+                                                            $B.output($B, function() {});
+                                                      });
+                                                }
+                                                else {
+                                                      return editAction(newBlock);
+                                                }
                                           });
                                     });
                               });

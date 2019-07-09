@@ -12,8 +12,10 @@ Ressources:
 - pdf: pdfMake: https://pdfmake.github.io/docs, pdfkit.org
 - vanilla: https://plainjs.com
 - Testing and bundeling: https://en.wikipedia.org/wiki/Grunt_(software)
+- CSS Burner: http://www.cssburner.com/
 - automation: https://gruntjs.com
 - KBOB: https://www.kbob.admin.ch/kbob/de/home/publikationen/dokumente-entlang-des-beschaffungsablaufs.html
+- theme: https://ide.servus.janschaer.ch/preview/blocks/admincast/html/dist/lists.html
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 

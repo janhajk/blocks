@@ -157,6 +157,7 @@
                   };
                   let row = document.createElement('div');
                   row.className = 'row';
+                  row.style.minHeight = '200px';
                   this.load(50, function(error, blocks) {
                         for (let i = 0; i < blocks.length; i++) {
                               row.appendChild(thumb(blocks[i]));
@@ -164,6 +165,7 @@
                                     domParent.appendChild(row);
                                     row = document.createElement('div');
                                     row.className = 'row';
+                                    row.style.minHeight = '200px';
                               }
                         }
                         if (blocks.length % thumbsPerRow !== 0) domParent.appendChild(row);

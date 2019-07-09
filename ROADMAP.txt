@@ -13,6 +13,7 @@ Ressources:
 - vanilla: https://plainjs.com
 - Testing and bundeling: https://en.wikipedia.org/wiki/Grunt_(software)
 - automation: https://gruntjs.com
+- KBOB: https://www.kbob.admin.ch/kbob/de/home/publikationen/dokumente-entlang-des-beschaffungsablaufs.html
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -23,24 +24,23 @@ Ressources:
 ----------------------------------------------------------------------------------------------------------------------------------------
 Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
-- BUG: if blick is deleted also delete children
-- BUG: Prevent infinite recursion when adding clone
+- BUG: if blick is deleted also delete children > getOffspring Function; then delete all offspring
 - BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
 
 - FEATURE: Handle content_type variations through properties
       - new Properties fn
-- FEATURE: Append block to new parent > make parent editable
 - FEATURE: revisions
     - change in block alters whole line up the tree
     
-- FEATURE: Variables valid for all subblocks
-    - New list in Properties tab in block.details.js
-    - reload all variables from blocks and subblocks and also clones and it's subblocks
-    - save variables with save button
-    - variable can also be another block; add block-id
 
  
    
++ BUG: Prevent infinite recursion when adding clone > Load maximum of n-Level
++ FEATURE: Variables valid for all subblocks
+    + New list in Properties tab in block.details.js
+    + reload all variables from blocks and subblocks and also clones and it's subblocks
+    + change variables when rendering and highlight
+    + save variables with save button
 + FEATURE: Block weight changable on children level
 + FEATURE: Show blocks with thumbnails in content window
 + O: order Documents sidebar by change date
@@ -90,6 +90,10 @@ Version 0.1 PROOF OF CONCEPT
 ----------------------------------------------------------------------------------------------------------------------------------------
 Version 0.2
 ----------------------------------------------------------------------------------------------------------------------------------------
+- FEATURE: Append block to new parent > make parent editable
+- FEATURE: variable can also be another block; add block-id
+- FEATURE: Remove Variable from block > button "cross"
+- FEATURE: Variable: Highlight unused variables
 - FEATURE: Import from json file
 - BUG: Jump to new Block; add header pixel; also Menu is killed
 - buy domain "baublock"

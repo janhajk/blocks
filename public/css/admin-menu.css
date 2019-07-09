@@ -1,0 +1,108 @@
+.header .admin-dropdown-menu {
+      margin-top: 25px
+}
+
+.header .admin-dropdown-menu .dropdown-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 30px 40px;
+      background-color: #18c5a9
+}
+
+.header .admin-dropdown-menu .dropdown-arrow:after {
+      background-color: #18c5a9
+}
+
+.header .admin-dropdown-menu .admin-avatar {
+      height: 60px;
+      width: 60px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      overflow: hidden;
+      margin-right: 35px;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center
+}
+
+.header .admin-dropdown-menu .admin-avatar img {
+      width: 88px;
+      max-width: 88px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg)
+}
+
+.header .admin-dropdown-menu .admin-badge {
+      color: #333
+}
+
+.header .admin-dropdown-menu .admin-badge i {
+      height: 28px;
+      width: 28px;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background-color: #333;
+      color: #fff
+}
+
+.header .admin-dropdown-menu .admin-menu-features {
+      padding: 25px 0;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex
+}
+
+.header .admin-dropdown-menu .admin-features-item {
+      width: 150px;
+      text-align: center;
+      color: #71808f
+}
+
+.header .admin-dropdown-menu .admin-features-item i {
+      display: block;
+      font-size: 36px;
+      margin-bottom: 16px
+}
+
+.header .admin-dropdown-menu .admin-features-item:hover {
+      color: inherit
+}
+
+.header .admin-dropdown-menu .admin-features-item:not(:last-child) {
+      border-right: 1px solid rgba(0, 0, 0, .1)
+}
+
+.header .admin-dropdown-menu .admin-menu-content {
+      padding: 10px 30px 30px;
+      border-top: 1px solid rgba(0, 0, 0, .1)
+}

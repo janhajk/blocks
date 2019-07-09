@@ -1,4 +1,5 @@
 /*global Block*/
+/*global $B*/
 (function() {
 
 
@@ -6,10 +7,10 @@
       let linkNewDocument = document.getElementById('linkNewDocument');
       linkNewDocument.onclick = function() {
             new Block({ content_type: 'document', content: 'Neues Dokument' }, function(newBlock) {
-                  window.$B = newBlock;
+                  $B = newBlock;
                   window.currentBlockId = newBlock._id;
-                  window.$B.load(function() {
-                        window.$B.output(window.$B, function() {
+                  $B.load(function() {
+                        $B.output($B, function() {
                               window.blockCollection.update();
                         });
                   });
@@ -72,10 +73,10 @@
                         a.href = 'javascript:;';
                         let _id = blocks[i]._id;
                         a.onclick = function() {
-                              window.$B = new Block(_id);
+                              $B = new Block(_id);
                               window.currentBlockId = _id;
-                              window.$B.load(function() {
-                                    window.$B.output(window.$B, function() {
+                              $B.load(function() {
+                                    $B.output($B, function() {
                                           console.log('success!');
                                     });
                               });
@@ -131,12 +132,12 @@
                         divBody.style.userSelect = 'none';
 
                         // Oben block  when clicking
-                        divBody.onclick = function() {
+                        div.onclick = function() {
                               // open document
-                              window.$B = new Block(block._id);
+                              $B = new Block(block._id);
                               window.currentBlockId = block._id;
-                              window.$B.load(function() {
-                                    window.$B.output(window.$B, function() {});
+                              $B.load(function() {
+                                    $B.output($B, function() {});
                               });
                         };
 

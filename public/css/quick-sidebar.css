@@ -1,0 +1,330 @@
+.quick-sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: -400px;
+      background-color: #fff;
+      width: 400px;
+      -webkit-transition: all.3s ease-in-out;
+      -o-transition: all.3s ease-in-out;
+      transition: all.3s ease-in-out;
+      z-index: 1005;
+      -webkit-box-shadow: 0 4px 15px 1px rgba(113, 106, 202, .2);
+      box-shadow: 0 4px 15px 1px rgba(113, 106, 202, .2)
+}
+
+.quick-sidebar.shined,
+.quick-sidebar .chat-panel.opened .messenger {
+      right: 0
+}
+
+.quick-sidebar>.nav-tabs {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+      justify-content: space-around
+}
+
+.quick-sidebar>.nav-tabs .nav-link {
+      text-align: center
+}
+
+.quick-sidebar>.nav-tabs .nav-link>i {
+      font-size: 26px
+}
+
+.quick-sidebar .tab-content {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 70px;
+      bottom: 0;
+      padding: 20px
+}
+
+.quick-sidebar .tab-content .tab-pane,
+.quick-sidebar .chat-list {
+      height: 100%
+}
+
+.quick-sidebar .chat-panel {
+      margin-left: -20px;
+      margin-right: -20px
+}
+
+.quick-sidebar .chat-list .media {
+      padding: 15px 20px;
+      color: inherit
+}
+
+.quick-sidebar .chat-list .media:focus,
+.quick-sidebar .chat-list .media:hover,
+.quick-sidebar .chat-list .media:focus,
+.quick-sidebar .chat-list .media:hover {
+      color: inherit
+}
+
+.quick-sidebar .chat-list .media:hover {
+      background-color: #f7f8f8
+}
+
+.quick-sidebar .messenger {
+      position: absolute;
+      top: -70px;
+      right: -100%;
+      bottom: 0;
+      width: 100%;
+      background-color: #fff;
+      -webkit-transition: all.3s ease-in-out;
+      -o-transition: all.3s ease-in-out;
+      transition: all.3s ease-in-out
+}
+
+.quick-sidebar .messenger-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      height: 60px;
+      border-bottom: 1px solid#e7e7e7;
+      background-color: #2cc4cb
+}
+
+.quick-sidebar .messenger-header .messenger-return {
+      font-size: 16px;
+      height: 36px;
+      width: 36px;
+      line-height: 40px;
+      text-align: center;
+      margin-left: 10px;
+      -webkit-border-radius: 50%;
+      border-radius: 50%
+}
+
+.quick-sidebar .messenger-header .messenger-return,
+.quick-sidebar .messenger-header .messenger-return:focus,
+.quick-sidebar .messenger-header .messenger-return:hover,
+.quick-sidebar .messenger-header .messenger-more,
+.quick-sidebar .messenger-header .messenger-more:focus,
+.quick-sidebar .messenger-header .messenger-more:hover,
+.quick-sidebar .messenger-header .messenger-return,
+.quick-sidebar .messenger-header .messenger-return:focus,
+.quick-sidebar .messenger-header .messenger-return:hover,
+.quick-sidebar .messenger-header .messenger-more,
+.quick-sidebar .messenger-header .messenger-more:focus,
+.quick-sidebar .messenger-header .messenger-more:hover {
+      color: #fff
+}
+
+.quick-sidebar .messenger-header .messenger-return:hover {
+      background-color: rgba(0, 0, 0, .1)
+}
+
+.quick-sidebar .messenger-header .messenger-more {
+      padding: 15px;
+      font-size: 16px
+}
+
+.quick-sidebar .messenger-messages {
+      background-color: #f3f6fb;
+      height: -webkit-calc(100% - 150px);
+      height: calc(100% - 150px)
+}
+
+.quick-sidebar .messenger-messages .scroller {
+      padding: 20px
+}
+
+.quick-sidebar .messenger-message {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      padding: 10px 0
+}
+
+.quick-sidebar .message-image {
+      padding: 6px 20px 0 0;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 60px;
+      -ms-flex: 0 0 60px;
+      flex: 0 0 60px
+}
+
+.quick-sidebar .message-image img {
+      width: 40px;
+      -webkit-border-radius: 50%;
+      border-radius: 50%
+}
+
+.quick-sidebar .message-body {
+      position: relative;
+      background-color: #fff;
+      padding: 1rem;
+      -webkit-box-shadow: 0 5px 20px#d6dee4;
+      box-shadow: 0 5px 20px#d6dee4
+}
+
+.quick-sidebar .message-body:before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 15px;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 10px 10px 10px 0;
+      border-right-color: #fff
+}
+
+.quick-sidebar .messenger-message-answer {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+      -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+      margin-left: 35px
+}
+
+.quick-sidebar .messenger-message-answer .message-body {
+      background-color: #2cc4cb;
+      color: #fff
+}
+
+.quick-sidebar .messenger-message-answer .message-body:before {
+      border-width: 10px 0 10px 10px;
+      border-left-color: #2cc4cb;
+      left: 100%
+}
+
+.quick-sidebar .message-time {
+      padding: 10px 0;
+      text-align: center;
+      font-size: 12px;
+      color: #aaa
+}
+
+.quick-sidebar .messenger-form {
+      padding-top: 30px
+}
+
+.quick-sidebar .messenger-form .messenger-form-inner {
+      height: 60px;
+      padding: 10px 20px;
+      border-top: 1px solid#e7e7e7;
+      position: relative
+}
+
+.quick-sidebar .messenger-form .messenger-input {
+      padding: 0;
+      width: 100%;
+      border: 0;
+      height: 100%;
+      padding-right: 100px
+}
+
+.quick-sidebar .messenger-form .messenger-actions {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 0 20px
+}
+
+.quick-sidebar .messenger-form .messenger-actions .messanger-button {
+      padding: 8px;
+      font-size: 16px;
+      opacity: .5
+}
+
+.quick-sidebar .messenger-form .messenger-actions .messanger-button:hover {
+      color: #18c5a9
+}
+
+.quick-sidebar .messenger-form .messenger-actions .messanger-paperclip {
+      font-size: 20px;
+      position: relative;
+      overflow: hidden
+}
+
+.quick-sidebar .messenger-form .messenger-actions .messanger-paperclip input {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0
+}
+
+.quick-sidebar .messenger-form .messenger-input:focus+.messenger-actions .messanger-button {
+      opacity: 1
+}
+
+.quick-sidebar .log-tabs {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+      -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+      height: 45px
+}
+
+.quick-sidebar .log-tabs>a {
+      height: 36px;
+      width: 36px;
+      line-height: 40px;
+      text-align: center;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      font-size: 16px;
+      margin-right: 5px
+}
+
+.quick-sidebar .log-tabs>a.active {
+      -webkit-box-shadow: 0 2px 5px#d6dee4;
+      box-shadow: 0 2px 5px#d6dee4;
+      color: #18c5a9
+}
+
+.quick-sidebar .logs {
+      height: -webkit-calc(100% - 45px);
+      height: calc(100% - 45px)
+}
+
+.quick-sidebar .settings-item {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-right: 15px
+}

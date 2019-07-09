@@ -1,0 +1,31 @@
+.sidebar-footer {
+      position: fixed;
+      bottom: 0;
+      width: 220px;
+      height: 50px;
+      background-color: #253544;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center
+}
+
+.sidebar-footer a {
+      width: 25%;
+      text-align: center;
+      font-size: 18px;
+      color: #b4bcc8
+}
+
+.sidebar-footer a:hover {
+      font-size: 20px;
+      color: #fff
+}
+
+body:not(.fixed-layout).sidebar-mini .sidebar-footer {
+      display: none
+}

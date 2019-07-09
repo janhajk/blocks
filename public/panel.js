@@ -1,5 +1,6 @@
 /*global $*/
 /*global Block*/
+/*global $B */
 (function() {
 
       const summernoteProps = {
@@ -76,10 +77,10 @@
                         title: 'Block öffnen',
                         icon: 'fullscreen',
                         action: function() {
-                              window.$B = new Block(block._id);
+                              $B = new Block(block._id);
                               window.currentBlockId = block._id;
-                              window.$B.load(function() {
-                                    window.$B.output(window.$B, function() {
+                              $B.load(function() {
+                                    $B.output($B, function() {
                                           console.log('success, following your block:');
                                     });
                               });
@@ -97,10 +98,10 @@
                         icon: 'fullscreen',
                         action: function() {
                               if (block.data.parent !== '') {
-                                    window.$B = new Block(block.data.parent);
+                                    $B = new Block(block.data.parent);
                                     window.currentBlockId = block.data.parent;
-                                    window.$B.load(function() {
-                                          window.$B.output(window.$B, function() {
+                                    $B.load(function() {
+                                          $B.output($B, function() {
                                                 console.log('success!');
                                           });
                                     });
@@ -147,8 +148,8 @@
                               block.move('up', function() {
                                     // Reload block
                                     // TODO: don't reload whole block
-                                    window.$B.load(function() {
-                                          window.$B.output(window.$B, function() {
+                                    $B.load(function() {
+                                          $B.output($B, function() {
                                                 console.log('success!');
                                           });
                                     });
@@ -163,8 +164,8 @@
                               block.move('down', function() {
                                     // Reload block
                                     // TODO: don't reload whole block
-                                    window.$B.load(function() {
-                                          window.$B.output(window.$B, function() {
+                                    $B.load(function() {
+                                          $B.output($B, function() {
                                                 console.log('success!');
                                           });
                                     });
@@ -182,7 +183,7 @@
                         icon: 'trash',
                         action: function() {
                               block.remove(function() {
-                                    let parentBlock = findBlockById(block.data.parent, window.$B);
+                                    let parentBlock = findBlockById(block.data.parent, $B);
                                     for (let i in parentBlock.data.children) {
                                           if (parentBlock.data.children[i].data._id === block.data._id) {
                                                 parentBlock.data.children.splice(i, 1);
@@ -234,7 +235,7 @@
 
                   // Tools menu container
                   let tools = document.createElement('div');
-                  tools.className = 'ibox-tools';
+                  tools.className = 'ibox-tools dropdown';
                   tools.style.marginRight = '10px';
                   tools.style.right = '0px';
                   tools.style.top = '0px';
@@ -254,20 +255,27 @@
                   // Bootstrap Dropdown Menu
                   let menu = document.createElement('div');
                   menu.className = 'dropdown-menu dropdown-menu-right';
+                  menu.setAttribute('role', 'menu');
                   // read items
+                  let menuPointsCount = 0;
                   for (let i = 0; i < menuPoints.length; i++) {
                         if (menuPoints[i].type.indexOf(block.data.type) > -1) {
+                              menuPointsCount++;
                               let a = document.createElement('a');
                               a.className = 'dropdown-item';
                               let icon = document.createElement('i');
                               icon.className = 'ti-' + menuPoints[i].icon;
+                              icon.style.marginRight = '5px';
                               a.appendChild(icon);
                               a.innerHTML += menuPoints[i].title;
                               a.onclick = menuPoints[i].action;
                               menu.appendChild(a);
                         }
                   }
-                  tools.appendChild(menu);
+                  if (menuPointsCount) {
+                        tools.appendChild(menu);
+                        $(menuButton).dropdown();
+                  }
 
                   return head;
             }();
@@ -300,7 +308,8 @@
                               $(firstTab).tab('show');
                               $('.quick-sidebar').backdrop();
                         });
-
+                        // Load Variables of selected block
+                        block.variables();
 
                   };
 

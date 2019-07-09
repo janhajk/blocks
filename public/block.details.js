@@ -1,6 +1,10 @@
 /*global Block */
 /*global $ */
 (function() {
+    let mediaList;
+    let contentContainer;
+    let links = [];
+    
     document.addEventListener('DOMContentLoaded', function() {
         // Header
         let ul = document.createElement('ul');
@@ -24,17 +28,18 @@
             div.style.fontSize = '0.8em';
             div.style.fontFamily = 'Poppins';
             a.appendChild(icon).appendChild(div);
+            links.push(a);
             li.appendChild(a);
             ul.appendChild(li);
         }
 
 
         // Content tabs
-        let contentContainer = document.createElement('div');
+        contentContainer = document.createElement('div');
         contentContainer.className = 'tab-content';
         for (let i = 0; i < liElements.length; i++) {
             let div = document.createElement('div');
-            div.className = ['tab-pane'].join(' ');
+            div.className = ['tab-pane', 'fade'].join(' ');
             div.id = 'tab-' + (i + 1);
             contentContainer.appendChild(div);
         }
@@ -44,157 +49,144 @@
         quickSidebarDom.appendChild(contentContainer);
 
         // Block Details Tab Content
-        let chat = document.createElement('div');
-        chat.className = 'chat-list';
         let slimscroll = document.createElement('div');
-        slimscroll.className = 'slimScrollDiv';
-        slimscroll.style.position = 'relative';
-        slimscroll.style.overflow = 'hidden';
-        slimscroll.style.width = 'auto';
-        slimscroll.style.height = '100%';
-        let scroller = document.createElement('div');
-        scroller.className = 'scroller';
-        scroller.style.overflow = 'hidden';
-        scroller.style.width = 'auto';
-        scroller.style.height = '100%';
-        let mediaList = document.createElement('div');
+        mediaList = document.createElement('div');
         mediaList.className = 'media-list';
-        chat.appendChild(slimscroll);
-        slimscroll.appendChild(scroller);
-        scroller.appendChild(mediaList);
-        contentContainer.firstChild.appendChild(scroller);
-
-
-        /**
-         * Edit a text field in place. Saves after pressing <enter>
-         * 
-         * @param DOM element the html DOM element
-         * @param Block block the block beeing edited
-         * @param object detail data content of the field (label, content, write, field, type)
-         * 
-         */
-        let inplaceEditor = function(element, block, detail) {
-            if (detail.type === undefined) {
-                detail.type = 'string';
-            }
-            element.innerHTML = '';
-            let input = document.createElement('input');
-            input.type = 'text';
-            if (detail.type === 'array') {
-                input.value = detail.content.join(', ');
-            }
-            else {
-                input.value = detail.content;
-            }
-            element.appendChild(input);
-            input.focus();
-            input.onkeypress = function(key) {
-                if (key.keyCode === 13) { // Enter
-                    let values = [];
-                    if (detail.type === 'array') {
-                        let aValues = this.value.split(',');
-                        for (let i = 0; i < aValues.length; i++) {
-                            values.push(aValues[i].trim());
-                        }
-                    }
-                    else {
-                        values.push(this.value);
-                    }
-                    block.saveValue(detail.field, values, function() {
-                        element.innerHTML = values.join(', ');
-                        block.data[detail.field] = detail.type === 'string' ? values.join('') : values;
-                        if (detail.field === 'name') window.blockCollection.update();
-                    });
-                }
-            };
-        };
-
-
-        Block.fn.details = function(next) {
-            let self = this;
-
-            let detailItem = function(type, detail) {
-                let media = document.createElement('a');
-                media.className = 'media';
-                media.href = 'javascript:;';
-                let body = document.createElement('div');
-                body.className = 'media-body';
-                let heading = document.createElement('div');
-                heading.className = 'media-heading';
-                heading.innerHTML = detail.label;
-                let content = document.createElement('div');
-                content.className = 'font-13 text-lighter';
-                content.style.minHeight = '20px';
-
-                if (detail.content !== undefined) {
-                    content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;
-                }
-                // content must be loaded first
-                else if (detail.loadData !== undefined) {
-                    detail.loadData(self._id, function(ids) {
-                        content.innerHTML = ids;
-                    });
-                }
-                // If field is writable
-                if (detail.write !== undefined && detail.write) {
-                    content.ondblclick = function() {
-                        inplaceEditor(content, self, detail);
-                    };
-                }
-                // 
-                if (detail.action !== undefined && detail.content !== 'keiner') {
-                    content.onclick = detail.action;
-                }
-                body.appendChild(heading);
-                body.appendChild(content);
-                media.appendChild(body);
-                return media;
-            };
-
-
-            // clear list
-            while (mediaList.firstChild) {
-                mediaList.removeChild(mediaList.firstChild);
-            }
-            let items = [
-                { label: 'Block ID', content: self._id },
-                { label: 'Block Name', content: self.data.name, write: true, field: 'name' },
-                { label: 'Inhalts-Typ', content: self.data.content_type },
-                { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
-                { label: 'Block-Typ', content: self.data.type },
-                { label: 'Tags', content: self.data.tags, write: true, field: 'tags', type: 'array' },
-                { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
-                {
-                    label: 'Übergeordneter Block',
-                    content: self.data.parent === '' ? 'keiner' : self.data.parent,
-                    action: function() {
-                        window.$B = new Block(self.data.parent);
-                        window.currentBlockId = self.data.parent;
-                        window.$B.load(function() {
-                            window.$B.output(window.$B, function() {
-                                console.log('success');
-                            });
-                        });
-                    }
-                },
-                {
-                    label: 'Orte, wo dieser Block verwendet wird',
-                    loadData: function(_id, next) {
-                        // load all occurences
-                    }
-                },
-            ];
-            for (let i = 0; i < items.length; i++) {
-                mediaList.appendChild(detailItem(null, items[i]));
-            }
-
-            return next(contentContainer.firstChild);
-
-        };
-
-
-
+        slimscroll.appendChild(mediaList);
+        contentContainer.firstChild.appendChild(slimscroll);
+        $(slimscroll).slimScroll({height:'auto'});
     });
+    
+    
+    
+    /**
+     * Edit a text field in place. Saves after pressing <enter>
+     * 
+     * @param DOM element the html DOM element
+     * @param Block block the block beeing edited
+     * @param object detail data content of the field (label, content, write, field, type)
+     * 
+     */
+    let inplaceEditor = function(element, block, detail) {
+        if (detail.type === undefined) {
+            detail.type = 'string';
+        }
+        element.innerHTML = '';
+        let input = document.createElement('input');
+        input.type = 'text';
+        if (detail.type === 'array') {
+            input.value = detail.content.join(', ');
+        }
+        else {
+            input.value = detail.content;
+        }
+        element.appendChild(input);
+        input.focus();
+        input.onkeypress = function(key) {
+            if (key.keyCode === 13) { // Enter
+                let values = [];
+                if (detail.type === 'array') {
+                    let aValues = this.value.split(',');
+                    for (let i = 0; i < aValues.length; i++) {
+                        values.push(aValues[i].trim());
+                    }
+                }
+                else {
+                    values.push(this.value);
+                }
+                block.saveValue(detail.field, values, function() {
+                    element.innerHTML = values.join(', ');
+                    block.data[detail.field] = detail.type === 'string' ? values.join('') : values;
+                    if (detail.field === 'name') window.blockCollection.update();
+                });
+            }
+        };
+    };
+
+
+    Block.fn.details = function(next) {
+        let self = this;
+
+        let detailItem = function(type, detail) {
+            let media = document.createElement('a');
+            media.className = 'media';
+            media.href = 'javascript:;';
+            let body = document.createElement('div');
+            body.className = 'media-body';
+            let heading = document.createElement('div');
+            heading.className = 'media-heading';
+            heading.innerHTML = detail.label;
+            let content = document.createElement('div');
+            content.className = 'font-13 text-lighter';
+            content.style.minHeight = '20px';
+
+            if (detail.content !== undefined) {
+                content.innerHTML = (Array.isArray(detail.content)) ? detail.content.join(', ') : detail.content;
+            }
+            // content must be loaded first
+            else if (detail.loadData !== undefined) {
+                detail.loadData(self._id, function(ids) {
+                    content.innerHTML = ids;
+                });
+            }
+            // If field is writable
+            if (detail.write !== undefined && detail.write) {
+                content.ondblclick = function() {
+                    inplaceEditor(content, self, detail);
+                };
+            }
+            // 
+            if (detail.action !== undefined && detail.content !== 'keiner') {
+                content.onclick = detail.action;
+            }
+            body.appendChild(heading);
+            body.appendChild(content);
+            media.appendChild(body);
+            return media;
+        };
+
+
+        // clear list
+        while (mediaList.firstChild) {
+            mediaList.removeChild(mediaList.firstChild);
+        }
+        let items = [
+            { label: 'Block ID', content: self._id },
+            { label: 'Block Name', content: self.data.name, write: true, field: 'name' },
+            { label: 'Inhalts-Typ', content: self.data.content_type },
+            { label: 'Erstellungsdatum', content: (new Date(self.data.timestamp)).toUTCString() },
+            { label: 'Block-Typ', content: self.data.type },
+            { label: 'Tags', content: self.data.tags, write: true, field: 'tags', type: 'array' },
+            { label: 'Anzahl Sub-Blocks', content: self.data.children.length },
+            {
+                label: 'Übergeordneter Block',
+                content: self.data.parent === '' ? 'keiner' : self.data.parent,
+                action: function() {
+                    window.$B = new Block(self.data.parent);
+                    window.currentBlockId = self.data.parent;
+                    window.$B.load(function() {
+                        window.$B.output(window.$B, function() {
+                            console.log('success');
+                        });
+                    });
+                }
+            },
+            {
+                label: 'Orte, wo dieser Block verwendet wird',
+                loadData: function(_id, next) {
+                    // load all occurences
+                }
+            },
+        ];
+        for (let i = 0; i < items.length; i++) {
+            mediaList.appendChild(detailItem(null, items[i]));
+        }
+        // return first tab (bootstrap needs .nav-link to use .tab('show') and display correct tab)
+        return next(links[0]);
+
+    };
+
+
 
 }());
 

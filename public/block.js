@@ -1,5 +1,6 @@
 /*global $ */
 /*global async */
+/*global $B */
 (function() {
 
       const req = function(params, next) {
@@ -72,6 +73,7 @@
                   content: '',
                   content_type: '',
                   properties: [],
+                  variables: {},
                   weight: 0,
                   tags: [],
                   language: 0
@@ -133,10 +135,11 @@
                   // using data._id as original _id (not self._id which contains changable _id)
                   loadById(self.data._id, function(e, block) {
                         self.data.children = [];
-                        // Clones keeps parent and type, because it get's reassigned before getting here
+                        // Clones keeps parent and type, because it get's reassigned before getting to this point
                         if (isClone) {
                               delete block.parent;
                               delete block.type;
+                              delete block.variables;
                         }
                         // set new data
                         for (let i in block) {
@@ -154,6 +157,12 @@
                                           function(childId, key, callback) {
                                                 self.data.children[key] = new _Block(childId);
                                                 self.data.children[key].level = self.level + 1;
+                                                // Copy variables from parent; overwrite own variables
+                                                for (let i in self.data.variables) {
+                                                      if (self.data.variables.hasOwnProperty(i)) {
+                                                            self.data.children[key].data.variables[i] = self.data.variables[i];
+                                                      }
+                                                }
                                                 // If clone, we need to use new assigned parent and _id
                                                 if (isClone) {
                                                       // assign new created _id and hand it down the tree as parent
@@ -162,9 +171,16 @@
                                                       self.data.children[key]._id = self._id + '_' + childId;
                                                       self.data.children[key].data.type = 'copy';
                                                 }
-                                                self.data.children[key].load(function() {
-                                                      callback(); // report child loaded
-                                                }, isClone);
+                                                // Prevent infinite recursion
+                                                if (self.level + 1 > 10) {
+                                                      console.log('infinite recursion');
+                                                      callback();
+                                                }
+                                                else {
+                                                      self.data.children[key].load(function() {
+                                                            callback(); // report child loaded
+                                                      }, isClone);
+                                                }
                                           },
                                           // when async finishes / all has loaded
                                           function(e) {
@@ -202,11 +218,18 @@
                                           self.data.children[key].data.parent = self._id;
                                           self.data.children[key].data.type = 'copy';
                                           self.data.children[key]._id = self._id + '_' + self.data.ancestor;
+                                          // Copy variables from parent
+                                          for (let i in self.data.variables) {
+                                                if (self.data.variables.hasOwnProperty(i)) {
+                                                      self.data.children[key].data.variables[i] = self.data.variables[i];
+                                                }
+                                          }
                                           // load 
                                           self.data.children[key].load(function() {
                                                 callback(); // report async that finished
                                           }, true);
                                     }
+                                    // if block is no clone, report to async
                                     else {
                                           callback();
                                     }
@@ -284,7 +307,7 @@
             this.move = function(type, next) {
 
                   // retrieve parent block
-                  let parentBlock = findBlockById(this.data.parent, window.$B);
+                  let parentBlock = findBlockById(this.data.parent, $B);
                   // If top block / document / no parent then don't do anything
                   if (!parentBlock) return next();
                   let siblings = parentBlock.data.children;
@@ -316,6 +339,7 @@
                               }
                         }
                   }
+                  // Save new Children order
                   parentBlock.saveValue('children', newOrder, function(e, res) {
                         next();
                   });
@@ -384,6 +408,11 @@
                   else {
                         content = self.data.content;
                   }
+                  // Custom formating thorugh plugins
+                  for (let i = 0; i < self.contentFormatter.length; i++) {
+                        // TODO: weight
+                        content = self.contentFormatter[i].format(content, self);
+                  }
                   if (self.data.type === 'clone') {
                         content = '&lt;Kopie&gt;';
                   }
@@ -397,36 +426,11 @@
              */
             this.parentDom = function() {
                   if (this._id === window.currentBlockId) return this.contentDom;
-                  let parent = findBlockById(this.data.parent, window.$B);
+                  let parent = findBlockById(this.data.parent, $B);
                   if (!parent) return console.log('The Following Block has no loaded parent:'), console.log(this);
                   return parent.dom.row;
             };
 
-
-            /**
-             * 
-             * Finds all unique Variables recursive in a block and returns array
-             * 
-             */
-            this.findAllVariables = function(next) {
-                  let variables = [];
-                  async.each(this.data.children, function(child, callback) {
-                              let content = child.data.content;
-                              let res = content.match(/(%[a-zA-Z_]*?%)/g);
-                              if (res !== null && res.length) {
-                                    variables = variables.concat(res).unique();
-                              }
-                              child.findAllVariables(function(vars) {
-                                    variables = variables.concat(vars).unique();
-                                    callback();
-                              });
-                        },
-                        // when async finishes / all has loaded
-                        function(e) {
-                              next(variables); // report block and children loaded
-                        }
-                  );
-            };
 
 
             /**
@@ -464,22 +468,12 @@
 
       Block.fn = Block.prototype = {
 
-            contentType: {}
+            contentType: {},
+            contentFormatter: []
 
       };
 
       window.Block = Block;
 
-
-      Array.prototype.unique = function() {
-            var a = this.concat();
-            for (var i = 0; i < a.length; ++i) {
-                  for (var j = i + 1; j < a.length; ++j) {
-                        if (a[i] === a[j])
-                              a.splice(j--, 1);
-                  }
-            }
-            return a;
-      };
 
 })();

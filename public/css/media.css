@@ -1,0 +1,31 @@
+.media {
+      margin: 0
+}
+
+.media .media-heading {
+      line-height: 1.1;
+      font-weight: 600;
+      margin-bottom: 5px
+}
+
+.media .media-img {
+      padding-right: 14px
+}
+
+.media-list {
+      padding: 0;
+      list-style: none
+}
+
+.media-list .media {
+      padding: 8px 0
+}
+
+.media-right .media-img {
+      padding-left: 14px;
+      padding-right: 0
+}
+
+.media-list.media-list-divider .media:not(:first-child) {
+      border-top: 1px solid #e1eaec
+}

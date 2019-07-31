@@ -1,0 +1,121 @@
+.list-group .list-group-item {
+      border-color: transparent;
+      background-color: transparent;
+      padding: 10px 15px
+}
+
+.list-group .list-group-item.disabled {
+      background-color: transparent;
+      color: #ccc
+}
+
+.list-group .list-group-item.active {
+      background-color: transparent;
+      border-color: transparent;
+      color: #2ecc71
+}
+
+.list-group.list-group-full .list-group-item {
+      padding-left: 0;
+      padding-right: 0
+}
+
+.list-group.list-group-divider .list-group-item:not(:first-child) {
+      border-top-color: #e1eaec
+}
+
+.list-group.list-group-bordered .list-group-item {
+      border-color: #e1eaec
+}
+
+.list-group.list-group-bordered .list-group-item.active {
+      background-color: #3498db;
+      border-color: #3498db;
+      color: #fff
+}
+
+.list-group.list-group-bordered .list-group-item:first-child {
+      -webkit-border-top-left-radius: 3px;
+      border-top-left-radius: 3px;
+      -webkit-border-top-right-radius: 3px;
+      border-top-right-radius: 3px
+}
+
+.list-group.list-group-bordered .list-group-item:last-child {
+      -webkit-border-bottom-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      -webkit-border-bottom-right-radius: 3px;
+      border-bottom-right-radius: 3px
+}
+
+.list-group .list-group-item-success {
+      color: #219351;
+      background-color: #e0f7ea
+}
+
+.list-group a.list-group-item-success,
+.list-group button.list-group-item-success {
+      color: #219351
+}
+
+.list-group a.list-group-item-success:focus,
+.list-group a.list-group-item-success:hover,
+.list-group button.list-group-item-success:focus,
+.list-group button.list-group-item-success:hover {
+      color: #219351;
+      background-color: #ccf2dc
+}
+
+.list-group .list-group-item-info {
+      color: #1984a5;
+      background-color: #def4fb
+}
+
+.list-group a.list-group-item-info,
+.list-group button.list-group-item-info {
+      color: #1984a5
+}
+
+.list-group a.list-group-item-info:focus,
+.list-group a.list-group-item-info:hover,
+.list-group button.list-group-item-info:focus,
+.list-group button.list-group-item-info:hover {
+      color: #1984a5;
+      background-color: #c7ecf8
+}
+
+.list-group .list-group-item-warning {
+      color: #af700d;
+      background-color: #fdf0db
+}
+
+.list-group a.list-group-item-warning,
+.list-group button.list-group-item-warning {
+      color: #af700d
+}
+
+.list-group a.list-group-item-warning:focus,
+.list-group a.list-group-item-warning:hover,
+.list-group button.list-group-item-warning:focus,
+.list-group button.list-group-item-warning:hover {
+      color: #af700d;
+      background-color: #fce6c3
+}
+
+.list-group .list-group-item-danger {
+      color: #a6372b;
+      background-color: #fbe4e2
+}
+
+.list-group a.list-group-item-danger,
+.list-group button.list-group-item-danger {
+      color: #a6372b
+}
+
+.list-group a.list-group-item-danger:focus,
+.list-group a.list-group-item-danger:hover,
+.list-group button.list-group-item-danger:focus,
+.list-group button.list-group-item-danger:hover {
+      color: #a6372b;
+      background-color: #f8cfcc
+}

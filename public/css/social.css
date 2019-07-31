@@ -1,0 +1,67 @@
+.social-widget {
+      width: 100px;
+      display: inline-block
+}
+
+.social-widget-header {
+      padding: 15px;
+      text-align: center;
+      font-size: 36px;
+      color: #fff
+}
+
+.social-widget-count {
+      padding: 12px;
+      font-weight: 500;
+      font-size: 18px;
+      color: #fff;
+      text-align: center
+}
+
+.social-widget-facebook .social-widget-header {
+      background-color: #3b5998
+}
+
+.social-widget-facebook .social-widget-count {
+      background-color: #4264aa
+}
+
+.social-widget-twitter .social-widget-header {
+      background-color: #00aced
+}
+
+.social-widget-twitter .social-widget-count {
+      background-color: #08bbff
+}
+
+.social-widget-google .social-widget-header {
+      background-color: #f86c6b
+}
+
+.social-widget-google .social-widget-count {
+      background-color: #f98483
+}
+
+.social-widget-linkedin .social-widget-header {
+      background-color: #4875b4
+}
+
+.social-widget-linkedin .social-widget-count {
+      background-color: #5982bd
+}
+
+.social-widget-pinterest .social-widget-header {
+      background-color: #ec488d
+}
+
+.social-widget-pinterest .social-widget-count {
+      background-color: #ee5f9b
+}
+
+.social-widget-vk .social-widget-header {
+      background-color: #4b73a4
+}
+
+.social-widget-vk .social-widget-count {
+      background-color: #5780b2
+}

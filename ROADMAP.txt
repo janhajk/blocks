@@ -26,7 +26,7 @@ Ressources:
 ----------------------------------------------------------------------------------------------------------------------------------------
 Version 0.2 - zeichner
 ----------------------------------------------------------------------------------------------------------------------------------------
-- BUG: if blick is deleted also delete children > getOffspring Function; then delete all offspring
+- BUG: if block is deleted also delete children > getOffspring Function; then delete all offspring
 - BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
 
 - FEATURE: Handle content_type variations through properties
@@ -63,7 +63,6 @@ Version 0.2 - zeichner
 - LOGIC: How are parent variables handeled? if parent block has variables set, the block won't show them.
 - CLEANUP: Routes to seperate files
 - CLEANUP: gui.js to new files
-- CLEANUP: Split CSS Files in multiple files
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,6 +78,31 @@ Version 0.3
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+Version 0.2 - zeichner
+----------------------------------------------------------------------------------------------------------------------------------------
+- CLEANUP: Split CSS Files in multiple files
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 

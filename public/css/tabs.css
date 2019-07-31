@@ -1,0 +1,143 @@
+
+
+.tabs-line>li .nav-link {
+      -webkit-transition: all .25s;
+      -o-transition: all .25s;
+      transition: all .25s;
+      border-bottom: 3px solid transparent
+}
+
+.tabs-line>li .nav-link:hover {
+      border-color: transparent;
+      background-color: transparent;
+      border-bottom-color: #cce5f6!important
+}
+
+.tabs-line>li .nav-link.active,
+.tabs-line>li .nav-link.active:focus,
+.tabs-line>li .nav-link.active:hover {
+      border-color: transparent;
+      border-bottom: 3px solid #52a7e0!important
+}
+
+.tabs-left,
+.tabs-line-left,
+.tabs-line-right,
+.tabs-right {
+      border-bottom: 0
+}
+
+.tabs-line-left {
+      float: left;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      margin-right: 20px
+}
+
+.tabs-line-left>li>.nav-link,
+.tabs-line-left>li>.nav-link:focus {
+      border-right: 1px solid #ddd
+}
+
+.tabs-line-left>li>.nav-link:hover {
+      border-color: transparent;
+      border-right: 3px solid #caf0f2;
+      padding-right: 13px;
+      margin-right: -1px
+}
+
+.tabs-line-left>li>.nav-link.active,
+.tabs-line-left>li>.nav-link.active:focus,
+.tabs-line-left>li>.nav-link.active:hover {
+      border: 1px solid transparent;
+      border-right: 3px solid #4ccdd3;
+      padding-right: 13px;
+      margin-right: -1px
+}
+
+.tabs-line-right {
+      float: right;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      margin-left: 20px
+}
+
+.tabs-line-right>li>.nav-link,
+.tabs-line-right>li>.nav-link:focus {
+      border-left: 1px solid #ddd
+}
+
+.tabs-line-right>li>.nav-link:hover {
+      border-color: transparent;
+      border-left: 3px solid #caf0f2;
+      padding-left: 13px;
+      margin-left: -1px
+}
+
+.tabs-line-right>li>.nav-link.active,
+.tabs-line-right>li>.nav-link.active:focus,
+.tabs-line-right>li>.nav-link.active:hover {
+      border: 1px solid transparent;
+      border-left: 3px solid #4ccdd3;
+      padding-left: 13px;
+      margin-left: -1px
+}
+
+.tabs-left {
+      float: left;
+      margin-right: 20px
+}
+
+.tabs-left .nav-link {
+      -webkit-border-radius: 2px 0 0 2px;
+      border-radius: 2px 0 0 2px;
+      margin-right: -1px;
+      border-right: 1px solid #ddd
+}
+
+.tabs-left .nav-link.active,
+.tabs-left .nav-link.active:focus,
+.tabs-left .nav-link.active:hover {
+      border-color: #ddd transparent #ddd #ddd
+}
+
+.tabs-right {
+      float: right;
+      margin-left: 20px
+}
+
+.tabs-right .nav-link {
+      -webkit-border-radius: 0 2px 2px 0;
+      border-radius: 0 2px 2px 0;
+      margin-left: -1px;
+      margin-right: 0;
+      border-left: 1px solid #ddd
+}
+
+.tabs-right .nav-link.active,
+.tabs-right .nav-link.active:focus,
+.tabs-right .nav-link.active:hover {
+      border-color: #ddd #ddd #ddd transparent
+}
+
+.tabs-below {
+      margin-bottom: 0;
+      margin-top: 10px;
+      border-top: 1px solid #ddd;
+      border-bottom: 0
+}
+
+.tabs-below .nav-item {
+      margin-bottom: 0;
+      margin-top: -1px
+}
+
+.tabs-below .nav-link.active {
+      border-color: transparent #ddd #ddd!important
+}

@@ -1,0 +1,35 @@
+.nav-pills,
+.nav-tabs {
+      margin-bottom: 15px
+}
+
+.nav-pills .nav-link,
+.nav-tabs .nav-link {
+      color: inherit
+}
+
+.nav-tabs .nav-link {
+      -webkit-border-radius: 2px 2px 0 0;
+      border-radius: 2px 2px 0 0;
+      margin-right: 0;
+      padding: .7rem 1rem
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+      color: #333
+}
+
+
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:focus,
+.nav-pills .nav-link.active:hover {
+      background-color: #2cc4cb!important;
+      color: #fff
+}
+
+.nav-pills .nav-link {
+      -webkit-border-radius: 2px;
+      border-radius: 2px
+}

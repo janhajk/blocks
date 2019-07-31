@@ -1,0 +1,301 @@
+.form-control {
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-box-shadow: none!important;
+      box-shadow: none!important
+}
+
+.form-control:focus {
+      border-color: #23b7e5
+}
+
+.input-rounded {
+      -webkit-border-radius: 200px;
+      border-radius: 200px
+}
+
+.input-group-addon {
+      color: #5d6064;
+      color: #71808f;
+      -webkit-border-radius: 2px!important;
+      border-radius: 2px!important
+}
+
+
+.input-group-icon {
+      position: relative;
+      color: #71808f
+}
+
+.input-group-icon .form-control {
+      padding-left: 33px
+}
+
+.input-group-icon .input-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 33px;
+      line-height: 33px;
+      width: 34px;
+      text-align: center
+}
+
+.input-group-icon.right .input-icon {
+      right: 0;
+      left: auto
+}
+
+.input-group-icon.right .form-control {
+      padding-left: 12px;
+      padding-right: 33px
+}
+
+.ui-checkbox,
+.ui-radio {
+      position: relative;
+      margin-bottom: 0;
+      cursor: pointer;
+      padding-left: 28px;
+      font-weight: 400;
+      min-height: 20px
+}
+
+.ui-checkbox .input-span,
+.ui-radio .input-span {
+      position: absolute;
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      left: 0;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 4px;
+      border-radius: 4px
+}
+
+.ui-checkbox .input-span::after,
+.ui-radio .input-span::after {
+      content: '';
+      position: absolute;
+      display: none;
+      width: 5px;
+      height: 10px;
+      left: 7px;
+      top: 3px;
+      border: solid #888;
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg)
+}
+
+.ui-checkbox input,
+.ui-radio input {
+      position: absolute;
+      opacity: 0
+}
+
+.ui-checkbox input:checked~.input-span:after,
+.ui-radio input:checked~.input-span:after {
+      display: block
+}
+
+.ui-checkbox:hover .input-span,
+.ui-radio:hover .input-span {
+      border-color: #b8b8b8
+}
+
+.ui-checkbox.ui-checkbox-gray .input-span,
+.ui-checkbox.ui-radio-gray .input-span,
+.ui-radio.ui-checkbox-gray .input-span,
+.ui-radio.ui-radio-gray .input-span {
+      background-color: #e6e6e6;
+      border-color: transparent
+}
+
+.ui-checkbox.ui-checkbox-gray .input-span::after,
+.ui-checkbox.ui-radio-gray .input-span::after,
+.ui-radio.ui-checkbox-gray .input-span::after,
+.ui-radio.ui-radio-gray .input-span::after {
+      border-color: #888
+}
+
+.ui-checkbox.disabled,
+.ui-radio.disabled {
+      opacity: .7;
+      cursor: not-allowed
+}
+
+.ui-checkbox.check-single,
+.ui-radio.check-single {
+      padding-left: 18px
+}
+
+.ui-radio .input-span {
+      -webkit-border-radius: 50%;
+      border-radius: 50%
+}
+
+.ui-radio .input-span::after {
+      border: 0;
+      height: 6px;
+      left: 6px;
+      top: 6px;
+      width: 6px;
+      background: #888;
+      -webkit-border-radius: 100%;
+      border-radius: 100%
+}
+
+.check-list .ui-checkbox,
+.check-list .ui-radio {
+      display: block
+}
+
+.check-list .ui-checkbox+.ui-checkbox,
+.check-list .ui-radio+.ui-radio {
+      margin-top: 8px
+}
+
+.ui-checkbox-inline,
+.ui-radio-inline {
+      display: inline-block;
+      margin-right: 15px
+}
+
+.ui-checkbox-primary input:checked~.input-span {
+      background-color: #3498db;
+      border-color: #3498db
+}
+
+.ui-checkbox-primary input:checked~.input-span::after {
+      border-color: #fff
+}
+
+.ui-radio-primary .input-span,
+.ui-radio-primary:hover .input-span {
+      border-color: #3498db
+}
+
+.ui-radio-primary input:checked~.input-span {
+      background-color: #3498db
+}
+
+.ui-radio-primary input:checked~.input-span::after {
+      background-color: #fff
+}
+
+.ui-checkbox-success input:checked~.input-span {
+      background-color: #2ecc71;
+      border-color: #2ecc71
+}
+
+.ui-checkbox-success input:checked~.input-span::after {
+      border-color: #fff
+}
+
+.ui-radio-success .input-span,
+.ui-radio-success:hover .input-span {
+      border-color: #2ecc71
+}
+
+.ui-radio-success input:checked~.input-span {
+      background-color: #2ecc71
+}
+
+.ui-radio-success input:checked~.input-span::after {
+      background-color: #fff
+}
+
+.ui-checkbox-info input:checked~.input-span {
+      background-color: #23b7e5;
+      border-color: #23b7e5
+}
+
+.ui-checkbox-info input:checked~.input-span::after {
+      border-color: #fff
+}
+
+.ui-radio-info .input-span,
+.ui-radio-info:hover .input-span {
+      border-color: #23b7e5
+}
+
+.ui-radio-info input:checked~.input-span {
+      background-color: #23b7e5
+}
+
+.ui-radio-info input:checked~.input-span::after {
+      background-color: #fff
+}
+
+.ui-checkbox-warning input:checked~.input-span {
+      background-color: #f39c12;
+      border-color: #f39c12
+}
+
+.ui-checkbox-warning input:checked~.input-span::after {
+      border-color: #fff
+}
+
+.ui-radio-warning .input-span,
+.ui-radio-warning:hover .input-span {
+      border-color: #f39c12
+}
+
+.ui-radio-warning input:checked~.input-span {
+      background-color: #f39c12
+}
+
+.ui-radio-warning input:checked~.input-span::after {
+      background-color: #fff
+}
+
+.ui-checkbox-danger input:checked~.input-span {
+      background-color: #e74c3c;
+      border-color: #e74c3c
+}
+
+.ui-checkbox-danger input:checked~.input-span::after {
+      border-color: #fff
+}
+
+.ui-radio-danger .input-span,
+.ui-radio-danger:hover .input-span {
+      border-color: #e74c3c
+}
+
+.ui-radio-danger input:checked~.input-span {
+      background-color: #e74c3c
+}
+
+.ui-radio-danger input:checked~.input-span::after {
+      background-color: #fff
+}
+
+
+.select2-container {
+      max-width: 100%
+}
+
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+      outline: 0!important;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      border: 1px solid rgba(0, 0, 0, .15);
+      height: auto
+}
+
+.select2-dropdown {
+      border: 1px solid rgba(0, 0, 0, .15)
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+      line-height: 30px
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+      line-height: 1.25
+}

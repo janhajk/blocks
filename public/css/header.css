@@ -1,0 +1,185 @@
+.header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      height: 56px;
+      position: relative;
+      background-color: #fff;
+      margin: 0;
+      border: 0;
+      -webkit-border-radius: 0;
+      border-radius: 0;
+      -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .08)
+}
+
+.header .page-brand {
+      width: 220px;
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 0 15px;
+      font-weight: 500;
+      font-size: 20px;
+      -webkit-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+      overflow: hidden
+}
+
+.header .page-brand .brand {
+      display: -webkit-inline-box;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex
+}
+
+.header .page-brand .brand-mini {
+      display: none
+}
+
+.header .navbar-toolbar {
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center
+}
+
+.header .navbar-toolbar>li>a {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 15px;
+      color: #6d7c85
+}
+
+.header .navbar-toolbar>li .notify-signal {
+      height: 6px;
+      width: 6px;
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #18c5a9;
+      -webkit-border-radius: 50%;
+      border-radius: 50%
+}
+
+.header .navbar-toolbar>li .notify-signal::before {
+      display: none;
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      height: 25px;
+      width: 25px;
+      z-index: 10;
+      border: 5px solid #18c5a9;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      -webkit-animation: heartbit 1s ease-out;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite
+}
+
+.header .navbar-toolbar>li.active .notify-signal::before {
+      display: block
+}
+
+.header .navbar-toolbar .dropdown-notification a.dropdown-toggle .notify-signal {
+      background: #f75a5f
+}
+
+.header .navbar-toolbar .dropdown-notification a.dropdown-toggle .notify-signal::before {
+      border-color: #f75a5f
+}
+
+.header .navbar-search {
+      padding: 0 15px
+}
+
+.header .navbar-search .search-icon {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 40px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      color: #6d7c85
+}
+
+.header .navbar-search .form-control {
+      border: 0;
+      padding: .65rem 1.25rem .65rem 40px;
+      -webkit-border-radius: 200px!important;
+      border-radius: 200px!important;
+      background-color: #f4f5f9;
+      border-color: #f4f5f9;
+      font-size: 13px
+}
+
+.header .sidebar-toggler {
+      font-size: 18px
+}
+
+.header .dropdown-user {
+      padding-right: 10px
+}
+
+.header .dropdown-user a.dropdown-toggle {
+      padding: 0 15px
+}
+
+.header .dropdown-user a.dropdown-toggle img {
+      width: 30px;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      margin-right: 10px
+}
+
+.header .dropdown-user>.dropdown-menu .dropdown-item {
+      color: #6d7c85
+}
+
+.header .dropdown-user>.dropdown-menu .dropdown-item i {
+      margin-right: 10px
+}
+
+.header .dropdown-inbox,
+.header .dropdown-notification {
+      font-size: 15px
+}
+
+.header .dropdown-inbox img {
+      width: 40px;
+      height: 40px
+}
+
+.dropdown-menu-media {
+      width: 280px
+}
+
+.header .page-brand {
+      color: #fff;
+      background-color: #374f65
+}

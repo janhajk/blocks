@@ -123,10 +123,10 @@
 
 
             /**
-             * Load block
+             * Load block data
              * 
              * request to server to get block data
-             * then create Block object
+             * create Block object
              * load childrend as Block objects
              * load clones
              * 
@@ -233,7 +233,7 @@
                                                 }
                                           }
                                           // :RECURSION:
-                                          // load 
+                                          // load clone as child 
                                           self.data.children[key].load(function() {
                                                 callback(); // report async that finished
                                           }, true);

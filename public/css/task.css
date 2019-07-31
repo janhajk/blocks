@@ -1,0 +1,28 @@
+.tasks-list .task-data {
+      padding-left: 25px
+}
+
+.tasks-list .task-item .ui-checkbox input:checked~.task-title {
+      text-decoration: line-through
+}
+
+.task-actions {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -15px
+}
+
+.task-actions>a.dropdown-toggle {
+      color: #aaa;
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      line-height: 30px;
+      text-align: center
+}
+
+.task-item:hover .task-actions {
+      display: block
+}

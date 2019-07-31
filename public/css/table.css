@@ -1,0 +1,45 @@
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th {
+      border-top: 1px solid #e8e8e8
+}
+
+.table thead th {
+      border-bottom: 1px solid #ddd!important;
+      border-top: 0;
+      font-weight: 700
+}
+
+.table.no-border>tbody>tr>td,
+.table.no-border>thead>tr>th {
+      border: 0 none!important
+}
+
+.table-bordered {
+      border: 1px solid #e8e8e8
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(0, 0, 0, .04)
+}
+
+.table-hover tbody tr:hover {
+      background-color: rgba(0, 0, 0, .05)
+}
+
+.table tr.success>td {
+      background-color: #e0f7ea!important
+}
+
+.table tr.info>td {
+      background-color: #def4fb!important
+}
+
+.table tr.warning>td {
+      background-color: #fdf0db!important
+}
+
+.table tr.danger>td {
+      background-color: #fbe4e2!important
+}

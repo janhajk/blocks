@@ -24,7 +24,7 @@ Ressources:
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-Version 0.2
+Version 0.2 - zeichner
 ----------------------------------------------------------------------------------------------------------------------------------------
 - BUG: if blick is deleted also delete children > getOffspring Function; then delete all offspring
 - BUG: Changing properties in detail pane changes block, but dblclicking again still shows old value
@@ -45,13 +45,12 @@ Version 0.2
 - FEATURE: Secret link to document
 - Adressbar with tags/links
 - Diff changes
-- Document Variables
 - content_type image/graphic
 - content_type form
 - block discussions
 - block revision comments
 - block temperory edits / create new document vresion; adds new temporary db-entry for every save; then publish new version and delete all the temporary entries since last
-- render document tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
+- render doc ument tree with colors for diffrent kinds of content (original, cloned etc); make a switch in global settings header
 - setup basic deploying mechanism of webapp
 - change block parent
 - search blocks
@@ -60,7 +59,7 @@ Version 0.2
 - public website (external or wordpress)
 - FEATURE: Load all tags into memory with jquery ui autocomplete "multiple values"
 - FEATURE: under settings, be able to sort children (using jquery ui sortable)
-- FEATURE: Split block in <p>-Blocks.
+- FEATURE: Split block by <p> in new Blocks.
 - LOGIC: How are parent variables handeled? if parent block has variables set, the block won't show them.
 - CLEANUP: Routes to seperate files
 - CLEANUP: gui.js to new files

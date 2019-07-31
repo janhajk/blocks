@@ -203,6 +203,20 @@
                               });
                         },
                         type: ['original', 'clone']
+                  },
+                  /**
+                   * 
+                   * Overwrite clone/copy BLock
+                   * 
+                   * 
+                   */
+                  {
+                        title: 'Block überschreiben',
+                        icon: 'layout-sidebar-right',
+                        action: function() {
+                              alert('Funktion noch nicht implementiert');
+                        },
+                        type: ['copy']
                   }
             ];
             for (let i = 0; i < block.blockPanelMenu.length; i++) {

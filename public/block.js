@@ -123,10 +123,14 @@
 
 
             /**
-             * Load block data
+             * Load block
+             * 
+             * request to server to get block data
+             * then create Block object
+             * load childrend as Block objects
+             * load clones
              * 
              * this is recursive as it loads all the children within
-             * loads clones
              *
              * 
              */
@@ -172,10 +176,14 @@
                                                       self.data.children[key].data.type = 'copy';
                                                 }
                                                 // Prevent infinite recursion
-                                                if (self.level + 1 > 10) {
+                                                // TODO: recognize infinite recursion
+                                                if (self.level > 10) {
                                                       console.log('infinite recursion');
                                                       callback();
                                                 }
+                                                
+                                                // :RECURSION:
+                                                // load child
                                                 else {
                                                       self.data.children[key].load(function() {
                                                             callback(); // report child loaded
@@ -224,6 +232,7 @@
                                                       self.data.children[key].data.variables[i] = self.data.variables[i];
                                                 }
                                           }
+                                          // :RECURSION:
                                           // load 
                                           self.data.children[key].load(function() {
                                                 callback(); // report async that finished

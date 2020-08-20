@@ -22,7 +22,7 @@
       "node-cache": "4.x.x",
       "archiver": "3.x.x",
       "mongoose": "5.x.x",
-      "bcrypt": "3.x.x",
+      "bcrypt": "5.x.x",
       "pdfkit": "0.x.x"
    }
 }
